@@ -79,7 +79,7 @@
 <body class="bg-gray-50 dark:bg-neutral-dark text-gray-900 dark:text-white min-h-screen font-sans antialiased">
 
     <!-- Main Navigation Bar (Home, About, Contact) -->
-    <nav id="main-nav" class="fixed top-0 left-0 right-0 z-40 bg-white dark:bg-black border-b border-gray-200 dark:border-white dark:border-opacity-10 backdrop-blur-lg bg-opacity-80 dark:bg-opacity-80">
+    <nav id="main-nav" class="fixed top-0 left-0 right-0 z-40 bg-white dark:bg-black border-b border-gray-200 dark:border-white dark:border-opacity-10">
         <div class="container mx-auto px-4">
             <div class="flex items-center justify-center h-16 gap-8">
                 <button onclick="showHome()" class="nav-link px-4 py-2 font-light text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
@@ -96,7 +96,7 @@
     </nav>
 
     <!-- Course Navigation Bar (appears in APSC 171 page) -->
-    <nav id="course-nav" class="fixed top-0 left-0 right-0 z-40 bg-white dark:bg-black border-b border-gray-200 dark:border-white dark:border-opacity-10 backdrop-blur-lg bg-opacity-80 dark:bg-opacity-80" style="display: none;">
+    <nav id="course-nav" class="fixed top-0 left-0 right-0 z-40 bg-white dark:bg-black border-b border-gray-200 dark:border-white dark:border-opacity-10" style="display: none;">
         <div class="container mx-auto px-4">
             <div class="flex items-center justify-center h-16 gap-8">
                 <button onclick="showLanding()" class="nav-link px-4 py-2 font-light text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
@@ -1305,8 +1305,96 @@
                         topic: 'Integration by Parts and Substitution',
                         description: 'Advanced integration techniques',
                         notes: 'By the end of this week, learners will be able to:\n\n• Apply the guess-and-check method for anti-differentiation.\n• Demonstrate the substitution method for anti-differentiation.\n• Demonstrate integration by parts.\n• Apply a slicing approach to construct integrals for areas.',
+                        reviewNotes: `
+                            <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">1. Integration by Parts (IBP)</h2>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The Concept and Formula</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li>IBP is the integral equivalent of the <strong>Product Rule</strong> for derivatives. It is used when the integrand is a product of two different types of functions (e.g., $x \\cdot e^{ax}$ or $\\arccos(x) \\cdot 1$).</li>
+                                <li><strong>The Formula:</strong>
+                                    $$\\int u \\, dv = uv - \\int v \\, du$$
+                                </li>
+                            </ul>
+
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The LIATE Trick (Choosing $u$ and $dv$)</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li>The critical step is choosing which part of the integrand will be $u$ and which will be $dv$. The goal is to make the resulting integral $\\int v \\, du$ simpler than the original integral.</li>
+                                <li>The mnemonic <strong>LIATE</strong> helps prioritize the choice for $u$:
+                                    <ol class="list-decimal list-inside ml-6 mt-2 space-y-2">
+                                        <li><strong>L</strong>ogarithmic functions (e.g., $\\ln(x)$)</li>
+                                        <li><strong>I</strong>nverse trigonometric functions (e.g., $\\arccos(x)$)</li>
+                                        <li><strong>A</strong>lgebraic functions (e.g., $x^n$, polynomials)</li>
+                                        <li><strong>T</strong>rigonometric functions (e.g., $\\sin(x)$, $\\cos(x)$)</li>
+                                        <li><strong>E</strong>xponential functions (e.g., $e^{ax}$)</li>
+                                    </ol>
+                                </li>
+                                <li><strong>The Rule:</strong> Pick the function that appears <strong>earlier</strong> in the LIATE list to be $u$. The remaining part of the integral is $dv$.</li>
+                            </ul>
+
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Example Application: $\\int \\arccos(x) \\, dx$</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li>The integrand is technically $\\arccos(x) \\cdot 1$.</li>
+                                <li>According to LIATE, $u$ must be the Inverse Trig function ($\\arccos(x)$), as it is highest priority.</li>
+                                <li><strong>Choice:</strong> $u = \\arccos(x)$, and $dv = dx$.</li>
+                                <li><strong>Derivatives/Integrals:</strong>
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2">
+                                        <li>$du = -\\frac{1}{\\sqrt{1-x^2}} dx$</li>
+                                        <li>$v = x$</li>
+                                    </ul>
+                                </li>
+                                <li>The new integral becomes $\\int v \\, du = \\int x \\left(-\\frac{1}{\\sqrt{1-x^2}}\\right) dx$. This integral is now easily solved using a simple <strong>u-substitution</strong> ($w = 1-x^2$). This combination of IBP followed by u-sub is common.</li>
+                            </ul>
+
+                            <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">2. Substitution (u-Substitution)</h2>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The Concept</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li>U-Substitution is the integral equivalent of the <strong>Chain Rule</strong> for derivatives. It simplifies a complex integrand by changing the integration variable.</li>
+                            </ul>
+
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Procedure and Trick</h3>
+                            <ol class="list-decimal list-inside space-y-3 mb-4">
+                                <li><strong>Choose $u$:</strong> Select an inner function $u$ whose derivative, $du$, is also present (or nearly present, up to a constant multiplier) in the integrand.
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2">
+                                        <li><strong>Trick for $\\int xe^{-3x^2} dx$:</strong> Choose $u$ as the exponent: $u = -3x^2$.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Find $du$:</strong> Differentiate $u$ with respect to $x$: $du = -6x \\, dx$.</li>
+                                <li><strong>Substitute $du$:</strong> Solve for $x \\, dx = -\\frac{1}{6} du$. Substitute this back into the integral.
+                                    $$\\int e^{-3x^2} (x \\, dx) \\implies \\int e^u \\left(-\\frac{1}{6} du\\right) = -\\frac{1}{6} \\int e^u du$$
+                                </li>
+                                <li><strong>Integrate:</strong> Solve the resulting, simpler integral.</li>
+                                <li><strong>Back-Substitute:</strong> Replace $u$ with the original expression in $x$.</li>
+                            </ol>
+
+                            <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">3. Area Between Curves (Review)</h2>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Integration with Vertical Slices ($\\Delta x$)</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li>Used when the area boundaries are defined as functions of $x$ (i.e., $y=f(x)$).</li>
+                                <li><strong>Formula:</strong> $A = \\int_{a}^{b} (\\text{Top Function}) - (\\text{Bottom Function}) \\, dx$.</li>
+                                <li>This requires identifying the intersection points ($a$ and $b$) by setting $f(x)=g(x)$.</li>
+                                <li>For example, the intersection of $f(x)=\\frac{x}{3}$ and $g(x)=\\sqrt{x}$ defines the limits.</li>
+                            </ul>
+
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Integration with Horizontal Slices ($\\Delta y$)</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li>Used when the area boundaries are defined as functions of $y$ (i.e., $x=f(y)$).</li>
+                                <li><strong>Formula:</strong> $A = \\int_{c}^{d} (\\text{Right Function}) - (\\text{Left Function}) \\, dy$.</li>
+                                <li><strong>Procedure:</strong> You must rewrite both boundary functions in terms of $y$.
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2">
+                                        <li>For $g(x)=\\sqrt{x}$, rewrite as $x=y^2$.</li>
+                                        <li>For $f(x)=\\frac{x}{3}$, rewrite as $x=3y$.</li>
+                                    </ul>
+                                </li>
+                                <li>The limits of integration ($c$ and $d$) are the $y$-coordinates of the intersection points.</li>
+                            </ul>
+                        `,
                         pdfLink: 'https://example.com/apsc171_week8_tutorial.pdf',
-                        videoId: 'u9SVTAW6aFY'
+                        videoId: 'u9SVTAW6aFY',
+                        extraVideoId: 'sci1pls4Lc8',
+                        extraVideoId2: 'zNU8iK8sGD0',
+                        extraVideoId3: '2I-_SV8cwsw'
                     },
                     {
                         week: 9,
