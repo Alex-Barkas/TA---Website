@@ -284,11 +284,6 @@
     <!-- ============================================ -->
     <div id="coming-soon-view" class="view-section">
         <div class="container mx-auto px-4 py-20 pt-32">
-            <button onclick="showLanding()" 
-                    class="mb-12 px-6 py-3 text-gray-900 dark:text-white bg-white dark:bg-black border border-gray-300 dark:border-white border-opacity-30 dark:border-opacity-20 rounded-lg transition-all duration-300 hover:border-opacity-100 hover:shadow-lg font-light">
-                ← Back to Course Selection
-            </button>
-            
             <div class="flex items-center justify-center min-h-[60vh]">
                 <div class="text-center">
                     <h2 class="text-6xl md:text-7xl font-light text-gray-900 dark:text-white mb-6">Coming Soon</h2>
@@ -1592,9 +1587,9 @@
             // Show coming soon view
             document.getElementById('coming-soon-view').classList.add('active');
             
-            // Show main nav, hide course nav (Coming Soon is not a course page)
-            document.getElementById('main-nav').style.display = 'block';
-            document.getElementById('course-nav').style.display = 'none';
+            // Show course nav, hide main nav (like APSC 171 course page)
+            document.getElementById('main-nav').style.display = 'none';
+            document.getElementById('course-nav').style.display = 'block';
             
             // Scroll to top of page
             window.scrollTo(0, 0);
