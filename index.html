@@ -1,0 +1,1821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculus Resources - Queen's University</title>
+    
+    <!-- Google Fonts - Clean modern font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- MathJax for LaTeX rendering -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    
+    <!-- Tailwind CSS CDN - provides all styling utilities -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom Tailwind Configuration -->
+    <script>
+        // Configure Tailwind with clean modern font and class-based dark mode
+        tailwind.config = {
+            darkMode: 'class', // Enable class-based dark mode
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                    },
+                    colors: {
+                        'neutral-dark': '#1a1a1a', // Neutral blackish-grey for dark mode (5% lighter)
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Smooth fade transitions for view switching */
+        .view-section {
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            display: none;
+        }
+        
+        .view-section.active {
+            opacity: 1;
+            display: block;
+        }
+        
+        /* Smooth transitions for theme switching */
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+    </style>
+    
+    <!-- Initialize theme before body renders to prevent flash -->
+    <script>
+        // This runs immediately before the body loads
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'dark') {
+                document.documentElement.classList.add('dark');
+            }
+        })();
+    </script>
+</head>
+<body class="bg-gray-50 dark:bg-neutral-dark text-gray-900 dark:text-white min-h-screen font-sans antialiased">
+
+    <!-- Main Navigation Bar (Home, About, Contact) -->
+    <nav id="main-nav" class="fixed top-0 left-0 right-0 z-40 bg-white dark:bg-black border-b border-gray-200 dark:border-white dark:border-opacity-10 backdrop-blur-lg bg-opacity-80 dark:bg-opacity-80">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-center h-16 gap-8">
+                <button onclick="showHome()" class="nav-link px-4 py-2 font-light text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
+                    Home
+                </button>
+                <button onclick="showAbout()" class="nav-link px-4 py-2 font-light text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
+                    About Me
+                </button>
+                <button onclick="showContact()" class="nav-link px-4 py-2 font-light text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
+                    Contact
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Course Navigation Bar (appears in APSC 171 page) -->
+    <nav id="course-nav" class="fixed top-0 left-0 right-0 z-40 bg-white dark:bg-black border-b border-gray-200 dark:border-white dark:border-opacity-10 backdrop-blur-lg bg-opacity-80 dark:bg-opacity-80" style="display: none;">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-center h-16 gap-8">
+                <button onclick="showLanding()" class="nav-link px-4 py-2 font-light text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
+                    Home
+                </button>
+                <button onclick="showCourseTab('resources')" class="nav-link px-4 py-2 font-light text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
+                    Course Resources
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" 
+            onclick="toggleTheme()"
+            class="fixed top-20 right-6 z-50 w-12 h-12 rounded-full border border-gray-300 dark:border-white dark:border-opacity-20 bg-white dark:bg-black bg-opacity-80 dark:bg-opacity-50 backdrop-blur-lg flex items-center justify-center hover:border-gray-900 dark:hover:border-opacity-100 transition-all duration-300 shadow-lg">
+        <!-- Sun icon (visible in dark mode) -->
+        <svg id="sun-icon" class="w-6 h-6 text-white hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+        </svg>
+        <!-- Moon icon (visible in light mode) -->
+        <svg id="moon-icon" class="w-6 h-6 text-gray-900 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+        </svg>
+    </button>
+
+    <!-- ============================================ -->
+    <!-- LANDING PAGE - COURSE SELECTION VIEW -->
+    <!-- ============================================ -->
+    <div id="landing-view" class="view-section active">
+        <div class="container mx-auto px-4 py-20 md:py-32 pt-32 md:pt-40">
+            
+            <!-- Header Section -->
+            <div class="text-center mb-20 md:mb-28">
+                <h1 class="text-5xl md:text-6xl font-light mb-3 text-gray-900 dark:text-white tracking-tight">
+                    Engineering Calculus
+                </h1>
+                <p class="text-base text-gray-600 dark:text-white dark:opacity-40 font-light">
+                    Queens University
+                </p>
+            </div>
+            
+            <!-- Course Selection Cards -->
+            <div class="max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <!-- APSC 171 Card -->
+                <div onclick="showCourseOutline('APSC171')" 
+                     class="border-2 border-gray-400 dark:border-white dark:border-opacity-20 rounded-2xl p-12 cursor-pointer transition-all duration-300 hover:border-gray-900 dark:hover:border-opacity-100 hover:shadow-xl">
+                    <div class="text-center">
+                        <h2 class="text-3xl font-light text-gray-900 dark:text-white mb-3">APSC 171</h2>
+                        <p class="text-lg font-light text-gray-600 dark:text-white dark:opacity-70 mb-2">Calculus I for Engineers</p>
+                        <p class="text-sm font-light text-gray-500 dark:text-white dark:opacity-50">Fall 2025</p>
+                    </div>
+                </div>
+                
+                <!-- APSC 172 Card -->
+                <div onclick="showComingSoon()" 
+                     class="border-2 border-gray-400 dark:border-white dark:border-opacity-20 rounded-2xl p-12 cursor-pointer transition-all duration-300 hover:border-gray-900 dark:hover:border-opacity-100 hover:shadow-xl">
+                    <div class="text-center">
+                        <h2 class="text-3xl font-light text-gray-900 dark:text-white mb-3">APSC 172</h2>
+                        <p class="text-lg font-light text-gray-600 dark:text-white dark:opacity-70 mb-2">Calculus II for Engineers</p>
+                        <p class="text-sm font-light text-gray-500 dark:text-white dark:opacity-50">Winter 2026</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- COURSE OUTLINE VIEW - 12 WEEK CARDS -->
+    <!-- ============================================ -->
+    <div id="course-view" class="view-section">
+        <div class="container mx-auto px-4 py-8 pt-24">
+            
+            <!-- Course Title (dynamically updated) -->
+            <h2 id="course-title" class="text-4xl md:text-5xl font-light mb-12 text-center text-gray-900 dark:text-white"></h2>
+            
+            <!-- Course Resources Tab Content -->
+            <div id="course-resources-tab" class="course-tab-content" style="display: none;">
+                <div class="max-w-4xl mx-auto">
+                    <div class="space-y-6">
+                        <!-- Course Description Section -->
+                        <div class="border border-gray-300 dark:border-white border-opacity-30 dark:border-opacity-20 rounded-xl p-8 bg-white dark:bg-black">
+                            <h3 class="text-2xl font-light text-gray-900 dark:text-white mb-6">Course Description</h3>
+                            <p class="text-gray-700 dark:text-white dark:opacity-70 font-light leading-relaxed">
+                                Graphs and derivatives of vector-valued functions; related applications. Implicit derivatives and related rate applications. Fundamental Theorem of Calculus, Riemann integral; applications to problems involving areas, volumes, mass, charge, work, etc. Integration by substitution, by parts, and partial fractions. Introduction to second-order differential equations and complex numbers.
+                            </p>
+                        </div>
+                        
+                        <!-- Tutorial Sessions Section -->
+                        <div class="border border-gray-300 dark:border-white border-opacity-30 dark:border-opacity-20 rounded-xl p-8 bg-white dark:bg-black">
+                            <h3 class="text-2xl font-light text-gray-900 dark:text-white mb-6">Tutorial Sessions</h3>
+                            <p class="text-gray-700 dark:text-white dark:opacity-70 font-light">
+                                Chernoff 212 Monday 1:30-2:30
+                            </p>
+                        </div>
+                        
+                        <!-- Grading Scheme Section -->
+                        <div class="border border-gray-300 dark:border-white border-opacity-30 dark:border-opacity-20 rounded-xl p-8 bg-white dark:bg-black">
+                            <h3 class="text-2xl font-light text-gray-900 dark:text-white mb-6">Grading Scheme</h3>
+                            
+                            <div class="mb-6">
+                                <p class="text-gray-700 dark:text-white dark:opacity-70 font-light mb-4">
+                                    <strong class="text-gray-900 dark:text-white">Webwork:</strong> 10% - best 10/12
+                                </p>
+                            </div>
+                            
+                            <p class="text-gray-700 dark:text-white dark:opacity-70 font-light mb-4">
+                                And the best of a) or b):
+                            </p>
+                            
+                            <div class="space-y-4">
+                                <!-- Option a -->
+                                <div class="p-4 bg-gray-50 dark:bg-gray-900 bg-opacity-50 dark:bg-opacity-30 rounded-lg border border-gray-200 dark:border-white dark:border-opacity-10">
+                                    <p class="text-sm font-medium text-gray-900 dark:text-white mb-2">a)</p>
+                                    <ul class="space-y-2 text-gray-700 dark:text-white dark:opacity-70 font-light">
+                                        <li>Midterm Test 1: 22.5%</li>
+                                        <li>Midterm Test 2: 22.5%</li>
+                                        <li>Final Exam: 45%</li>
+                                    </ul>
+                                </div>
+                                
+                                <!-- Option b -->
+                                <div class="p-4 bg-gray-50 dark:bg-gray-900 bg-opacity-50 dark:bg-opacity-30 rounded-lg border border-gray-200 dark:border-white dark:border-opacity-10">
+                                    <p class="text-sm font-medium text-gray-900 dark:text-white mb-2">b)</p>
+                                    <ul class="space-y-2 text-gray-700 dark:text-white dark:opacity-70 font-light">
+                                        <li>Best Midterm: 22.5%</li>
+                                        <li>Final Exam: 67.5%</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Office Hours Section -->
+                        <div class="border border-gray-300 dark:border-white border-opacity-30 dark:border-opacity-20 rounded-xl p-8 bg-white dark:bg-black">
+                            <h3 class="text-2xl font-light text-gray-900 dark:text-white mb-6">Office Hours</h3>
+                            <p class="text-gray-700 dark:text-white dark:opacity-70 font-light">
+                                Check OnQ
+                            </p>
+                        </div>
+                        
+                        <!-- Contact Information Section -->
+                        <div class="border border-gray-300 dark:border-white border-opacity-30 dark:border-opacity-20 rounded-xl p-8 bg-white dark:bg-black">
+                            <h3 class="text-2xl font-light text-gray-900 dark:text-white mb-6">Contact Information</h3>
+                            <div class="space-y-3">
+                                <div>
+                                    <p class="text-sm font-medium text-gray-900 dark:text-white mb-1">Course Email</p>
+                                    <a href="mailto:apsc171@queensu.ca" class="text-gray-700 dark:text-white dark:opacity-70 font-light hover:text-gray-900 dark:hover:text-white underline">
+                                        apsc171@queensu.ca
+                                    </a>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-900 dark:text-white mb-1">Course Coordinator - Alan Ableson</p>
+                                    <a href="mailto:ableson@queensu.ca" class="text-gray-700 dark:text-white dark:opacity-70 font-light hover:text-gray-900 dark:hover:text-white underline">
+                                        ableson@queensu.ca
+                                    </a>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-900 dark:text-white mb-1">My Email</p>
+                                    <a href="mailto:23kkv9@queensu.ca" class="text-gray-700 dark:text-white dark:opacity-70 font-light hover:text-gray-900 dark:hover:text-white underline">
+                                        23kkv9@queensu.ca
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Weekly Content Tab -->
+            <div id="course-weekly-tab" class="course-tab-content">
+                <!-- Week Cards Container (dynamically populated) -->
+                <div id="weeks-container" class="max-w-4xl mx-auto space-y-4">
+                    <!-- Week cards will be inserted here by JavaScript -->
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- COMING SOON VIEW - FOR APSC 172 -->
+    <!-- ============================================ -->
+    <div id="coming-soon-view" class="view-section">
+        <div class="container mx-auto px-4 py-20 pt-32">
+            <button onclick="showLanding()" 
+                    class="mb-12 px-6 py-3 text-gray-900 dark:text-white bg-white dark:bg-black border border-gray-300 dark:border-white border-opacity-30 dark:border-opacity-20 rounded-lg transition-all duration-300 hover:border-opacity-100 hover:shadow-lg font-light">
+                ← Back to Course Selection
+            </button>
+            
+            <div class="flex items-center justify-center min-h-[60vh]">
+                <div class="text-center">
+                    <h2 class="text-6xl md:text-7xl font-light text-gray-900 dark:text-white mb-6">Coming Soon</h2>
+                    <p class="text-xl text-gray-600 dark:text-white dark:opacity-50 font-light">APSC 172 resources will be available for Winter Semester</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- WEEK DETAIL VIEW - INDIVIDUAL WEEK PAGE -->
+    <!-- ============================================ -->
+    <div id="week-view" class="view-section">
+        <div class="container mx-auto px-4 py-8 pt-24">
+            
+            <!-- Back Button -->
+            <button onclick="backToCourseOutline()" 
+                    class="mb-12 px-6 py-3 text-gray-900 dark:text-white bg-white dark:bg-black border border-gray-300 dark:border-white border-opacity-30 dark:border-opacity-20 rounded-lg transition-all duration-300 hover:border-opacity-100 hover:shadow-lg font-light">
+                ← Back to Course Outline
+            </button>
+            
+            <!-- Week Header -->
+            <div class="max-w-4xl mx-auto mb-12">
+                <span id="week-number" class="text-gray-600 dark:text-white dark:opacity-60 font-light text-lg mb-3 block"></span>
+                <h2 id="week-topic" class="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-4"></h2>
+                <p id="week-description" class="text-xl text-gray-600 dark:text-white dark:opacity-60 font-light"></p>
+            </div>
+            
+            <!-- Week Content Sections -->
+            <div class="max-w-4xl mx-auto space-y-6">
+                
+                <!-- Section A: Learning Outcomes -->
+                <div class="border border-gray-300 dark:border-white border-opacity-30 dark:border-opacity-20 rounded-xl p-8 bg-white dark:bg-black">
+                    <h3 class="text-2xl font-light text-gray-900 dark:text-white mb-6">Learning Outcomes</h3>
+                    <div id="week-notes" class="text-gray-700 dark:text-white dark:opacity-80 leading-relaxed font-light space-y-2"></div>
+                </div>
+                
+                <!-- Section B: Review Notes (LaTeX Support) -->
+                <div class="border border-gray-300 dark:border-white border-opacity-30 dark:border-opacity-20 rounded-xl p-8 bg-white dark:bg-black">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-2xl font-light text-gray-900 dark:text-white">Review Notes</h3>
+                        <button id="toggle-review-notes" onclick="toggleReviewNotes()" class="px-4 py-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg hover:bg-gray-700 dark:hover:bg-gray-200 transition-all duration-300 font-light text-sm">
+                            Show More
+                        </button>
+                    </div>
+                    <div class="relative">
+                        <div id="week-review-notes" class="text-gray-700 dark:text-white dark:opacity-80 leading-relaxed font-light prose prose-lg max-w-none transition-all duration-300" style="max-height: 200px; overflow: hidden;">
+                        </div>
+                        <div id="review-notes-fade" class="pointer-events-none absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white dark:from-black to-transparent" style="display: block;"></div>
+                    </div>
+                </div>
+                
+                <!-- Section C: Tutorial Answer Key (PDF Embed) -->
+                <div class="border border-gray-300 dark:border-white border-opacity-30 dark:border-opacity-20 rounded-xl p-8 bg-white dark:bg-black">
+                    <h3 class="text-2xl font-light text-gray-900 dark:text-white mb-6">Tutorial Answer Key</h3>
+                    <!-- Responsive PDF iframe -->
+                    <div class="border border-gray-200 dark:border-white border-opacity-30 dark:border-opacity-10 rounded-lg overflow-hidden" style="height: 500px;">
+                        <iframe 
+                            id="week-pdf"
+                            src="" 
+                            class="w-full h-full"
+                            title="Tutorial Answer Key">
+                        </iframe>
+                    </div>
+                    <a id="week-pdf-link" 
+                       href="" 
+                       target="_blank"
+                       class="inline-block mt-4 text-blue-600 dark:text-white dark:opacity-60 hover:text-blue-800 dark:hover:opacity-100 transition-all font-light">
+                        → Open PDF in new tab
+                    </a>
+                </div>
+                
+                <!-- Section D: Supplementary Video (YouTube Embed) -->
+                <div class="border border-gray-300 dark:border-white border-opacity-30 dark:border-opacity-20 rounded-xl p-8 bg-white dark:bg-black">
+                    <h3 id="video-section-title" class="text-2xl font-light text-gray-900 dark:text-white mb-6">Supplementary Learning Video</h3>
+                    
+                    <!-- First Video -->
+                    <div class="relative rounded-lg mb-6" style="padding-bottom: 56.25%; height: 0; overflow: visible;">
+                        <iframe 
+                            id="week-video"
+                            src="" 
+                            class="absolute top-0 left-0 w-full h-full rounded-lg"
+                            title="Supplementary Video"
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" 
+                            allowfullscreen
+                            webkitallowfullscreen
+                            mozallowfullscreen>
+                        </iframe>
+                    </div>
+                    
+                    <!-- Second Video (if available) -->
+                    <div id="week-video-2-container" style="display: none;">
+                        <div class="relative rounded-lg mb-6" style="padding-bottom: 56.25%; height: 0; overflow: visible;">
+                            <iframe 
+                                id="week-video-2"
+                                src="" 
+                                class="absolute top-0 left-0 w-full h-full rounded-lg"
+                                title="Additional Supplementary Video"
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" 
+                                allowfullscreen
+                                webkitallowfullscreen
+                                mozallowfullscreen>
+                            </iframe>
+                        </div>
+                    </div>
+                    
+                    <!-- Third Video (if available) -->
+                    <div id="week-video-3-container" style="display: none;">
+                        <div class="relative rounded-lg mb-6" style="padding-bottom: 56.25%; height: 0; overflow: visible;">
+                            <iframe 
+                                id="week-video-3"
+                                src="" 
+                                class="absolute top-0 left-0 w-full h-full rounded-lg"
+                                title="Additional Supplementary Video 2"
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" 
+                                allowfullscreen
+                                webkitallowfullscreen
+                                mozallowfullscreen>
+                            </iframe>
+                        </div>
+                    </div>
+                    
+                    <!-- Fourth Video (if available) -->
+                    <div id="week-video-4-container" style="display: none;">
+                        <div class="relative rounded-lg" style="padding-bottom: 56.25%; height: 0; overflow: visible;">
+                            <iframe 
+                                id="week-video-4"
+                                src="" 
+                                class="absolute top-0 left-0 w-full h-full rounded-lg"
+                                title="Additional Supplementary Video 3"
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" 
+                                allowfullscreen
+                                webkitallowfullscreen
+                                mozallowfullscreen>
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- ABOUT ME VIEW -->
+    <!-- ============================================ -->
+    <div id="about-view" class="view-section">
+        <div class="container mx-auto px-4 py-20 pt-32">
+            <div class="max-w-3xl mx-auto">
+                <h1 class="text-5xl md:text-6xl font-light mb-8 text-gray-900 dark:text-white">About Me</h1>
+                
+                <div class="space-y-6">
+                    <div class="border border-gray-300 dark:border-white border-opacity-30 dark:border-opacity-20 rounded-xl p-8 bg-white dark:bg-black">
+                        <p class="text-lg text-gray-700 dark:text-white dark:opacity-80 leading-relaxed font-light mb-4">
+                            Hello! I'm a Teaching Assistant for APSC 171 and 172 at Queen's University.
+                        </p>
+                        <p class="text-lg text-gray-700 dark:text-white dark:opacity-80 leading-relaxed font-light mb-4">
+                            I'm passionate about helping engineering students understand calculus concepts and succeed in their studies. With experience in both Calculus I and II, I work to make complex mathematical concepts accessible and applicable to engineering problems.
+                        </p>
+                        <p class="text-lg text-gray-700 dark:text-white dark:opacity-80 leading-relaxed font-light">
+                            My goal is to provide clear explanations, helpful resources, and support to all students taking these courses.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- CONTACT VIEW -->
+    <!-- ============================================ -->
+    <div id="contact-view" class="view-section">
+        <div class="container mx-auto px-4 py-20 pt-32">
+            <div class="max-w-3xl mx-auto">
+                <h1 class="text-5xl md:text-6xl font-light mb-8 text-gray-900 dark:text-white">Contact</h1>
+                
+                <div class="space-y-6">
+                    <div class="border border-gray-300 dark:border-white border-opacity-30 dark:border-opacity-20 rounded-xl p-8 bg-white dark:bg-black">
+                        <h2 class="text-2xl font-light text-gray-900 dark:text-white mb-6">Get in Touch</h2>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">Email</h3>
+                                <a href="mailto:23kkv9@queensu.ca" class="text-gray-700 dark:text-white dark:opacity-70 font-light hover:text-gray-900 dark:hover:text-white underline">
+                                    23kkv9@queensu.ca
+                                </a>
+                                <p class="text-gray-700 dark:text-white dark:opacity-70 font-light mt-2">Feel free to email me with any questions.</p>
+                            </div>
+                            
+                            <div>
+                                <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">Current Tutorial Session</h3>
+                                <p class="text-gray-700 dark:text-white dark:opacity-70 font-light">Chernoff 212</p>
+                                <p class="text-gray-700 dark:text-white dark:opacity-70 font-light">Tuesdays 1:30 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- JAVASCRIPT - DATA & FUNCTIONALITY -->
+    <!-- ============================================ -->
+    <script>
+        // ========================================
+        // THEME TOGGLE FUNCTIONALITY
+        // Manages light/dark mode switching with localStorage persistence
+        // ========================================
+        
+        // Initialize theme on page load
+        function initTheme() {
+            // Check if user has a saved preference, otherwise default to dark mode
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'dark') {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        }
+        
+        // Toggle between light and dark mode
+        function toggleTheme() {
+            const isDark = document.documentElement.classList.contains('dark');
+            
+            if (isDark) {
+                // Switch to light mode
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                // Switch to dark mode
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+        
+        // Initialize theme immediately
+        initTheme();
+        
+        // ========================================
+        // COURSE TAB SWITCHING
+        // Handle switching between Course Resources and Weekly Content tabs
+        // ========================================
+        
+        // Function to switch between tabs within the course view
+        function showCourseTab(tabName) {
+            // Get tab content sections
+            const resourcesContent = document.getElementById('course-resources-tab');
+            const weeklyContent = document.getElementById('course-weekly-tab');
+            
+            // Make sure course view is visible
+            document.getElementById('course-view').classList.add('active');
+            document.getElementById('week-view').classList.remove('active');
+            
+            // Switch based on which tab was clicked
+            if (tabName === 'resources') {
+                // Show Resources tab, hide Weekly tab
+                resourcesContent.style.display = 'block';
+                weeklyContent.style.display = 'none';
+            } else if (tabName === 'weekly') {
+                // Show Weekly tab, hide Resources tab
+                resourcesContent.style.display = 'none';
+                weeklyContent.style.display = 'block';
+            }
+            
+            // Scroll to top of page
+            window.scrollTo(0, 0);
+        }
+        
+        // ========================================
+        // TOGGLE REVIEW NOTES EXPANSION
+        // Handle expanding/collapsing the review notes section
+        // ========================================
+        let reviewNotesExpanded = false;
+        
+        function toggleReviewNotes() {
+            const reviewNotesElement = document.getElementById('week-review-notes');
+            const toggleButton = document.getElementById('toggle-review-notes');
+            const fadeElement = document.getElementById('review-notes-fade');
+            
+            reviewNotesExpanded = !reviewNotesExpanded;
+            
+            if (reviewNotesExpanded) {
+                // Expand the notes - show full content
+                reviewNotesElement.style.maxHeight = '5000px';  // Large enough for any content
+                toggleButton.textContent = 'Show Less';
+                fadeElement.style.display = 'none';
+            } else {
+                // Collapse the notes - show preview only
+                reviewNotesElement.style.maxHeight = '200px';
+                toggleButton.textContent = 'Show More';
+                fadeElement.style.display = 'block';
+            }
+        }
+        
+        // ========================================
+        // NAVIGATION FUNCTIONS
+        // Handle navigation between Home, About Me, and Contact pages
+        // ========================================
+        
+        // Show Home page (landing page with course selection)
+        function showHome() {
+            document.getElementById('landing-view').classList.add('active');
+            document.getElementById('about-view').classList.remove('active');
+            document.getElementById('contact-view').classList.remove('active');
+            document.getElementById('course-view').classList.remove('active');
+            document.getElementById('week-view').classList.remove('active');
+            document.getElementById('coming-soon-view').classList.remove('active');
+            
+            // Show main nav, hide course nav
+            document.getElementById('main-nav').style.display = 'block';
+            document.getElementById('course-nav').style.display = 'none';
+            
+            window.scrollTo(0, 0);
+        }
+        
+        // Show About Me page
+        function showAbout() {
+            document.getElementById('landing-view').classList.remove('active');
+            document.getElementById('about-view').classList.add('active');
+            document.getElementById('contact-view').classList.remove('active');
+            document.getElementById('course-view').classList.remove('active');
+            document.getElementById('week-view').classList.remove('active');
+            document.getElementById('coming-soon-view').classList.remove('active');
+            
+            // Show main nav, hide course nav
+            document.getElementById('main-nav').style.display = 'block';
+            document.getElementById('course-nav').style.display = 'none';
+            
+            window.scrollTo(0, 0);
+        }
+        
+        // Show Contact page
+        function showContact() {
+            document.getElementById('landing-view').classList.remove('active');
+            document.getElementById('about-view').classList.remove('active');
+            document.getElementById('contact-view').classList.add('active');
+            document.getElementById('course-view').classList.remove('active');
+            document.getElementById('week-view').classList.remove('active');
+            document.getElementById('coming-soon-view').classList.remove('active');
+            
+            // Show main nav, hide course nav
+            document.getElementById('main-nav').style.display = 'block';
+            document.getElementById('course-nav').style.display = 'none';
+            
+            window.scrollTo(0, 0);
+        }
+        
+        // ========================================
+        // COURSE DATA STRUCTURE
+        // This object contains all 12 weeks of content for both courses
+        // Each week has: topic, description, notes, pdfLink, and videoId
+        // ========================================
+        const courseData = {
+            'APSC171': {
+                title: 'APSC 171: Calculus I for Engineers (Fall 2025)',
+                weeks: [
+                    {
+                        week: 1,
+                        topic: 'Derivatives and Vectors',
+                        description: 'Evaluating derivatives and computing vector operations',
+                        notes: 'By the end of this week, learners will be able to:\n\n• Evaluate derivatives of all common functions.\n• Compute derivatives of more complicated functions using the product, quotient and chain rules.\n• Compute and interpret sums of vectors, and scalar and vector products of vectors.',
+                        reviewNotes: `
+                            <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">1. Derivatives</h2>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Key Differentiation Rules</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li><strong>Chain Rule:</strong> Used when differentiating a composite function $f(g(x))$.
+                                    $$\\frac{d}{dx} [f(g(x))] = f'(g(x)) \\cdot g'(x)$$
+                                </li>
+                                <li><strong>Product Rule:</strong> Used when differentiating a product of two functions $f(x)g(x)$.
+                                    $$\\frac{d}{dx} [f(x)g(x)] = f'(x)g(x) + f(x)g'(x)$$
+                                </li>
+                                <li><strong>Quotient Rule:</strong> Used when differentiating a ratio of two functions $f(x)/g(x)$.
+                                    $$\\frac{d}{dx} \\left[ \\frac{f(x)}{g(x)} \\right] = \\frac{f'(x)g(x) - f(x)g'(x)}{[g(x)]^2}$$
+                                </li>
+                            </ul>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Tips and Simplification</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li><strong>Simplify First (The Power Rule Tip):</strong> Before using the Quotient Rule, you can often use algebra to rewrite a function into terms that are powers of $t$ (or $x$). This lets you use the simple Power Rule and avoids complex calculations.
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2">
+                                        <li><strong>Example:</strong> For $r(t)=\\frac{5t^{4}-2t}{\\sqrt{t}}$, rewrite as:
+                                            $$r(t) = \\frac{5t^4}{t^{1/2}} - \\frac{2t}{t^{1/2}} = 5t^{4 - 1/2} - 2t^{1 - 1/2} = 5t^{7/2} - 2t^{1/2}$$
+                                        </li>
+                                        <li>Now, the derivative (velocity) is straightforward using the Power Rule:
+                                            $$r'(t) = 5 \\cdot \\frac{7}{2} t^{5/2} - 2 \\cdot \\frac{1}{2} t^{-1/2} = \\frac{35}{2} t^{5/2} - t^{-1/2}$$
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><strong>Exponents for Square Roots:</strong> Always rewrite $\\sqrt{g(t)}$ as $(g(t))^{1/2}$ and $\\frac{1}{\\sqrt{g(t)}}$ as $(g(t))^{-1/2}$. This makes the Chain Rule application much clearer.</li>
+                                <li><strong>Reciprocals and Negative Exponents:</strong> For $h(x)=\\frac{1}{1+e^{-x}}$, you can use the Quotient Rule, or rewrite it as $h(x) = (1+e^{-x})^{-1}$ and use the Chain Rule (often easier!).</li>
+                            </ul>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Position and Velocity</h3>
+                            <ul class="list-disc list-inside space-y-2 mb-4">
+                                <li>The <strong>velocity</strong> function $\\vec{v}(t)$ is the <strong>derivative</strong> of the position function $\\vec{r}(t)$.
+                                    $$\\vec{v}(t) = \\vec{r}'(t) = \\frac{d}{dt}\\vec{r}(t)$$
+                                </li>
+                            </ul>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Vector Operations</h3>
+                            <ul class="list-disc list-inside space-y-2 mb-4">
+                                <li><strong>Vector Addition/Subtraction:</strong> Performed <strong>component-wise</strong>.</li>
+                                <li><strong>Scalar Multiplication:</strong> Multiply each component by the scalar.</li>
+                                <li><strong>Magnitude (Length) of a Vector:</strong> For $\\vec{v}=\\langle v_1, v_2, v_3 \\rangle$, the magnitude is:
+                                    $$||\\vec{v}|| = \\sqrt{v_1^2 + v_2^2 + v_3^2}$$
+                                </li>
+                                <li><strong>Dot Product:</strong> The result is a <strong>scalar</strong> (a number). It is computed by multiplying corresponding components and summing the results. For $\\vec{a}=\\langle a_1, a_2, a_3 \\rangle$ and $\\vec{b}=\\langle b_1, b_2, b_3 \\rangle$:
+                                    $$\\vec{a} \\cdot \\vec{b} = a_1 b_1 + a_2 b_2 + a_3 b_3$$
+                                </li>
+                            </ul>
+                            
+                            <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">2. Parallel and Perpendicular Vectors</h2>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Perpendicular Vectors</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li><strong>Tip 1 (The Dot Product Rule):</strong> Two non-zero vectors $\\vec{a}$ and $\\vec{b}$ are <strong>perpendicular (orthogonal)</strong> if and only if their <strong>dot product is zero</strong>.
+                                    $$\\vec{a} \\cdot \\vec{b} = 0$$
+                                </li>
+                                <li><strong>Tip 2 (2D Quick Perpendicular):</strong> To quickly find a vector perpendicular to $\\vec{v} = \\langle a, b \\rangle$, just swap the components and negate one of them.
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2">
+                                        <li>$\\vec{w}_1 = \\langle -b, a \\rangle$ or $\\vec{w}_2 = \\langle b, -a \\rangle$</li>
+                                        <li>For the vector $\\langle -3, 4 \\rangle$, a perpendicular vector is $\\langle -4, -3 \\rangle$.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Unit Vectors:</strong> A unit vector is a vector with a magnitude of 1. You find a unit vector $\\vec{u}$ in the direction of $\\vec{v}$ by normalizing:
+                                    $$\\vec{u} = \\frac{\\vec{v}}{||\\vec{v}||}$$
+                                </li>
+                                <li>Once you find a perpendicular vector $\\vec{w}$, you must normalize it to find the two unit vectors that are perpendicular ($\\pm \\vec{u}$).</li>
+                            </ul>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Parallel Vectors</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li><strong>Tip (The Scalar Multiple Rule):</strong> Two vectors $\\vec{c}$ and $\\vec{d}$ are <strong>parallel</strong> if and only if one is a <strong>scalar multiple</strong> of the other.
+                                    $$\\vec{c} = q \\cdot \\vec{d} \\quad \\text{for some scalar } q$$
+                                </li>
+                                <li>This means the ratio of their corresponding components must be equal.
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2">
+                                        <li><strong>Example:</strong> For $\\vec{c}=\\langle q, 2 \\rangle$ and $\\vec{d}=\\langle 2, 3 \\rangle$, we need:
+                                            $$\\frac{q}{2} = \\frac{2}{3}$$
+                                        </li>
+                                        <li>Solving for $q$ gives the required value for them to be parallel.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        `,
+                        pdfLink: 'https://example.com/apsc171_week1_tutorial.pdf',
+                        videoId: '9vKqVkMQHKk'
+                    },
+                    {
+                        week: 2,
+                        topic: 'Vector-Valued Functions',
+                        description: 'Parametric curves and their properties',
+                        notes: 'By the end of this week, learners will be able to:\n\n• Define vector-valued functions (parametric curves).\n• Sketch vector-valued functions.\n• Determine if vector-valued functions collide or intersect.',
+                        reviewNotes: `
+                            <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">1. Vector-Valued Functions $\\vec{r}(t)$</h2>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Definition and Basic Form</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li>A vector-valued function, $\\vec{r}(t)$, describes the <strong>position</strong> of a particle or point in space (or a plane) at time $t$.</li>
+                                <li>In 2D, its components define the $(x, y)$ coordinates:
+                                    $$\\vec{r}(t) = \\langle x(t), y(t) \\rangle$$
+                                </li>
+                                <li>$t$ is called the <strong>parameter</strong>.</li>
+                            </ul>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Converting to Cartesian Equation (Eliminating the Parameter)</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li><strong>Goal:</strong> To find the familiar $y=f(x)$ equation.</li>
+                                <li><strong>Method:</strong>
+                                    <ol class="list-decimal list-inside ml-6 mt-2 space-y-2">
+                                        <li>Start with the parametric equations: $x = x(t)$ and $y = y(t)$.</li>
+                                        <li><strong>Solve one equation for $t$</strong>. Pick the easiest one (usually $x(t)$ or $y(t)$).</li>
+                                        <li><strong>Substitute</strong> that expression for $t$ into the other equation.</li>
+                                        <li>The result is the Cartesian equation relating $x$ and $y$.</li>
+                                    </ol>
+                                </li>
+                                <li><strong>Tip (Check Domain and Range):</strong> When you eliminate the parameter, the resulting Cartesian equation ($y=f(x)$) often describes a curve that is <strong>larger</strong> than the actual path traced by $\\vec{r}(t)$. This is super important.
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2">
+                                        <li><strong>Example:</strong> If $x(t) = \\sqrt{t-1}$, then $x$ must be $\\ge 0$. You must indicate which part of the graph $\\vec{r}(t)$ actually passes over.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            
+                            <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">2. Particle Collision vs. Intersecting Paths</h2>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li><strong>Collision:</strong> Particles collide if they are at the <strong>same position</strong> at the <strong>same time</strong>.
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2">
+                                        <li>Set the vector functions equal to each other using the <strong>same parameter</strong> $t$:
+                                            $$\\vec{r}_1(t) = \\vec{r}_2(t)$$
+                                        </li>
+                                        <li>This gives two component equations: $x_1(t) = x_2(t)$ and $y_1(t) = y_2(t)$.</li>
+                                        <li>Solve $x_1(t) = x_2(t)$ for $t$. If this value of $t$ also satisfies $y_1(t) = y_2(t)$, a collision occurs at that time.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Intersecting Paths:</strong> The paths (trajectories) intersect if they are at the <strong>same position</strong> but possibly at <strong>different times</strong>.
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2">
+                                        <li>Set the vector functions equal using <strong>different parameters</strong> (e.g., $t$ for $r_1$ and $s$ for $r_2$):
+                                            $$\\vec{r}_1(t) = \\vec{r}_2(s)$$
+                                        </li>
+                                        <li>This gives two component equations: $x_1(t) = x_2(s)$ and $y_1(t) = y_2(s)$.</li>
+                                        <li>This is a system of two equations with two unknowns ($t$ and $s$). Solve this system. If a solution $(t, s)$ exists, the paths intersect.</li>
+                                        <li>The <strong>intersection location</strong> is found by plugging $t$ into $\\vec{r}_1(t)$ OR $s$ into $\\vec{r}_2(s)$.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            
+                            <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">3. Parametrizing Circles</h2>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Standard Parametrization</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li>A circle centered at $(h, k)$ with radius $R$ is defined by the Cartesian equation:
+                                    $$(x-h)^2 + (y-k)^2 = R^2$$
+                                </li>
+                                <li>The standard parametrization for this circle (moving <strong>counter-clockwise</strong>) is:
+                                    $$\\vec{u}(t) = \\langle h + R \\cos(t), \\quad k + R \\sin(t) \\rangle$$
+                                </li>
+                                <li>For the circle $(x-3)^2+(y-7)^2=36$, $h=3$, $k=7$, and $R=\\sqrt{36}=6$.</li>
+                            </ul>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Tips for Controlling Direction and Start Point</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li><strong>Clockwise Motion:</strong> Want to go clockwise instead? Just swap the components (or swap $\\cos(t)$ and $\\sin(t)$) OR negate the $t$ inside. A simple way is to swap the $\\sin(t)$ and $\\cos(t)$ terms:
+                                    $$\\vec{u}_{\\text{CW}}(t) = \\langle h + R \\sin(t), \\quad k + R \\cos(t) \\rangle$$
+                                </li>
+                                <li><strong>Starting Point ($t=0$):</strong>
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2">
+                                        <li>$\\langle h + R\\cos(t), k + R\\sin(t) \\rangle$ starts at $(h+R, k)$ (the rightmost point).</li>
+                                        <li>$\\langle h + R\\sin(t), k + R\\cos(t) \\rangle$ starts at $(h, k+R)$ (the topmost point).</li>
+                                        <li>You can use phase shift (like $\\vec{u}(t) = \\langle h + R \\cos(t+\\phi), k + R \\sin(t+\\phi) \\rangle$) to control where you start. For example, to start at $(h, k-R)$ (bottom of the circle), set $\\phi = \\frac{3\\pi}{2}$ or $-\\frac{\\pi}{2}$.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        `,
+                        pdfLink: 'https://example.com/apsc171_week2_tutorial.pdf',
+                        videoId: 'QaN_3TytT_U',
+                        extraVideoId: 'rLsmajsyaEg'
+                    },
+                    {
+                        week: 3,
+                        topic: 'Derivatives with Vector-Valued Functions',
+                        description: 'Velocity and acceleration in parametric curves',
+                        notes: 'By the end of this week, learners will be able to:\n\n• Compute and use velocity in parametric curves.\n• Compute and use acceleration in parametric curves.',
+                        reviewNotes: `
+                            <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">1. Derivatives of Vector-Valued Functions</h2>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Key Definitions</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li><strong>Position Vector:</strong> $\\vec{r}(t) = \\langle x(t), y(t), z(t) \\rangle$. This traces the particle's path.</li>
+                                <li><strong>Velocity Vector:</strong> The derivative of the position vector, $\\vec{r}'(t)$, is the <strong>velocity</strong> vector $\\vec{v}(t)$.
+                                    $$\\vec{v}(t) = \\vec{r}'(t) = \\left\\langle \\frac{dx}{dt}, \\frac{dy}{dt}, \\frac{dz}{dt} \\right\\rangle$$
+                                </li>
+                                <li><strong>Velocity Direction:</strong> The vector $\\vec{r}'(t)$ is <strong>tangent</strong> to the curve at the point $\\vec{r}(t)$ and points in the direction of motion.</li>
+                                <li><strong>Speed (Scalar):</strong> The magnitude (length) of the velocity vector is the <strong>speed</strong> $s(t)$. Speed is a scalar quantity.
+                                    $$s(t) = ||\\vec{v}(t)|| = ||\\vec{r}'(t)|| = \\sqrt{\\left(\\frac{dx}{dt}\\right)^2 + \\left(\\frac{dy}{dt}\\right)^2 + \\left(\\frac{dz}{dt}\\right)^2}$$
+                                </li>
+                            </ul>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Setting Up Circular Motion</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li><strong>Parametric Form of a Circle (Radius $R$, Center $(h, k)$):</strong>
+                                    $$\\vec{r}(t) = \\langle h + R \\cos(\\omega t), \\quad k + R \\sin(\\omega t) \\rangle$$
+                                </li>
+                                <li><strong>Angular Speed ($\\omega$):</strong> This is the rotational speed in $\\text{radians/second}$. The <strong>linear speed</strong> $s$ is related to $\\omega$ by $s = R \\omega$.</li>
+                                <li><strong>Tip for Constant Speed:</strong> To ensure a constant linear speed $s$, you must find the angular speed $\\omega$ such that:
+                                    $$\\omega = \\frac{s}{R}$$
+                                </li>
+                                <li><strong>Controlling Direction and Start Point:</strong>
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2">
+                                        <li><strong>Counter-Clockwise:</strong> Uses $\\langle R \\cos(\\omega t), R \\sin(\\omega t) \\rangle$. Starts at $(R, 0)$ for $t=0$.</li>
+                                        <li><strong>Clockwise:</strong> Uses $\\langle R \\cos(\\omega t), -R \\sin(\\omega t) \\rangle$ OR $\\langle R \\sin(\\omega t), R \\cos(\\omega t) \\rangle$ (with careful start point check).</li>
+                                        <li>For starting at $(2,0)$ with radius $R=2$ going clockwise: Use $\\langle 2 \\cos(\\omega t), -2 \\sin(\\omega t) \\rangle$. Find $\\omega$ from the given speed.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            
+                            <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">2. Tangent Vectors and Targeting</h2>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The Tangent Line Concept</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li>If an object travels straight ahead from its current position $\\vec{r}(t)$ in the direction it's moving, it follows the line <strong>tangent</strong> to the curve at that point.</li>
+                                <li>This tangent line is defined by:
+                                    $$\\vec{L}(u) = \\vec{r}(t_0) + u \\cdot \\vec{r}'(t_0)$$
+                                    where $t_0$ is the time of launch, and $u \\ge 0$ is the new parameter along the line.
+                                </li>
+                            </ul>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The Targeting Tip</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li><strong>Scenario:</strong> Particle at $\\vec{r}(t)$ launches a projectile towards a target $\\vec{P}$.</li>
+                                <li><strong>Condition:</strong> The vector from the particle's launch position $\\vec{r}(t)$ to the target $\\vec{P}$ must be <strong>parallel</strong> to the particle's velocity vector $\\vec{v}(t) = \\vec{r}'(t)$ at the launch time $t$.</li>
+                                <li><strong>Setup:</strong>
+                                    $$\\vec{P} - \\vec{r}(t) = k \\cdot \\vec{r}'(t) \\quad \\text{for some scalar } k > 0$$
+                                </li>
+                                <li>This sets up a system of equations (one for each component) where you need to solve for $t$ and $k$.</li>
+                                <li><strong>Steps:</strong>
+                                    <ol class="list-decimal list-inside ml-6 mt-2 space-y-2">
+                                        <li>Find the position of the car: $\\vec{r}(t) = \\langle t+1, t^2+2 \\rangle$.</li>
+                                        <li>Find the velocity of the car: $\\vec{r}'(t) = \\langle 1, 2t \\rangle$.</li>
+                                        <li>The target is $\\vec{P} = \\langle -1, 2 \\rangle$.</li>
+                                        <li>Set up the parallel vector condition: $\\vec{P} - \\vec{r}(t) = k \\cdot \\vec{r}'(t)$.
+                                            $$\\langle -1 - (t+1), \\quad 2 - (t^2+2) \\rangle = k \\langle 1, 2t \\rangle$$
+                                        </li>
+                                    </ol>
+                                </li>
+                                <li>Solve the resulting system of two equations for the single variable $t$. You must check that $k$ is positive, as the projectile must travel forward.</li>
+                            </ul>
+                        `,
+                        pdfLink: 'https://example.com/apsc171_week3_tutorial.pdf',
+                        videoId: 'e4xW-zFl9Pc'
+                    },
+                    {
+                        week: 4,
+                        topic: 'Inverse Trig, Tangent Lines and Linearization',
+                        description: 'Inverse trigonometric functions and tangent line approximations',
+                        notes: 'By the end of this week, learners will be able to:\n\n• Review inverse trigonometric functions and their derivatives.\n• Create and use linearization/tangent line formulas.',
+                        reviewNotes: `
+                            <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">1. Projectile Motion (Using Derivatives)</h2>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The Motion Hierarchy</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li>Position $\\vec{r}(t)$</li>
+                                <li>Velocity $\\vec{v}(t) = \\vec{r}'(t)$</li>
+                                <li>Acceleration $\\vec{a}(t) = \\vec{v}'(t) = \\vec{r}''(t)$</li>
+                            </ul>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Analyzing Motion from Velocity</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li><strong>Finding Acceleration:</strong> If given the velocity $\\vec{v}(t)=\\langle v_x(t), v_y(t) \\rangle$, the acceleration is found by differentiating each component.
+                                    $$\\vec{a}(t) = \\vec{v}'(t) = \\left\\langle \\frac{d}{dt} v_x(t), \\quad \\frac{d}{dt} v_y(t) \\right\\rangle$$
+                                </li>
+                                <li><strong>The Gravity Tip:</strong> Gravity is a constant, downward acceleration. By calculating $\\vec{a}(t)$ from the given velocity $\\vec{v}(t)$, the constant $y$-component of $\\vec{a}(t)$ gives the acceleration due to gravity, $g$. Comparing this value to $9.8 \\text{ m/s}^2$ (Earth) helps identify the environment.</li>
+                            </ul>
+                            
+                            <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">2. Derivatives of Inverse Trig and Transcendental Functions</h2>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Key Differentiation Rules</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li><strong>Inverse Tangent Derivative (Chain Rule Required):</strong>
+                                    $$\\frac{d}{du} (\\arctan(u)) = \\frac{1}{1+u^2} \\cdot u'$$
+                                </li>
+                                <li><strong>Inverse Cosine Derivative (Chain Rule Required):</strong>
+                                    $$\\frac{d}{du} (\\arccos(u)) = -\\frac{1}{\\sqrt{1-u^2}} \\cdot u'$$
+                                </li>
+                                <li><strong>Exponential/Power Rule:</strong> Use the Chain Rule when the exponent or base is a function of $t$.
+                                    $$\\frac{d}{dt} (a^{g(t)}) = a^{g(t)} \\ln(a) \\cdot g'(t)$$
+                                </li>
+                                <li><strong>Vector-Valued Functions:</strong> Differentiate each component independently. If $\\vec{r}(t)=\\langle f(t), g(t) \\rangle$, then $\\vec{r}'(t)=\\langle f'(t), g'(t) \\rangle$.</li>
+                            </ul>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The Product/Quotient Rule Trap</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li>Be careful to apply the <strong>Product Rule</strong> or <strong>Quotient Rule</strong> first when needed, and then apply the Chain Rule to differentiate the inner functions.</li>
+                                <li><strong>Example:</strong> For $f(s)=\\frac{\\arctan(s)}{4^{s}}$, you MUST use the <strong>Quotient Rule</strong>:
+                                    $$f'(s) = \\frac{(\\frac{d}{ds} \\arctan(s)) \\cdot 4^s - \\arctan(s) \\cdot (\\frac{d}{ds} 4^s)}{(4^s)^2}$$
+                                </li>
+                            </ul>
+                            
+                            <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">3. Evaluating Inverse Trigonometric Functions</h2>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Key Property: Domain and Range Restriction</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li>$\\arcsin(x)$ has a range of $[-\\pi/2, \\pi/2]$. $\\arccos(x)$ has a range of $[0, \\pi]$.</li>
+                                <li><strong>Tip (The Unit Circle):</strong> When asked to evaluate $\\arcsin(\\sin(\\theta))$, if $\\theta$ is outside the restricted range, use the unit circle to find an equivalent angle $\\phi$ that <em>is</em> in the range such that $\\sin(\\phi) = \\sin(\\theta)$.</li>
+                            </ul>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The Quadrant Method (Using Triangles)</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li>Used to simplify composite functions like $\\cos(\\arcsin(1/2))$ or $\\sin(\\arctan(r))$.</li>
+                                <li><strong>Steps:</strong>
+                                    <ol class="list-decimal list-inside ml-6 mt-2 space-y-2">
+                                        <li>Let $\\theta$ be the angle defined by the inner inverse function (e.g., $\\theta = \\arcsin(1/2)$).</li>
+                                        <li>Draw a <strong>right-angle triangle</strong> representing $\\theta$ in the appropriate quadrant.</li>
+                                        <li>Use the definition (SOH CAH TOA) to label two sides of the triangle.</li>
+                                        <li>Use the Pythagorean Theorem to find the length of the third side.</li>
+                                        <li>Use the triangle to find the value of the outer trigonometric function.</li>
+                                        <li><strong>General Example:</strong> Let $\\theta = \\arctan(r) = \\arctan(r/1)$. Opposite $= r$, Adjacent $= 1$. Hypotenuse $= \\sqrt{r^2+1}$. Thus, $\\sin(\\theta) = \\frac{\\text{Opposite}}{\\text{Hypotenuse}} = \\frac{r}{\\sqrt{r^2+1}}$.</li>
+                                    </ol>
+                                </li>
+                            </ul>
+                            
+                            <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">4. Linearization (Tangent Line Approximation)</h2>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The Linearization Formula</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li>The <strong>linearization</strong> of a function $f(x)$ at a point $x = a$ is given by:
+                                    $$L(x) = f(a) + f'(a)(x-a)$$
+                                </li>
+                                <li><strong>What it does:</strong> The linearization $L(x)$ is the equation of the <strong>tangent line</strong> to the curve $y = f(x)$ at the point $(a, f(a))$. It provides a <strong>linear approximation</strong> of the function near $x = a$.</li>
+                                <li><strong>Why it's useful:</strong> For values of $x$ close to $a$, we have $f(x) \\approx L(x)$. This approximation allows us to estimate function values using simple linear calculations instead of evaluating the more complex original function.</li>
+                                <li><strong>Key components:</strong>
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2">
+                                        <li>$f(a)$ is the $y$-value of the function at the point of tangency.</li>
+                                        <li>$f'(a)$ is the slope of the tangent line at $x = a$.</li>
+                                        <li>$(x - a)$ represents the horizontal distance from the point of tangency.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Example:</strong> To approximate $\\sqrt{4.1}$ using linearization of $f(x) = \\sqrt{x}$ at $a = 4$:
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2">
+                                        <li>$f(4) = \\sqrt{4} = 2$</li>
+                                        <li>$f'(x) = \\frac{1}{2\\sqrt{x}}$, so $f'(4) = \\frac{1}{2\\sqrt{4}} = \\frac{1}{4}$</li>
+                                        <li>$L(x) = 2 + \\frac{1}{4}(x - 4)$</li>
+                                        <li>$L(4.1) = 2 + \\frac{1}{4}(4.1 - 4) = 2 + \\frac{1}{4}(0.1) = 2.025$</li>
+                                        <li>This is very close to the actual value $\\sqrt{4.1} \\approx 2.0248$.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        `,
+                        pdfLink: 'https://example.com/apsc171_week4_tutorial.pdf',
+                        videoId: 'YXWKpgmLgHk',
+                        extraVideoId: 'yZHcHQcCmlI',
+                        extraVideoId2: 'VVtGpDPn1CU'
+                    },
+                    {
+                        week: 5,
+                        topic: 'Implicit Derivatives, Related Rates and Optimization',
+                        description: 'Advanced derivative applications and Test 1',
+                        notes: 'By the end of this week, learners will be able to:\n\n• Compute implicit derivatives.\n• Solve problems involving related rates.\n• Apply the first derivative test and the second derivative test for identifying local maxima and minima.\n• Distinguish global vs. local extrema.\n• Solve optimization word problems.',
+                        reviewNotes: `
+                            <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">1. Implicit Differentiation</h2>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The Concept</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li>Used when a function $y$ cannot be easily solved explicitly as $y=f(x)$, where $x$ and $y$ are intertwined (e.g., $y^2+xy-y^3=2$).</li>
+                                <li>The goal is to find the derivative $\\frac{dy}{dx}$.</li>
+                            </ul>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The Chain Rule Tip</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li>When differentiating any term involving $y$, you must use the <strong>Chain Rule</strong>.</li>
+                                <li>Treat $y$ as an inner function $y(x)$.</li>
+                                <li><strong>Key Rule:</strong> $\\frac{d}{dx} [g(y)] = g'(y) \\cdot \\frac{dy}{dx}$.</li>
+                                <li><strong>Example:</strong> $\\frac{d}{dx} (y^2) = 2y \\cdot \\frac{dy}{dx}$.</li>
+                                <li><strong>Product Rule Reminder:</strong> If you have an $x \\cdot y$ term, you must use the Product Rule <strong>and</strong> the Chain Rule:
+                                    $$\\frac{d}{dx} (xy) = \\left( \\frac{d}{dx} x \\right) y + x \\left( \\frac{d}{dx} y \\right) = 1 \\cdot y + x \\cdot \\frac{dy}{dx}$$
+                                </li>
+                            </ul>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Procedure</h3>
+                            <ol class="list-decimal list-inside ml-6 space-y-2 mb-4">
+                                <li>Differentiate every term with respect to $x$, applying $\\frac{dy}{dx}$ whenever you differentiate a $y$ term.</li>
+                                <li>Group all terms containing $\\frac{dy}{dx}$ on one side and all other terms on the opposite side.</li>
+                                <li>Factor out $\\frac{dy}{dx}$.</li>
+                                <li>Solve for $\\frac{dy}{dx}$. Think of it like you find the change in $y$ with respect to the change in $x$, which is just slope or $f'(x)$.</li>
+                                <li>To find the slope at a point $(x_0, y_0)$, substitute those coordinates into the final expression for $\\frac{dy}{dx}$.</li>
+                            </ol>
+                            
+                            <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">2. Related Rates</h2>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The Concept</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li>Related rates problems involve finding the rate of change of one variable (e.g., $\\frac{d\\theta}{dt}$) when the rate of change of another related variable (e.g., $\\frac{dx}{dt}$) is known.</li>
+                                <li>All differentiation is done with respect to <strong>time</strong> ($t$).</li>
+                            </ul>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Procedure and Tips</h3>
+                            <ol class="list-decimal list-inside ml-6 space-y-2 mb-4">
+                                <li><strong>Draw a Diagram and Define Variables:</strong> Clearly label all changing and constant quantities.</li>
+                                <li><strong>Identify Knowns/Unknowns:</strong> List all given rates (e.g., $\\frac{dh}{dt}$), known values at the moment of interest, and the desired rate (e.g., $\\frac{dC}{dt}$).</li>
+                                <li><strong>Find the Relationship Equation (Geometric Link):</strong> Establish an equation linking the variables (e.g., Pythagorean theorem, Volume of a Cone, Trigonometric Ratios).
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2">
+                                        <li>For Drone/Camera problems, the relationship is trigonometric: $\\tan(\\theta) = \\frac{\\text{Opposite}}{\\text{Adjacent}}$.</li>
+                                        <li>For Cone problems, the volume equation $V=\\frac{1}{3}\\pi r^{2}h$ is key.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Differentiate Implicitly with respect to $t$:</strong> Differentiate the relationship equation using the <strong>Chain Rule</strong> and <strong>Product Rule</strong> as needed. Remember $\\frac{dV}{dt}=0$ if the volume is constant.</li>
+                                <li><strong>Substitute and Solve:</strong> Plug in all known values and solve for the unknown rate.</li>
+                            </ol>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Cone Proportions Tip</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li>If two variables in the volume equation of a cone ($r$ and $h$) are changing, you usually need a second relationship between $r$ and $h$ to simplify the differentiation.</li>
+                                <li><strong>Relationship:</strong> We need to relate $r$ to the circumference $C = 2\\pi r$. If the volume $V$ is constant, then $\\frac{dV}{dt} = 0$.</li>
+                                <li><strong>No Proportionality Assumption:</strong> Unlike many cone problems, if the relationship between $r$ and $h$ is not constant ($r/h$ is not constant), you must use the Product Rule when differentiating $V=\\frac{1}{3}\\pi r^{2}h$ with respect to $t$:
+                                    $$\\frac{dV}{dt} = \\frac{1}{3}\\pi \\left( 2r \\frac{dr}{dt} h + r^2 \\frac{dh}{dt} \\right) = 0$$
+                                </li>
+                            </ul>
+                            
+                            <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">3. Optimization</h2>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The Concept</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li>Optimization involves finding the maximum or minimum value of a function on a given interval (e.g., maximizing volume or area).</li>
+                            </ul>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Procedure</h3>
+                            <ol class="list-decimal list-inside ml-6 space-y-2 mb-4">
+                                <li><strong>Define the Objective Function ($Q$):</strong> Write the formula for the quantity you want to maximize or minimize (e.g., Volume $V(x)$, Area $A(x)$). This must be in terms of a <strong>single variable</strong>.</li>
+                                <li><strong>Determine the Domain (Interval):</strong> Establish the physical constraints on the variable (e.g., for a box problem, the cut size $x$ must be $x > 0$ and cannot exceed half the smallest dimension, so $0 < x < 4$).</li>
+                                <li><strong>Find the Critical Numbers:</strong> Compute the derivative $Q'(x)$ and set it equal to zero to find candidate values for maximum/minimum.</li>
+                                <li><strong>Test the Candidates:</strong> Evaluate the objective function $Q(x)$ at:
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2">
+                                        <li>The critical numbers found in step 3.</li>
+                                        <li>The endpoints of the domain (from step 2).</li>
+                                    </ul>
+                                </li>
+                                <li>The largest value is the absolute maximum; the smallest is the absolute minimum.</li>
+                            </ol>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Box Volume Tip</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li><strong>Dimensions (Length $\\times$ Width $\\times$ Height):</strong> If the original cardboard is $L_0 \\times W_0$ and you cut a square of side $x$ from each corner:
+                                    $$V(x) = (L_0 - 2x)(W_0 - 2x)(x)$$
+                                </li>
+                                <li><strong>Example:</strong> For $L_0=15$, $W_0=8$:
+                                    $$V(x) = (15 - 2x)(8 - 2x)x$$
+                                </li>
+                            </ul>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Inscribed Rectangle Tip</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li>If a rectangle is centered on the $y$-axis with a base of $2x$, its upper-right corner is at $(x, y)$.</li>
+                                <li><strong>Area $A$:</strong> $A = (\\text{Base}) \\times (\\text{Height}) = (2x) \\cdot y$.</li>
+                                <li><strong>Substitute $y$:</strong> Use the parabola equation $y=20-4x^2$ to express Area in one variable:
+                                    $$A(x) = 2x(20 - 4x^2) = 40x - 8x^3$$
+                                </li>
+                            </ul>
+                        `,
+                        pdfLink: 'https://example.com/apsc171_week5_tutorial.pdf',
+                        videoId: 'qb40J4N1fa4',
+                        extraVideoId: 'j6I3EXiKB2A',
+                        extraVideoId2: '0vIZdyjoubE',
+                        extraVideoId3: 'iK625WaKomM'
+                    },
+                    {
+                        week: 6,
+                        topic: 'Defining and Estimating Integrals as Areas',
+                        description: 'Introduction to integration and area estimation',
+                        notes: 'By the end of this week, learners will be able to:\n\n• Determine how to calculate the area described by a function.\n• Estimate the area defined by a function using numerical methods.\n• Define the definite integral.\n• Connect the relationship between the definite integral and area above and below the axis.',
+                        reviewNotes: `
+                            <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">1. Riemann Sums</h2>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The Concept</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li>A Riemann sum is an approximation of the definite integral $\\int_{a}^{b} f(x) dx$, which represents the net area under the curve $f(x)$ from $a$ to $b$.</li>
+                                <li>The area is approximated by summing the areas of $n$ rectangles.
+                                    $$\\int_{a}^{b} f(x) dx \\approx \\sum_{i=1}^{n} f(x_i^*) \\Delta x$$
+                                </li>
+                            </ul>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Key Definitions</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li><strong>Width of Interval ($\\Delta x$):</strong> Calculated as $\\Delta x = \\frac{b-a}{n}$ for equal width intervals.</li>
+                                <li><strong>Right Sum ($R_n$):</strong> Uses the right endpoint of each interval to determine the height of the rectangle. $R_n = \\sum_{i=1}^{n} f(x_i) \\Delta x$.</li>
+                                <li><strong>Left Sum ($L_n$):</strong> Uses the left endpoint of each interval to determine the height of the rectangle. $L_n = \\sum_{i=1}^{n} f(x_{i-1}) \\Delta x$.</li>
+                            </ul>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Tip for Upper and Lower Estimates</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li>For a function $f(x)$ that is <strong>monotonic</strong> (always increasing or always decreasing) over the interval:
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2">
+                                        <li>If $f(x)$ is <strong>increasing</strong> ($\\uparrow$), the <strong>Right Sum ($R_n$)</strong> gives the <strong>Upper Estimate</strong> (overestimate).</li>
+                                        <li>If $f(x)$ is <strong>increasing</strong> ($\\uparrow$), the <strong>Left Sum ($L_n$)</strong> gives the <strong>Lower Estimate</strong> (underestimate).</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Procedure:</strong> For oil leakage rate problems where the rate is increasing, the Right Sum is the upper bound, and the Left Sum is the lower bound.</li>
+                                <li><strong>Non-Uniform Width:</strong> If the time intervals are not equal (e.g., $\\Delta t$ is 3, 3, 3, 3), you must calculate the area of each rectangle separately: Area $\\approx \\sum (\\text{rate}) \\cdot (\\text{time interval})$.</li>
+                            </ul>
+                            
+                            <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">2. Midpoint Rule</h2>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The Concept</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li>The Midpoint Rule uses the midpoint of each subinterval to determine the height of the rectangles.</li>
+                                <li>For each interval $[x_{i-1}, x_i]$, the midpoint is $\\bar{x}_i = \\frac{x_{i-1} + x_i}{2}$.</li>
+                                <li>The Midpoint Rule formula is:
+                                    $$M_n = \\sum_{i=1}^{n} f(\\bar{x}_i) \\Delta x$$
+                                    where $\\bar{x}_i$ is the midpoint of the $i$-th interval.
+                                </li>
+                                <li><strong>Accuracy:</strong> The Midpoint Rule typically provides a better approximation than Left or Right Riemann sums, and often performs similarly to the Trapezoidal Rule.</li>
+                            </ul>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Relationship to Concavity</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li>If the curve is <strong>Concave Up</strong> ($\\cup$, $f''(x) > 0$), the Midpoint Rule gives an <strong>Underestimate</strong>.</li>
+                                <li>If the curve is <strong>Concave Down</strong> ($\\cap$, $f''(x) < 0$), the Midpoint Rule gives an <strong>Overestimate</strong>.</li>
+                            </ul>
+                            
+                            <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">3. Trapezoidal Rule</h2>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The Concept</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li>The Trapezoidal Rule uses trapezoids instead of rectangles, averaging the left and right endpoints for a much better approximation.
+                                    $$T_n = \\frac{\\Delta x}{2} [f(x_0) + 2f(x_1) + 2f(x_2) + \\dots + 2f(x_{n-1}) + f(x_n)]$$
+                                </li>
+                                <li>Note that $T_n$ is simply the average of the Left and Right Riemann sums: $T_n = \\frac{1}{2}(L_n + R_n)$.</li>
+                            </ul>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Underestimate vs. Overestimate</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li>The Trapezoidal Rule's error is related to the <strong>concavity</strong> of the function $f(x)$.</li>
+                                <li>If the curve is <strong>Concave Down</strong> ($\\cap$, $f''(x) < 0$), the trapezoids lie <strong>below</strong> the curve, resulting in an <strong>Underestimate</strong>.</li>
+                                <li>If the curve is <strong>Concave Up</strong> ($\\cup$, $f''(x) > 0$), the trapezoids lie <strong>above</strong> the curve, resulting in an <strong>Overestimate</strong>.</li>
+                                <li><strong>Example:</strong> The function $f(x) = \\cos(x)$ on $[0, \\pi/2]$ is concave down, so the trapezoidal rule will result in an <strong>underestimate</strong>.</li>
+                            </ul>
+                            
+                            <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">4. Integrals as Geometric Area</h2>
+                            
+                            <p class="text-gray-700 dark:text-white dark:opacity-80 leading-relaxed text-lg font-light mb-6">This is finding areas using just recognition of shapes we already are familiar with.</p>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The Concept</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li>Some integrals can be evaluated exactly without using the Fundamental Theorem of Calculus by recognizing the shape defined by $f(x)$ over the integration interval.
+                                    $$\\int_{a}^{b} f(x) dx = \\text{Area}_{\\text{Above } x\\text{-axis}} - \\text{Area}_{\\text{Below } x\\text{-axis}}$$
+                                </li>
+                            </ul>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Recognizing Shapes</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li><strong>Semicircle Tip:</strong> The term $\\sqrt{R^2 - x^2}$ always relates to a semicircle of radius $R$.</li>
+                                <li>If $y = \\sqrt{9-x^2}$, squaring both sides gives $y^2 = 9-x^2$, or $x^2 + y^2 = 9$. This is the equation for the upper half of a circle centered at the origin with $R=3$.</li>
+                                <li><strong>Procedure for $\\int_{-3}^{0}(1+\\sqrt{9-x^{2}}) dx$:</strong>
+                                    <ol class="list-decimal list-inside ml-6 mt-2 space-y-2">
+                                        <li>Split the integral: $\\int_{-3}^{0} 1 dx + \\int_{-3}^{0} \\sqrt{9-x^{2}} dx$.</li>
+                                        <li>The first part is a rectangle (Area $1 \\times 3$).</li>
+                                        <li>The second part is the area of a quarter circle (Quadrant II) with radius $R=3$. Area $= \\frac{1}{4} \\pi R^2$.</li>
+                                    </ol>
+                                </li>
+                            </ul>
+                        `,
+                        pdfLink: 'https://example.com/apsc171_week6_tutorial.pdf',
+                        videoId: 'ZmYUcieRTck',
+                        extraVideoId: 'Rn9Gr52zhrY'
+                    },
+                    {
+                        week: 7,
+                        topic: 'The Fundamental Theorem of Calculus',
+                        description: 'Computing integrals and anti-derivatives',
+                        notes: 'By the end of this week, learners will be able to:\n\n• List properties of definite integrals.\n• State the Fundamental Theorem of Calculus.\n• Compute simple anti-derivatives and definite integrals.',
+                        reviewNotes: `
+                            <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">1. The Fundamental Theorem of Calculus (Part 2)</h2>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Evaluating Definite Integrals</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li><strong>FTC Part 2:</strong> If $f$ is continuous on $[a, b]$, and $F$ is any antiderivative of $f$ (i.e., $F'=f$), then:
+                                    $$\\int_{a}^{b} f(x) dx = F(b) - F(a)$$
+                                </li>
+                                <li><strong>Procedure:</strong>
+                                    <ol class="list-decimal list-inside ml-6 mt-2 space-y-2">
+                                        <li>Rewrite the integrand using negative exponents (The Power Rule Tip): For $\\frac{1}{(x+1)^{3}}$, rewrite as $(x+1)^{-3}$.</li>
+                                        <li>Find the antiderivative $F(x)$. (This may require a simple substitution, $u=x+1$).
+                                            $$F(x) = \\frac{(x+1)^{-2}}{-2} = -\\frac{1}{2(x+1)^2}$$
+                                        </li>
+                                        <li>Evaluate $F(x)$ at the limits: $F(5) - F(0)$.</li>
+                                    </ol>
+                                </li>
+                            </ul>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Antiderivatives and General Integration</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li><strong>The Power Rule for Integration:</strong> For $n \\ne -1$:
+                                    $$\\int x^n dx = \\frac{x^{n+1}}{n+1} + C$$
+                                </li>
+                                <li><strong>The Exception:</strong> The Power Rule fails when $n=-1$.
+                                    $$\\int \\frac{1}{x} dx = \\int x^{-1} dx = \\ln|x| + C$$
+                                </li>
+                                <li><strong>Simplification Tip:</strong> Before integrating a fraction where the denominator is a monomial (single term like $\\sqrt{x}$), simplify the expression by dividing and rewriting using exponents:
+                                    $$\\int \\frac{x^{3}-2}{\\sqrt{x}} dx = \\int \\left( \\frac{x^3}{x^{1/2}} - \\frac{2}{x^{1/2}} \\right) dx = \\int (x^{5/2} - 2x^{-1/2}) dx$$
+                                </li>
+                            </ul>
+                            
+                            <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">2. Applications of the Definite Integral</h2>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Total Change and Accumulation</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li>The integral of a rate function $r(t)$ gives the <strong>total change</strong> (accumulation) of the quantity over the interval.
+                                    $$\\text{Total Change} = \\int_{t_0}^{t_f} r(t) dt$$
+                                </li>
+                                <li><strong>Finding the Final Amount:</strong> To find the final amount in the tank:
+                                    $$\\text{Final Amount} = \\text{Initial Amount} + \\int_{0}^{10} r(t) dt$$
+                                </li>
+                            </ul>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Area Between Curves</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li>The total area $A$ enclosed between two curves $f(x)$ and $g(x)$ over $[a, b]$ is found by integrating the absolute difference:
+                                    $$A = \\int_{a}^{b} |f(x) - g(x)| dx$$
+                                </li>
+                                <li><strong>Procedure:</strong>
+                                    <ol class="list-decimal list-inside ml-6 mt-2 space-y-2">
+                                        <li>Find the intersection points to define the sub-intervals where one function is always "on top" of the other. (Set $y_1=y_2$).</li>
+                                        <li>Set up the integral(s) as $\\int (\\text{Top Function} - \\text{Bottom Function}) dx$.</li>
+                                    </ol>
+                                </li>
+                            </ul>
+                            
+                            <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">3. Properties of Definite Integrals</h2>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Linearity of the Integral</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li>Definite integrals can be split and scalars can be factored out. This is called the <strong>linearity property</strong>.
+                                    $$\\int_{a}^{b} [c \\cdot f(x) + d \\cdot g(x)] dx = c \\int_{a}^{b} f(x) dx + d \\int_{a}^{b} g(x) dx$$
+                                </li>
+                                <li><strong>Procedure:</strong> Simply substitute the given integral values into the split expression:
+                                    $$\\int_{0}^{9}[2f(x)+3g(x)]dx = 2 \\int_{0}^{9} f(x) dx + 3 \\int_{0}^{9} g(x) dx$$
+                                </li>
+                            </ul>
+                        `,
+                        pdfLink: 'https://example.com/apsc171_week7_tutorial.pdf',
+                        videoId: 'rfG8ce4nNh0',
+                        extraVideoId: 'b0RJkIBhfEM'
+                    },
+                    {
+                        week: 8,
+                        topic: 'Integration by Parts and Substitution',
+                        description: 'Advanced integration techniques',
+                        notes: 'By the end of this week, learners will be able to:\n\n• Apply the guess-and-check method for anti-differentiation.\n• Demonstrate the substitution method for anti-differentiation.\n• Demonstrate integration by parts.\n• Apply a slicing approach to construct integrals for areas.',
+                        pdfLink: 'https://example.com/apsc171_week8_tutorial.pdf',
+                        videoId: 'u9SVTAW6aFY'
+                    },
+                    {
+                        week: 9,
+                        topic: 'Integrals for Volume and Work; Partial Fractions',
+                        description: 'Applications of integration and another method to integrate',
+                        notes: 'By the end of this week, learners will be able to:\n\n• Apply slicing approaches to construct integrals for volumes and work.\n• Evaluating integrals using partial fractions.',
+                        reviewNotes: `
+                            <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">1. Volume of Revolution</h2>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The Washer Method (Rotation about Horizontal Axis)</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li>Used when the area being rotated does not touch the axis of revolution, creating a hole.</li>
+                                <li>The axis of revolution is $\\mathbf{y=c}$ (a horizontal line). Integration is with respect to $\\mathbf{x}$.</li>
+                                <li>Volume element is $dV = \\pi (R^2 - r^2) dx$.</li>
+                                <li><strong>Outer Radius ($R$):</strong> Distance from the axis of revolution ($y=c$) to the function <strong>furthest</strong> away.</li>
+                                <li><strong>Inner Radius ($r$):</strong> Distance from the axis of revolution ($y=c$) to the function <strong>closest</strong> to it.</li>
+                                <li><strong>Setup for Axis $y=6$:</strong>
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2">
+                                        <li>The axis is $y=6$.</li>
+                                        <li>The top boundary of the region is $y=5$ and the bottom is $y=3x-x^2$.</li>
+                                        <li>Outer Radius $\\mathbf{R}$: From $y=6$ down to the furthest function $y=3x-x^2$.
+                                            $$R = 6 - (3x-x^2)$$
+                                        </li>
+                                        <li>Inner Radius $\\mathbf{r}$: From $y=6$ down to the closest function $y=5$.
+                                            $$r = 6 - 5 = 1$$
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>The volume integral is $V = \\int_{a}^{b} \\pi (R^2 - r^2) dx$.</li>
+                            </ul>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The Disk Method (Rotation about Vertical Axis)</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li>Used when the area touches the axis of revolution (no hole).</li>
+                                <li>The axis of revolution is $\\mathbf{x=c}$ (a vertical line). Integration is with respect to $\\mathbf{y}$.</li>
+                                <li><strong>Procedure for Rotation about $x$-axis:</strong> The $x$-axis is the line $y=0$. Since the region touches this axis, it's the Disk Method.
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2">
+                                        <li>Radius $\\mathbf{R}$: Distance from $y=0$ to the function $y=x^2$.
+                                            $$R = x^2$$
+                                        </li>
+                                        <li>Volume integral is $V = \\int_{a}^{b} \\pi R^2 dx$.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            
+                            <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">2. Work Done by Pumping</h2>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The Concept</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li>Work $W$ is done against gravity to lift a mass $m$ to a height $h$. $W = \\int dW$.</li>
+                                <li>The differential work $dW$ required to lift an infinitesimally thin slice of fluid (of volume $dV$) a distance $D$ is:
+                                    $$dW = (\\text{Force}) \\cdot (\\text{Distance}) = (\\text{Mass} \\cdot g) \\cdot D$$
+                                    $$dW = (\\rho \\cdot dV \\cdot g) \\cdot D$$
+                                </li>
+                            </ul>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Setting up the Work Integral (The Slicing Tip)</h3>
+                            <ol class="list-decimal list-inside ml-6 space-y-2 mb-4">
+                                <li><strong>Define Coordinate System:</strong> Set $y=0$ at a convenient location (e.g., the base of the cone).</li>
+                                <li><strong>Slice and Dimensions:</strong> Draw a horizontal slice (disk) at height $y$ with thickness $dy$. Find the radius $r$ of this slice in terms of $y$.</li>
+                                <li><strong>Find the Radius $r(y)$ (Similar Triangles):</strong> For a cone with $R=2$ at $H=5$, use similar triangles: $\\frac{r}{y} = \\frac{2}{5} \\implies r = \\frac{2}{5}y$.</li>
+                                <li><strong>Volume of Slice $dV$:</strong>
+                                    $$dV = \\pi r^2 dy = \\pi \\left(\\frac{2}{5}y\\right)^2 dy$$
+                                </li>
+                                <li><strong>Lifting Distance $D$:</strong> This is the distance from the slice at height $y$ to the outflow pipe ($7 \\text{ m}$ below the base). The water must be lifted from the slice ($y$) to the top of the reservoir ($y=5$) PLUS the $7 \\text{ m}$ pipe length.
+                                    $$D = (5 - y) + 7 = 12 - y$$
+                                </li>
+                                <li><strong>Limits of Integration:</strong> The water drains from the top $3 \\text{ m}$, meaning from $y=5$ down to $y=2$.
+                                    $$W = \\int_{2}^{5} (\\rho g) \\cdot (\\pi r^2) \\cdot (D) dy$$
+                                </li>
+                            </ol>
+                            
+                            <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">3. Integration by Partial Fractions</h2>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The Concept</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li>Used to integrate rational functions $\\frac{P(x)}{Q(x)}$ where $Q(x)$ can be factored.</li>
+                            </ul>
+                            
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Procedure</h3>
+                            <ol class="list-decimal list-inside ml-6 space-y-2 mb-4">
+                                <li><strong>Factor the Denominator:</strong> $x^{2}-2x+1 = (x-1)^2$. This is a <strong>repeated linear factor</strong>.</li>
+                                <li><strong>Set up the Partial Fraction Decomposition:</strong> The decomposition requires one term for each power of the factor:
+                                    $$\\frac{4x-2}{(x-1)^2} = \\frac{A}{x-1} + \\frac{B}{(x-1)^2}$$
+                                </li>
+                                <li><strong>Solve for $A$ and $B$:</strong>
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2">
+                                        <li>Multiply by the denominator $(x-1)^2$: $4x-2 = A(x-1) + B$.</li>
+                                        <li>Use the "cover-up" tip: Set $x=1$: $4(1)-2 = A(0) + B \\implies B=2$.</li>
+                                        <li>Choose any other $x$ (e.g., $x=0$) to find $A$: $4(0)-2 = A(0-1) + 2 \\implies -2 = -A + 2 \\implies A=4$.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Integrate the New Terms:</strong>
+                                    $$\\int \\left( \\frac{4}{x-1} + \\frac{2}{(x-1)^2} \\right) dx = 4 \\int \\frac{1}{x-1} dx + 2 \\int (x-1)^{-2} dx$$
+                                </li>
+                                <li><strong>Result:</strong> The integration yields $4 \\ln|x-1| - 2(x-1)^{-1} + C$.</li>
+                            </ol>
+                        `,
+                        pdfLink: 'https://example.com/apsc171_week9_tutorial.pdf',
+                        videoId: 'QLHJl2_aM5Q',
+                        extraVideoId: '_HqG9Ac5XAM'
+                    },
+                    {
+                        week: 10,
+                        topic: 'Differential Equations and Complex Numbers 1',
+                        description: 'Spring/mass systems and complex number fundamentals',
+                        notes: 'By the end of this week, learners will be able to:\n\n• Represent a spring/mass system with differential equations.\n• Present harmonic motion in mathematical form.\n• Define and use polar and Cartesian forms of Complex Numbers.',
+                        pdfLink: 'https://example.com/apsc171_week10_tutorial.pdf',
+                        videoId: 'Gc3QvUB0PkI'
+                    },
+                    {
+                        week: 11,
+                        topic: 'Differential Equations and Complex Numbers 2',
+                        description: "Euler's formula and complex exponential functions",
+                        notes: "By the end of this week, learners will be able to:\n\n• State Euler's Formula.\n• Use the complex exponential function to convert between Cartesian and polar forms.\n• Solve for the behaviours of a spring/mass system using complex numbers.",
+                        pdfLink: 'https://example.com/apsc171_week11_tutorial.pdf',
+                        videoId: 'IHxXZRJe0KQ'
+                    },
+                    {
+                        week: 12,
+                        topic: 'Review',
+                        description: 'Course review and synthesis',
+                        notes: 'By the end of this week, learners will be able to:\n\n• Summarize and perform tasks from the earlier work from the course.',
+                        pdfLink: 'https://example.com/apsc171_week12_tutorial.pdf',
+                        videoId: 'JCjWo3jB7po'
+                    }
+                ]
+            },
+            'APSC172': {
+                title: 'APSC 172: Calculus II for Engineers (Winter 2026)',
+                weeks: [
+                    {
+                        week: 1,
+                        topic: 'Advanced Integration Techniques',
+                        description: 'Integration by parts and trigonometric substitution',
+                        notes: 'Master integration by parts using the formula ∫u dv = uv - ∫v du. Use the LIATE rule to choose u (Logarithmic, Inverse trig, Algebraic, Trigonometric, Exponential). Also learn trigonometric substitution for integrals involving √(a²-x²), √(a²+x²), and √(x²-a²).',
+                        pdfLink: 'https://example.com/apsc172_week1_tutorial.pdf',
+                        videoId: '2I-_SV8cwsw' // Khan Academy - Integration by parts
+                    },
+                    {
+                        week: 2,
+                        topic: 'Partial Fractions',
+                        description: 'Decomposing rational functions for integration',
+                        notes: 'Learn to decompose rational functions into simpler fractions that can be integrated individually. Steps: 1) Ensure degree of numerator < degree of denominator, 2) Factor denominator, 3) Set up partial fraction decomposition, 4) Solve for coefficients, 5) Integrate each term.',
+                        pdfLink: 'https://example.com/apsc172_week2_tutorial.pdf',
+                        videoId: '2BFvNOHEGFQ' // Khan Academy - Partial fractions
+                    },
+                    {
+                        week: 3,
+                        topic: 'Improper Integrals',
+                        description: 'Integration over infinite intervals and discontinuities',
+                        notes: 'Study integrals with infinite limits or integrands with vertical asymptotes. Evaluate using limits: ∫[a,∞] f(x)dx = lim(b→∞) ∫[a,b] f(x)dx. Determine convergence or divergence using comparison tests and p-test for ∫[1,∞] 1/x^p dx.',
+                        pdfLink: 'https://example.com/apsc172_week3_tutorial.pdf',
+                        videoId: 'e1W87pF4JOk' // Khan Academy - Improper integrals
+                    },
+                    {
+                        week: 4,
+                        topic: 'Sequences and Series',
+                        description: 'Infinite sequences and their convergence',
+                        notes: 'Understand the difference between sequences and series. A sequence {a_n} is a list of numbers; a series Σa_n is the sum. Learn tests for convergence: divergence test, geometric series test, and the concept of limits of sequences.',
+                        pdfLink: 'https://example.com/apsc172_week4_tutorial.pdf',
+                        videoId: 'L-hyyPNcXCo' // Khan Academy - Sequences
+                    },
+                    {
+                        week: 5,
+                        topic: 'Series Convergence Tests',
+                        description: 'Integral, comparison, and ratio tests',
+                        notes: 'Master multiple convergence tests: Integral Test, Direct/Limit Comparison Tests, Ratio Test, and Root Test. Each test has specific conditions - know when to apply each one. The Ratio Test is often most useful for series with factorials or exponentials.',
+                        pdfLink: 'https://example.com/apsc172_week5_tutorial.pdf',
+                        videoId: 'KDHuWxy53uM' // Khan Academy - Ratio test
+                    },
+                    {
+                        week: 6,
+                        topic: 'Power Series',
+                        description: 'Series representations of functions',
+                        notes: 'Study power series Σc_n(x-a)^n, their radius and interval of convergence. Use the Ratio Test to find the radius R, then check endpoints separately. Learn to represent functions as power series and perform operations (addition, differentiation, integration) on them.',
+                        pdfLink: 'https://example.com/apsc172_week6_tutorial.pdf',
+                        videoId: '3d6DsjIBzJ4' // Khan Academy - Power series
+                    },
+                    {
+                        week: 7,
+                        topic: 'Polar Coordinates',
+                        description: 'Extending functions to curved space',
+                        notes: 'Learn the polar coordinate system where points are (r, θ). Conversions: x = r cos(θ), y = r sin(θ), r² = x² + y², tan(θ) = y/x. Graph common polar curves: circles, rose curves, cardioids, and limaçons. Understand symmetry in polar graphs.',
+                        pdfLink: 'https://example.com/apsc172_week7_tutorial.pdf',
+                        videoId: 'EYNwNwrEL4g' // Khan Academy - Polar coordinates
+                    },
+                    {
+                        week: 8,
+                        topic: 'Calculus in Polar Coordinates',
+                        description: 'Area and arc length in polar form',
+                        notes: 'Compute areas using A = (1/2)∫[α,β] r² dθ. The 1/2 factor is crucial - don\'t forget it. Find slopes of polar curves using dy/dx = (dr/dθ sin θ + r cos θ)/(dr/dθ cos θ - r sin θ). Calculate arc length in polar coordinates.',
+                        pdfLink: 'https://example.com/apsc172_week8_tutorial.pdf',
+                        videoId: 'hOCNRBzsqrs' // Khan Academy - Polar area
+                    },
+                    {
+                        week: 9,
+                        topic: 'Parametric Equations',
+                        description: 'Curves defined by parameter t',
+                        notes: 'Study curves defined as x = f(t), y = g(t). Find dy/dx = (dy/dt)/(dx/dt). Compute arc length using L = ∫√[(dx/dt)² + (dy/dt)²] dt. Parametric equations are essential for describing motion and complex curves that aren\'t functions.',
+                        pdfLink: 'https://example.com/apsc172_week9_tutorial.pdf',
+                        videoId: '1xKXmeCusDs' // Khan Academy - Parametric equations
+                    },
+                    {
+                        week: 10,
+                        topic: 'First-Order Differential Equations',
+                        description: 'Separable and linear differential equations',
+                        notes: 'Learn to solve separable equations (separate variables and integrate both sides) and first-order linear equations using integrating factors μ(x) = e^(∫P(x)dx). Applications include exponential growth/decay, Newton\'s Law of Cooling, and mixing problems.',
+                        pdfLink: 'https://example.com/apsc172_week10_tutorial.pdf',
+                        videoId: 'XIDkM2VUAJ0' // Khan Academy - Differential equations
+                    },
+                    {
+                        week: 11,
+                        topic: 'Second-Order Differential Equations',
+                        description: 'Homogeneous equations with constant coefficients',
+                        notes: 'Solve equations of the form ay\'\' + by\' + cy = 0 using the characteristic equation ar² + br + c = 0. Three cases: distinct real roots (y = c₁e^(r₁x) + c₂e^(r₂x)), repeated root (y = (c₁ + c₂x)e^(rx)), complex roots (y = e^(αx)(c₁cos(βx) + c₂sin(βx))).',
+                        pdfLink: 'https://example.com/apsc172_week11_tutorial.pdf',
+                        videoId: 'q_RKzapza1U' // Khan Academy - Second order DEs
+                    },
+                    {
+                        week: 12,
+                        topic: 'Applications of Differential Equations',
+                        description: 'Modeling real-world systems with DEs',
+                        notes: 'Apply differential equations to engineering problems: mechanical vibrations (springs and dampers), electrical circuits (RLC circuits), population dynamics, and heat transfer. This week synthesizes all DE concepts and shows their practical importance in engineering.',
+                        pdfLink: 'https://example.com/apsc172_week12_tutorial.pdf',
+                        videoId: 'VYdF1egoVBo' // Khan Academy - DE applications
+                    }
+                ]
+            }
+        };
+
+        // ========================================
+        // GLOBAL STATE VARIABLES
+        // Track which course and week are currently being viewed
+        // ========================================
+        let currentCourse = null;
+        let currentWeekIndex = null;
+
+        // ========================================
+        // FUNCTION: showLanding()
+        // Purpose: Display the landing page with course selection cards
+        // Hides all other views and shows the landing view
+        // ========================================
+        function showLanding() {
+            // Show landing view
+            document.getElementById('landing-view').classList.add('active');
+            // Hide all other views
+            document.getElementById('course-view').classList.remove('active');
+            document.getElementById('week-view').classList.remove('active');
+            document.getElementById('coming-soon-view').classList.remove('active');
+            document.getElementById('about-view').classList.remove('active');
+            document.getElementById('contact-view').classList.remove('active');
+            
+            // Show main nav, hide course nav
+            document.getElementById('main-nav').style.display = 'block';
+            document.getElementById('course-nav').style.display = 'none';
+            
+            // Reset state
+            currentCourse = null;
+            currentWeekIndex = null;
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // ========================================
+        // FUNCTION: showComingSoon()
+        // Purpose: Display the "Coming Soon" page for APSC 172
+        // This is shown when user clicks on the 172 course card
+        // ========================================
+        function showComingSoon() {
+            // Hide all other views
+            document.getElementById('landing-view').classList.remove('active');
+            document.getElementById('course-view').classList.remove('active');
+            document.getElementById('week-view').classList.remove('active');
+            document.getElementById('about-view').classList.remove('active');
+            document.getElementById('contact-view').classList.remove('active');
+            // Show coming soon view
+            document.getElementById('coming-soon-view').classList.add('active');
+            
+            // Show main nav, hide course nav (Coming Soon is not a course page)
+            document.getElementById('main-nav').style.display = 'block';
+            document.getElementById('course-nav').style.display = 'none';
+            
+            // Scroll to top of page
+            window.scrollTo(0, 0);
+        }
+
+        // ========================================
+        // FUNCTION: showCourseOutline(courseCode)
+        // Purpose: Display the 12-week outline for the selected course
+        // Parameters: courseCode - either 'APSC171' or 'APSC172'
+        // This function dynamically generates all week cards from the data
+        // ========================================
+        function showCourseOutline(courseCode) {
+            // Store which course we're viewing
+            currentCourse = courseCode;
+            
+            // Get the course data
+            const course = courseData[courseCode];
+            
+            // Update the course title
+            document.getElementById('course-title').textContent = course.title;
+            
+            // Get the container where we'll put the week cards
+            const container = document.getElementById('weeks-container');
+            
+            // Clear any existing content
+            container.innerHTML = '';
+            
+            // Loop through all 12 weeks and create a card for each
+            course.weeks.forEach((weekData, index) => {
+                // Create the week card HTML
+                const weekCard = createWeekCard(weekData, index);
+                container.innerHTML += weekCard;
+            });
+            
+            // Switch views: hide other views, show course outline
+            document.getElementById('landing-view').classList.remove('active');
+            document.getElementById('week-view').classList.remove('active');
+            document.getElementById('coming-soon-view').classList.remove('active');
+            document.getElementById('about-view').classList.remove('active');
+            document.getElementById('contact-view').classList.remove('active');
+            document.getElementById('course-view').classList.add('active');
+            
+            // Show course nav, hide main nav
+            document.getElementById('main-nav').style.display = 'none';
+            document.getElementById('course-nav').style.display = 'block';
+            
+            // Set default tab to "Weekly Content"
+            showCourseTab('weekly');
+            
+            // Scroll to top of page
+            window.scrollTo(0, 0);
+        }
+
+        // ========================================
+        // FUNCTION: createWeekCard(weekData, index)
+        // Purpose: Generate the HTML for a single week card that navigates to week detail page
+        // Parameters: 
+        //   - weekData: object containing week info (topic, description, notes, etc.)
+        //   - index: the array index (used to identify which week was clicked)
+        // Returns: HTML string for the clickable week card
+        // ========================================
+        function createWeekCard(weekData, index) {
+            return `
+                <!-- Week ${weekData.week} Card - Click to view details -->
+                <div onclick="showWeekDetail(${index})" 
+                     class="border border-gray-300 dark:border-white border-opacity-30 dark:border-opacity-20 rounded-xl p-6 cursor-pointer hover:border-opacity-100 transition-all duration-300 hover:shadow-xl bg-white dark:bg-black">
+                    <div class="flex justify-between items-start">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-2">
+                                <span class="text-gray-600 dark:text-white font-light text-lg">Week ${weekData.week}</span>
+                                <h3 class="text-xl font-medium text-gray-900 dark:text-white">${weekData.topic}</h3>
+                            </div>
+                            <p class="text-gray-600 dark:text-white dark:opacity-60 font-light">${weekData.description}</p>
+                        </div>
+                        <!-- Arrow icon indicating clickable -->
+                        <svg class="w-6 h-6 text-gray-400 dark:text-white dark:opacity-40 flex-shrink-0 ml-4" 
+                             fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </div>
+                </div>
+            `;
+        }
+
+        // ========================================
+        // FUNCTION: showWeekDetail(index)
+        // Purpose: Navigate to the week detail page and populate it with content
+        // Parameters: index - which week was clicked (0-11)
+        // This function switches the view and loads all the week's information
+        // ========================================
+        function showWeekDetail(index) {
+            // Store which week we're viewing
+            currentWeekIndex = index;
+            
+            // Get the week data from the current course
+            const weekData = courseData[currentCourse].weeks[index];
+            
+            // Populate the week detail page with this week's information
+            document.getElementById('week-number').textContent = `Week ${weekData.week}:`;
+            document.getElementById('week-topic').textContent = weekData.topic;
+            document.getElementById('week-description').textContent = weekData.description;
+            
+            // Format the notes with proper line breaks and bullet points
+            const notesElement = document.getElementById('week-notes');
+            const notesLines = weekData.notes.split('\n');
+            notesElement.innerHTML = '';
+            
+            notesLines.forEach(line => {
+                line = line.trim();
+                if (line === '') return; // Skip empty lines
+                
+                if (line.startsWith('•')) {
+                    // Bullet point line
+                    const li = document.createElement('div');
+                    li.className = 'flex items-start mb-2';
+                    li.innerHTML = `
+                        <span class="text-gray-900 dark:text-white mr-3 mt-1">•</span>
+                        <span>${line.substring(1).trim()}</span>
+                    `;
+                    notesElement.appendChild(li);
+                } else {
+                    // Regular text line
+                    const p = document.createElement('p');
+                    p.className = 'mb-3';
+                    if (line.startsWith('By the end of this week')) {
+                        p.className += ' font-medium text-gray-900 dark:text-white';
+                    }
+                    p.textContent = line;
+                    notesElement.appendChild(p);
+                }
+            });
+            
+            // Populate review notes with LaTeX support
+            const reviewNotesElement = document.getElementById('week-review-notes');
+            reviewNotesElement.innerHTML = weekData.reviewNotes || '<p class="text-gray-500 dark:text-white dark:opacity-50 italic">Review notes coming soon...</p>';
+            
+            // Reset review notes to collapsed state when changing weeks
+            reviewNotesExpanded = false;
+            reviewNotesElement.style.maxHeight = '200px';
+            document.getElementById('toggle-review-notes').textContent = 'Show More';
+            document.getElementById('review-notes-fade').style.display = 'block';
+            
+            // Re-render MathJax for the new content
+            if (window.MathJax) {
+                MathJax.typesetPromise([reviewNotesElement]).catch((err) => console.log('MathJax error:', err));
+            }
+            
+            // Set the PDF iframe source and link
+            document.getElementById('week-pdf').src = weekData.pdfLink;
+            document.getElementById('week-pdf-link').href = weekData.pdfLink;
+            
+            // Set the first YouTube video iframe source
+            document.getElementById('week-video').src = `https://www.youtube.com/embed/${weekData.videoId}`;
+            
+            // Handle second video (if exists)
+            const video2Container = document.getElementById('week-video-2-container');
+            const video2Iframe = document.getElementById('week-video-2');
+            const video3Container = document.getElementById('week-video-3-container');
+            const video3Iframe = document.getElementById('week-video-3');
+            const video4Container = document.getElementById('week-video-4-container');
+            const video4Iframe = document.getElementById('week-video-4');
+            const videoSectionTitle = document.getElementById('video-section-title');
+            
+            // Count how many videos we have
+            let videoCount = 1;
+            if (weekData.extraVideoId) {
+                video2Iframe.src = `https://www.youtube.com/embed/${weekData.extraVideoId}`;
+                video2Container.style.display = 'block';
+                videoCount++;
+            } else {
+                video2Container.style.display = 'none';
+            }
+            
+            if (weekData.extraVideoId2) {
+                video3Iframe.src = `https://www.youtube.com/embed/${weekData.extraVideoId2}`;
+                video3Container.style.display = 'block';
+                videoCount++;
+            } else {
+                video3Container.style.display = 'none';
+            }
+            
+            if (weekData.extraVideoId3) {
+                video4Iframe.src = `https://www.youtube.com/embed/${weekData.extraVideoId3}`;
+                video4Container.style.display = 'block';
+                videoCount++;
+            } else {
+                video4Container.style.display = 'none';
+            }
+            
+            // Update title based on number of videos
+            videoSectionTitle.textContent = videoCount > 1 ? 'Supplementary Learning Videos' : 'Supplementary Learning Video';
+            
+            // Switch views: hide other views, show week detail
+            document.getElementById('course-view').classList.remove('active');
+            document.getElementById('landing-view').classList.remove('active');
+            document.getElementById('coming-soon-view').classList.remove('active');
+            document.getElementById('about-view').classList.remove('active');
+            document.getElementById('contact-view').classList.remove('active');
+            document.getElementById('week-view').classList.add('active');
+            
+            // Keep course nav visible (hide main nav)
+            document.getElementById('main-nav').style.display = 'none';
+            document.getElementById('course-nav').style.display = 'block';
+            
+            // Scroll to top of page
+            window.scrollTo(0, 0);
+        }
+
+        // ========================================
+        // FUNCTION: backToCourseOutline()
+        // Purpose: Navigate back from week detail page to the course outline
+        // This function returns you to the list of 12 weeks
+        // ========================================
+        function backToCourseOutline() {
+            // Hide week detail view, show course outline view
+            document.getElementById('week-view').classList.remove('active');
+            document.getElementById('course-view').classList.add('active');
+            
+            // Clear the current week index
+            currentWeekIndex = null;
+            
+            // Scroll to top of page
+            window.scrollTo(0, 0);
+        }
+
+        // ========================================
+        // INITIALIZATION
+        // When the page loads, make sure the landing view is shown
+        // ========================================
+        document.addEventListener('DOMContentLoaded', function() {
+            showLanding();
+        });
+    </script>
+
+</body>
+</html>
