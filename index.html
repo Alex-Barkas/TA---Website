@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculus Resources - Queen's University</title>
-    
+
     <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22black%22/><text x=%2250%22 y=%2270%22 font-size=%2260%22 font-style=%22italic%22 fill=%22white%22 text-anchor=%22middle%22>dx</text></svg>">
-    
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22black%22/><text x=%2250%22 y=%2270%22 font-size=%2260%22 font-style=%22italic%22 fill=%22white%22 text-anchor=%22middle%22>dx</text></svg>">
+
     <!-- Google Fonts - Clean modern font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
+
     <!-- MathJax for LaTeX rendering -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -24,10 +26,10 @@
             }
         };
     </script>
-    
+
     <!-- Tailwind CSS CDN - provides all styling utilities -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <!-- Custom Tailwind Configuration -->
     <script>
         // Configure Tailwind with clean modern font and class-based dark mode
@@ -45,7 +47,7 @@
             }
         }
     </script>
-    
+
     <style>
         /* Smooth fade transitions for view switching */
         .view-section {
@@ -53,42 +55,47 @@
             transition: opacity 0.3s ease-in-out;
             display: none;
         }
-        
+
         .view-section.active {
             opacity: 1;
             display: block;
         }
-        
+
         /* Smooth transitions for theme switching */
         * {
             transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
     </style>
-    
+
     <!-- Initialize theme before body renders to prevent flash -->
     <script>
-        // This runs immediately before the body loads
-        (function() {
-            const savedTheme = localStorage.getItem('theme') || 'dark';
-            if (savedTheme === 'dark') {
-                document.documentElement.classList.add('dark');
-            }
-        })();
+            // This runs immediately before the body loads
+            (function () {
+                const savedTheme = localStorage.getItem('theme') || 'dark';
+                if (savedTheme === 'dark') {
+                    document.documentElement.classList.add('dark');
+                }
+            })();
     </script>
 </head>
+
 <body class="bg-gray-50 dark:bg-neutral-dark text-gray-900 dark:text-white min-h-screen font-sans antialiased">
 
     <!-- Main Navigation Bar (Home, About, Contact) -->
-    <nav id="main-nav" class="fixed top-0 left-0 right-0 z-40 bg-white dark:bg-black border-b border-gray-200 dark:border-white dark:border-opacity-10">
+    <nav id="main-nav"
+        class="fixed top-0 left-0 right-0 z-40 bg-white dark:bg-black border-b border-gray-200 dark:border-white dark:border-opacity-10">
         <div class="container mx-auto px-4">
             <div class="flex items-center justify-center h-16 gap-8">
-                <button onclick="showHome()" class="nav-link px-4 py-2 font-light text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
+                <button onclick="showHome()"
+                    class="nav-link px-4 py-2 font-light text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
                     Home
                 </button>
-                <button onclick="showAbout()" class="nav-link px-4 py-2 font-light text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
+                <button onclick="showAbout()"
+                    class="nav-link px-4 py-2 font-light text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
                     About Me
                 </button>
-                <button onclick="showContact()" class="nav-link px-4 py-2 font-light text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
+                <button onclick="showContact()"
+                    class="nav-link px-4 py-2 font-light text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
                     Contact
                 </button>
             </div>
@@ -96,13 +103,17 @@
     </nav>
 
     <!-- Course Navigation Bar (appears in APSC 171 page) -->
-    <nav id="course-nav" class="fixed top-0 left-0 right-0 z-40 bg-white dark:bg-black border-b border-gray-200 dark:border-white dark:border-opacity-10" style="display: none;">
+    <nav id="course-nav"
+        class="fixed top-0 left-0 right-0 z-40 bg-white dark:bg-black border-b border-gray-200 dark:border-white dark:border-opacity-10"
+        style="display: none;">
         <div class="container mx-auto px-4">
             <div class="flex items-center justify-center h-16 gap-8">
-                <button onclick="showLanding()" class="nav-link px-4 py-2 font-light text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
+                <button onclick="showLanding()"
+                    class="nav-link px-4 py-2 font-light text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
                     Home
                 </button>
-                <button onclick="showCourseTab('resources')" class="nav-link px-4 py-2 font-light text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
+                <button onclick="showCourseTab('resources')"
+                    class="nav-link px-4 py-2 font-light text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
                     Course Resources
                 </button>
             </div>
@@ -110,16 +121,20 @@
     </nav>
 
     <!-- Theme Toggle Button -->
-    <button id="theme-toggle" 
-            onclick="toggleTheme()"
-            class="fixed top-20 right-6 z-50 w-12 h-12 rounded-full border border-gray-300 dark:border-white dark:border-opacity-20 bg-white dark:bg-black bg-opacity-80 dark:bg-opacity-50 backdrop-blur-lg flex items-center justify-center hover:border-gray-900 dark:hover:border-opacity-100 transition-all duration-300 shadow-lg">
+    <button id="theme-toggle" onclick="toggleTheme()"
+        class="fixed top-20 right-6 z-50 w-12 h-12 rounded-full border border-gray-300 dark:border-white dark:border-opacity-20 bg-white dark:bg-black bg-opacity-80 dark:bg-opacity-50 backdrop-blur-lg flex items-center justify-center hover:border-gray-900 dark:hover:border-opacity-100 transition-all duration-300 shadow-lg">
         <!-- Sun icon (visible in dark mode) -->
-        <svg id="sun-icon" class="w-6 h-6 text-white hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+        <svg id="sun-icon" class="w-6 h-6 text-white hidden dark:block" fill="none" stroke="currentColor"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
+            </path>
         </svg>
         <!-- Moon icon (visible in light mode) -->
-        <svg id="moon-icon" class="w-6 h-6 text-gray-900 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+        <svg id="moon-icon" class="w-6 h-6 text-gray-900 block dark:hidden" fill="none" stroke="currentColor"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
         </svg>
     </button>
 
@@ -128,7 +143,7 @@
     <!-- ============================================ -->
     <div id="landing-view" class="view-section active">
         <div class="container mx-auto px-4 py-20 md:py-32 pt-32 md:pt-40">
-            
+
             <!-- Header Section -->
             <div class="text-center mb-20 md:mb-28">
                 <h1 class="text-5xl md:text-6xl font-light mb-3 text-gray-900 dark:text-white tracking-tight">
@@ -138,30 +153,32 @@
                     Queens University
                 </p>
             </div>
-            
+
             <!-- Course Selection Cards -->
             <div class="max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
-                
+
                 <!-- APSC 171 Card -->
-                <div onclick="showCourseOutline('APSC171')" 
-                     class="border-2 border-gray-400 dark:border-white dark:border-opacity-20 rounded-2xl p-12 cursor-pointer transition-all duration-300 hover:border-gray-900 dark:hover:border-opacity-100 hover:shadow-xl">
+                <div onclick="showCourseOutline('APSC171')"
+                    class="border-2 border-gray-400 dark:border-white dark:border-opacity-20 rounded-2xl p-12 cursor-pointer transition-all duration-300 hover:border-gray-900 dark:hover:border-opacity-100 hover:shadow-xl">
                     <div class="text-center">
                         <h2 class="text-3xl font-light text-gray-900 dark:text-white mb-3">APSC 171</h2>
-                        <p class="text-lg font-light text-gray-600 dark:text-white dark:opacity-70 mb-2">Calculus I for Engineers</p>
+                        <p class="text-lg font-light text-gray-600 dark:text-white dark:opacity-70 mb-2">Calculus I for
+                            Engineers</p>
                         <p class="text-sm font-light text-gray-500 dark:text-white dark:opacity-50">Fall 2025</p>
                     </div>
                 </div>
-                
+
                 <!-- APSC 172 Card -->
-                <div onclick="showComingSoon()" 
-                     class="border-2 border-gray-400 dark:border-white dark:border-opacity-20 rounded-2xl p-12 cursor-pointer transition-all duration-300 hover:border-gray-900 dark:hover:border-opacity-100 hover:shadow-xl">
+                <div onclick="showComingSoon()"
+                    class="border-2 border-gray-400 dark:border-white dark:border-opacity-20 rounded-2xl p-12 cursor-pointer transition-all duration-300 hover:border-gray-900 dark:hover:border-opacity-100 hover:shadow-xl">
                     <div class="text-center">
                         <h2 class="text-3xl font-light text-gray-900 dark:text-white mb-3">APSC 172</h2>
-                        <p class="text-lg font-light text-gray-600 dark:text-white dark:opacity-70 mb-2">Calculus II for Engineers</p>
+                        <p class="text-lg font-light text-gray-600 dark:text-white dark:opacity-70 mb-2">Calculus II for
+                            Engineers</p>
                         <p class="text-sm font-light text-gray-500 dark:text-white dark:opacity-50">Winter 2026</p>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </div>
@@ -171,47 +188,56 @@
     <!-- ============================================ -->
     <div id="course-view" class="view-section">
         <div class="container mx-auto px-4 py-8 pt-24">
-            
+
             <!-- Course Title (dynamically updated) -->
-            <h2 id="course-title" class="text-4xl md:text-5xl font-light mb-12 text-center text-gray-900 dark:text-white"></h2>
-            
+            <h2 id="course-title"
+                class="text-4xl md:text-5xl font-light mb-12 text-center text-gray-900 dark:text-white"></h2>
+
             <!-- Course Resources Tab Content -->
             <div id="course-resources-tab" class="course-tab-content" style="display: none;">
                 <div class="max-w-4xl mx-auto">
                     <div class="space-y-6">
                         <!-- Course Description Section -->
-                        <div class="border border-gray-300 dark:border-white border-opacity-30 dark:border-opacity-20 rounded-xl p-8 bg-white dark:bg-black">
+                        <div
+                            class="border border-gray-300 dark:border-white border-opacity-30 dark:border-opacity-20 rounded-xl p-8 bg-white dark:bg-black">
                             <h3 class="text-2xl font-light text-gray-900 dark:text-white mb-6">Course Description</h3>
                             <p class="text-gray-700 dark:text-white dark:opacity-70 font-light leading-relaxed">
-                                Graphs and derivatives of vector-valued functions; related applications. Implicit derivatives and related rate applications. Fundamental Theorem of Calculus, Riemann integral; applications to problems involving areas, volumes, mass, charge, work, etc. Integration by substitution, by parts, and partial fractions. Introduction to second-order differential equations and complex numbers.
+                                Graphs and derivatives of vector-valued functions; related applications. Implicit
+                                derivatives and related rate applications. Fundamental Theorem of Calculus, Riemann
+                                integral; applications to problems involving areas, volumes, mass, charge, work, etc.
+                                Integration by substitution, by parts, and partial fractions. Introduction to
+                                second-order differential equations and complex numbers.
                             </p>
                         </div>
-                        
+
                         <!-- Tutorial Sessions Section -->
-                        <div class="border border-gray-300 dark:border-white border-opacity-30 dark:border-opacity-20 rounded-xl p-8 bg-white dark:bg-black">
+                        <div
+                            class="border border-gray-300 dark:border-white border-opacity-30 dark:border-opacity-20 rounded-xl p-8 bg-white dark:bg-black">
                             <h3 class="text-2xl font-light text-gray-900 dark:text-white mb-6">Tutorial Sessions</h3>
                             <p class="text-gray-700 dark:text-white dark:opacity-70 font-light">
                                 Chernoff 212 Monday 1:30-2:30
                             </p>
                         </div>
-                        
+
                         <!-- Grading Scheme Section -->
-                        <div class="border border-gray-300 dark:border-white border-opacity-30 dark:border-opacity-20 rounded-xl p-8 bg-white dark:bg-black">
+                        <div
+                            class="border border-gray-300 dark:border-white border-opacity-30 dark:border-opacity-20 rounded-xl p-8 bg-white dark:bg-black">
                             <h3 class="text-2xl font-light text-gray-900 dark:text-white mb-6">Grading Scheme</h3>
-                            
+
                             <div class="mb-6">
                                 <p class="text-gray-700 dark:text-white dark:opacity-70 font-light mb-4">
                                     <strong class="text-gray-900 dark:text-white">Webwork:</strong> 10% - best 10/12
                                 </p>
                             </div>
-                            
+
                             <p class="text-gray-700 dark:text-white dark:opacity-70 font-light mb-4">
                                 And the best of a) or b):
                             </p>
-                            
+
                             <div class="space-y-4">
                                 <!-- Option a -->
-                                <div class="p-4 bg-gray-50 dark:bg-gray-900 bg-opacity-50 dark:bg-opacity-30 rounded-lg border border-gray-200 dark:border-white dark:border-opacity-10">
+                                <div
+                                    class="p-4 bg-gray-50 dark:bg-gray-900 bg-opacity-50 dark:bg-opacity-30 rounded-lg border border-gray-200 dark:border-white dark:border-opacity-10">
                                     <p class="text-sm font-medium text-gray-900 dark:text-white mb-2">a)</p>
                                     <ul class="space-y-2 text-gray-700 dark:text-white dark:opacity-70 font-light">
                                         <li>Midterm Test 1: 22.5%</li>
@@ -219,9 +245,10 @@
                                         <li>Final Exam: 45%</li>
                                     </ul>
                                 </div>
-                                
+
                                 <!-- Option b -->
-                                <div class="p-4 bg-gray-50 dark:bg-gray-900 bg-opacity-50 dark:bg-opacity-30 rounded-lg border border-gray-200 dark:border-white dark:border-opacity-10">
+                                <div
+                                    class="p-4 bg-gray-50 dark:bg-gray-900 bg-opacity-50 dark:bg-opacity-30 rounded-lg border border-gray-200 dark:border-white dark:border-opacity-10">
                                     <p class="text-sm font-medium text-gray-900 dark:text-white mb-2">b)</p>
                                     <ul class="space-y-2 text-gray-700 dark:text-white dark:opacity-70 font-light">
                                         <li>Best Midterm: 22.5%</li>
@@ -230,44 +257,50 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Office Hours Section -->
-                        <div class="border border-gray-300 dark:border-white border-opacity-30 dark:border-opacity-20 rounded-xl p-8 bg-white dark:bg-black">
+                        <div
+                            class="border border-gray-300 dark:border-white border-opacity-30 dark:border-opacity-20 rounded-xl p-8 bg-white dark:bg-black">
                             <h3 class="text-2xl font-light text-gray-900 dark:text-white mb-6">Office Hours</h3>
                             <p class="text-gray-700 dark:text-white dark:opacity-70 font-light">
                                 Check OnQ
                             </p>
                         </div>
-                        
+
                         <!-- Contact Information Section -->
-                        <div class="border border-gray-300 dark:border-white border-opacity-30 dark:border-opacity-20 rounded-xl p-8 bg-white dark:bg-black">
+                        <div
+                            class="border border-gray-300 dark:border-white border-opacity-30 dark:border-opacity-20 rounded-xl p-8 bg-white dark:bg-black">
                             <h3 class="text-2xl font-light text-gray-900 dark:text-white mb-6">Contact Information</h3>
                             <div class="space-y-3">
                                 <div>
                                     <p class="text-sm font-medium text-gray-900 dark:text-white mb-1">Course Email</p>
-                                    <a href="mailto:apsc171@queensu.ca" class="text-gray-700 dark:text-white dark:opacity-70 font-light hover:text-gray-900 dark:hover:text-white underline">
+                                    <a href="mailto:apsc171@queensu.ca"
+                                        class="text-gray-700 dark:text-white dark:opacity-70 font-light hover:text-gray-900 dark:hover:text-white underline">
                                         apsc171@queensu.ca
                                     </a>
                                 </div>
                                 <div>
-                                    <p class="text-sm font-medium text-gray-900 dark:text-white mb-1">Course Coordinator - Alan Ableson</p>
-                                    <a href="mailto:ableson@queensu.ca" class="text-gray-700 dark:text-white dark:opacity-70 font-light hover:text-gray-900 dark:hover:text-white underline">
+                                    <p class="text-sm font-medium text-gray-900 dark:text-white mb-1">Course Coordinator
+                                        - Alan Ableson</p>
+                                    <a href="mailto:ableson@queensu.ca"
+                                        class="text-gray-700 dark:text-white dark:opacity-70 font-light hover:text-gray-900 dark:hover:text-white underline">
                                         ableson@queensu.ca
                                     </a>
                                 </div>
                                 <div>
                                     <p class="text-sm font-medium text-gray-900 dark:text-white mb-1">My Email</p>
-                                    <a href="mailto:23kkv9@queensu.ca" class="text-gray-700 dark:text-white dark:opacity-70 font-light hover:text-gray-900 dark:hover:text-white underline">
-                                        23kkv9@queensu.ca
+                                    <a href="mailto:alex.barkas@queensu.ca"
+                                        class="text-gray-700 dark:text-white dark:opacity-70 font-light hover:text-gray-900 dark:hover:text-white underline">
+                                        alex.barkas@queensu.ca
                                     </a>
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
-            
+
             <!-- Weekly Content Tab -->
             <div id="course-weekly-tab" class="course-tab-content">
                 <!-- Week Cards Container (dynamically populated) -->
@@ -275,7 +308,7 @@
                     <!-- Week cards will be inserted here by JavaScript -->
                 </div>
             </div>
-            
+
         </div>
     </div>
 
@@ -287,7 +320,8 @@
             <div class="flex items-center justify-center min-h-[60vh]">
                 <div class="text-center">
                     <h2 class="text-6xl md:text-7xl font-light text-gray-900 dark:text-white mb-6">Coming Soon</h2>
-                    <p class="text-xl text-gray-600 dark:text-white dark:opacity-50 font-light">APSC 172 resources will be available for Winter Semester</p>
+                    <p class="text-xl text-gray-600 dark:text-white dark:opacity-50 font-light">APSC 172 resources will
+                        be available for Winter Semester</p>
                 </div>
             </div>
         </div>
@@ -298,135 +332,121 @@
     <!-- ============================================ -->
     <div id="week-view" class="view-section">
         <div class="container mx-auto px-4 py-8 pt-24">
-            
+
             <!-- Back Button -->
-            <button onclick="backToCourseOutline()" 
-                    class="mb-12 px-6 py-3 text-gray-900 dark:text-white bg-white dark:bg-black border border-gray-300 dark:border-white border-opacity-30 dark:border-opacity-20 rounded-lg transition-all duration-300 hover:border-opacity-100 hover:shadow-lg font-light">
+            <button onclick="backToCourseOutline()"
+                class="mb-12 px-6 py-3 text-gray-900 dark:text-white bg-white dark:bg-black border border-gray-300 dark:border-white border-opacity-30 dark:border-opacity-20 rounded-lg transition-all duration-300 hover:border-opacity-100 hover:shadow-lg font-light">
                 ← Back to Course Outline
             </button>
-            
+
             <!-- Week Header -->
             <div class="max-w-4xl mx-auto mb-12">
-                <span id="week-number" class="text-gray-600 dark:text-white dark:opacity-60 font-light text-lg mb-3 block"></span>
+                <span id="week-number"
+                    class="text-gray-600 dark:text-white dark:opacity-60 font-light text-lg mb-3 block"></span>
                 <h2 id="week-topic" class="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-4"></h2>
                 <p id="week-description" class="text-xl text-gray-600 dark:text-white dark:opacity-60 font-light"></p>
             </div>
-            
+
             <!-- Week Content Sections -->
             <div class="max-w-4xl mx-auto space-y-6">
-                
+
                 <!-- Section A: Learning Outcomes -->
-                <div class="border border-gray-300 dark:border-white border-opacity-30 dark:border-opacity-20 rounded-xl p-8 bg-white dark:bg-black">
+                <div
+                    class="border border-gray-300 dark:border-white border-opacity-30 dark:border-opacity-20 rounded-xl p-8 bg-white dark:bg-black">
                     <h3 class="text-2xl font-light text-gray-900 dark:text-white mb-6">Learning Outcomes</h3>
-                    <div id="week-notes" class="text-gray-700 dark:text-white dark:opacity-80 leading-relaxed font-light space-y-2"></div>
+                    <div id="week-notes"
+                        class="text-gray-700 dark:text-white dark:opacity-80 leading-relaxed font-light space-y-2">
+                    </div>
                 </div>
-                
+
                 <!-- Section B: Review Notes (LaTeX Support) -->
-                <div class="border border-gray-300 dark:border-white border-opacity-30 dark:border-opacity-20 rounded-xl p-8 bg-white dark:bg-black">
+                <div
+                    class="border border-gray-300 dark:border-white border-opacity-30 dark:border-opacity-20 rounded-xl p-8 bg-white dark:bg-black">
                     <div class="flex items-center justify-between mb-6">
                         <h3 class="text-2xl font-light text-gray-900 dark:text-white">Review Notes</h3>
-                        <button id="toggle-review-notes" onclick="toggleReviewNotes()" class="px-4 py-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg hover:bg-gray-700 dark:hover:bg-gray-200 transition-all duration-300 font-light text-sm">
+                        <button id="toggle-review-notes" onclick="toggleReviewNotes()"
+                            class="px-4 py-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg hover:bg-gray-700 dark:hover:bg-gray-200 transition-all duration-300 font-light text-sm">
                             Show More
                         </button>
                     </div>
                     <div class="relative">
-                        <div id="week-review-notes" class="text-gray-700 dark:text-white dark:opacity-80 leading-relaxed font-light prose prose-lg max-w-none transition-all duration-300" style="max-height: 200px; overflow: hidden;">
+                        <div id="week-review-notes"
+                            class="text-gray-700 dark:text-white dark:opacity-80 leading-relaxed font-light prose prose-lg max-w-none transition-all duration-300"
+                            style="max-height: 200px; overflow: hidden;">
                         </div>
-                        <div id="review-notes-fade" class="pointer-events-none absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white dark:from-black to-transparent" style="display: block;"></div>
+                        <div id="review-notes-fade"
+                            class="pointer-events-none absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white dark:from-black to-transparent"
+                            style="display: block;"></div>
                     </div>
                 </div>
-                
+
                 <!-- Section C: Tutorial Answer Key (PDF Embed) -->
-                <div class="border border-gray-300 dark:border-white border-opacity-30 dark:border-opacity-20 rounded-xl p-8 bg-white dark:bg-black">
+                <div id="week-pdf-section"
+                    class="border border-gray-300 dark:border-white border-opacity-30 dark:border-opacity-20 rounded-xl p-8 bg-white dark:bg-black">
                     <h3 class="text-2xl font-light text-gray-900 dark:text-white mb-6">Tutorial Answer Key</h3>
                     <!-- Responsive PDF iframe -->
-                    <div class="border border-gray-200 dark:border-white border-opacity-30 dark:border-opacity-10 rounded-lg overflow-hidden" style="height: 500px;">
-                        <iframe 
-                            id="week-pdf"
-                            src="" 
-                            class="w-full h-full"
-                            title="Tutorial Answer Key">
+                    <div class="border border-gray-200 dark:border-white border-opacity-30 dark:border-opacity-10 rounded-lg overflow-hidden"
+                        style="height: 500px;">
+                        <iframe id="week-pdf" src="" class="w-full h-full" title="Tutorial Answer Key">
                         </iframe>
                     </div>
-                    <a id="week-pdf-link" 
-                       href="" 
-                       target="_blank"
-                       class="inline-block mt-4 text-blue-600 dark:text-white dark:opacity-60 hover:text-blue-800 dark:hover:opacity-100 transition-all font-light">
+                    <a id="week-pdf-link" href="" target="_blank"
+                        class="inline-block mt-4 text-blue-600 dark:text-white dark:opacity-60 hover:text-blue-800 dark:hover:opacity-100 transition-all font-light">
                         → Open PDF in new tab
                     </a>
                 </div>
-                
+
                 <!-- Section D: Supplementary Video (YouTube Embed) -->
-                <div class="border border-gray-300 dark:border-white border-opacity-30 dark:border-opacity-20 rounded-xl p-8 bg-white dark:bg-black">
-                    <h3 id="video-section-title" class="text-2xl font-light text-gray-900 dark:text-white mb-6">Supplementary Learning Video</h3>
-                    
+                <div id="week-video-section"
+                    class="border border-gray-300 dark:border-white border-opacity-30 dark:border-opacity-20 rounded-xl p-8 bg-white dark:bg-black">
+                    <h3 id="video-section-title" class="text-2xl font-light text-gray-900 dark:text-white mb-6">
+                        Supplementary Learning Video</h3>
+
                     <!-- First Video -->
                     <div class="relative rounded-lg mb-6" style="padding-bottom: 56.25%; height: 0; overflow: visible;">
-                        <iframe 
-                            id="week-video"
-                            src="" 
-                            class="absolute top-0 left-0 w-full h-full rounded-lg"
-                            title="Supplementary Video"
-                            frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" 
-                            allowfullscreen
-                            webkitallowfullscreen
-                            mozallowfullscreen>
+                        <iframe id="week-video" src="" class="absolute top-0 left-0 w-full h-full rounded-lg"
+                            title="Supplementary Video" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                            allowfullscreen webkitallowfullscreen mozallowfullscreen>
                         </iframe>
                     </div>
-                    
+
                     <!-- Second Video (if available) -->
                     <div id="week-video-2-container" style="display: none;">
-                        <div class="relative rounded-lg mb-6" style="padding-bottom: 56.25%; height: 0; overflow: visible;">
-                            <iframe 
-                                id="week-video-2"
-                                src="" 
-                                class="absolute top-0 left-0 w-full h-full rounded-lg"
-                                title="Additional Supplementary Video"
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" 
-                                allowfullscreen
-                                webkitallowfullscreen
-                                mozallowfullscreen>
+                        <div class="relative rounded-lg mb-6"
+                            style="padding-bottom: 56.25%; height: 0; overflow: visible;">
+                            <iframe id="week-video-2" src="" class="absolute top-0 left-0 w-full h-full rounded-lg"
+                                title="Additional Supplementary Video" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                                allowfullscreen webkitallowfullscreen mozallowfullscreen>
                             </iframe>
                         </div>
                     </div>
-                    
+
                     <!-- Third Video (if available) -->
                     <div id="week-video-3-container" style="display: none;">
-                        <div class="relative rounded-lg mb-6" style="padding-bottom: 56.25%; height: 0; overflow: visible;">
-                            <iframe 
-                                id="week-video-3"
-                                src="" 
-                                class="absolute top-0 left-0 w-full h-full rounded-lg"
-                                title="Additional Supplementary Video 2"
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" 
-                                allowfullscreen
-                                webkitallowfullscreen
-                                mozallowfullscreen>
+                        <div class="relative rounded-lg mb-6"
+                            style="padding-bottom: 56.25%; height: 0; overflow: visible;">
+                            <iframe id="week-video-3" src="" class="absolute top-0 left-0 w-full h-full rounded-lg"
+                                title="Additional Supplementary Video 2" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                                allowfullscreen webkitallowfullscreen mozallowfullscreen>
                             </iframe>
                         </div>
                     </div>
-                    
+
                     <!-- Fourth Video (if available) -->
                     <div id="week-video-4-container" style="display: none;">
                         <div class="relative rounded-lg" style="padding-bottom: 56.25%; height: 0; overflow: visible;">
-                            <iframe 
-                                id="week-video-4"
-                                src="" 
-                                class="absolute top-0 left-0 w-full h-full rounded-lg"
-                                title="Additional Supplementary Video 3"
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" 
-                                allowfullscreen
-                                webkitallowfullscreen
-                                mozallowfullscreen>
+                            <iframe id="week-video-4" src="" class="absolute top-0 left-0 w-full h-full rounded-lg"
+                                title="Additional Supplementary Video 3" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                                allowfullscreen webkitallowfullscreen mozallowfullscreen>
                             </iframe>
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </div>
@@ -438,27 +458,34 @@
         <div class="container mx-auto px-4 py-20 pt-32">
             <div class="max-w-6xl mx-auto">
                 <h1 class="text-5xl md:text-6xl font-light mb-12 text-gray-900 dark:text-white">About Me</h1>
-                
+
                 <div class="flex flex-col md:flex-row gap-6">
                     <!-- Text Content -->
-                    <div class="flex-1 border border-gray-300 dark:border-white border-opacity-30 dark:border-opacity-20 rounded-xl p-8 md:p-10 bg-white dark:bg-black space-y-5">
+                    <div
+                        class="flex-1 border border-gray-300 dark:border-white border-opacity-30 dark:border-opacity-20 rounded-xl p-8 md:p-10 bg-white dark:bg-black space-y-5">
                         <p class="text-lg text-gray-700 dark:text-white dark:opacity-80 leading-relaxed font-light">
-                            I'm Alex Barkas, a second-year student specializing in Applied Mathematics and Mechanical Engineering.
+                            I'm Alex Barkas, a second-year student specializing in Applied Mathematics and Mechanical
+                            Engineering.
                         </p>
                         <p class="text-lg text-gray-700 dark:text-white dark:opacity-80 leading-relaxed font-light">
-                            I grew up in Toronto playing sports and focusing intensely on math and science-based subjects. I've always loved exploring new topics and understanding how things work.
+                            I grew up in Toronto playing sports and focusing intensely on math and science-based
+                            subjects. I've always loved exploring new topics and understanding how things work.
                         </p>
                         <p class="text-lg text-gray-700 dark:text-white dark:opacity-80 leading-relaxed font-light">
-                            My goal in these tutorials is to use my experience to help you guys not only understand the material but to really grasp how these fundamental principles work and apply them.
+                            My goal in these tutorials is to use my experience to help you guys not only understand the
+                            material but to really grasp how these fundamental principles work and apply them.
                         </p>
                         <p class="text-lg text-gray-700 dark:text-white dark:opacity-80 leading-relaxed font-light">
-                            When I took these courses in first year, I found the supplementary YouTube videos on this page were incredibly helpful for reinforcing the concepts and seeing them explained visually. I encourage you to use them too!
+                            When I took these courses in first year, I found the supplementary YouTube videos on this
+                            page were incredibly helpful for reinforcing the concepts and seeing them explained
+                            visually. I encourage you to use them too!
                         </p>
                     </div>
-                    
+
                     <!-- Profile Photo -->
                     <div class="flex-shrink-0">
-                        <img src="kangaroopic.jpg" alt="Profile Photo" class="w-full md:w-80 h-64 md:h-full object-cover rounded-2xl shadow-xl border-2 border-gray-300 dark:border-white border-opacity-40 dark:border-opacity-20">
+                        <img src="kangaroopic.jpg" alt="Profile Photo"
+                            class="w-full md:w-80 h-64 md:h-full object-cover rounded-2xl shadow-xl border-2 border-gray-300 dark:border-white border-opacity-40 dark:border-opacity-20">
                     </div>
                 </div>
             </div>
@@ -472,22 +499,26 @@
         <div class="container mx-auto px-4 py-20 pt-32">
             <div class="max-w-3xl mx-auto">
                 <h1 class="text-5xl md:text-6xl font-light mb-8 text-gray-900 dark:text-white">Contact</h1>
-                
+
                 <div class="space-y-6">
-                    <div class="border border-gray-300 dark:border-white border-opacity-30 dark:border-opacity-20 rounded-xl p-8 bg-white dark:bg-black">
+                    <div
+                        class="border border-gray-300 dark:border-white border-opacity-30 dark:border-opacity-20 rounded-xl p-8 bg-white dark:bg-black">
                         <h2 class="text-2xl font-light text-gray-900 dark:text-white mb-6">Get in Touch</h2>
-                        
+
                         <div class="space-y-4">
                             <div>
                                 <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">Email</h3>
-                                <a href="mailto:23kkv9@queensu.ca" class="text-gray-700 dark:text-white dark:opacity-70 font-light hover:text-gray-900 dark:hover:text-white underline">
-                                    23kkv9@queensu.ca
+                                <a href="mailto:alex.barkas@queensu.ca"
+                                    class="text-gray-700 dark:text-white dark:opacity-70 font-light hover:text-gray-900 dark:hover:text-white underline">
+                                    alex.barkas@queensu.ca
                                 </a>
-                                <p class="text-gray-700 dark:text-white dark:opacity-70 font-light mt-2">Feel free to email me with any questions.</p>
+                                <p class="text-gray-700 dark:text-white dark:opacity-70 font-light mt-2">Feel free to
+                                    email me with any questions.</p>
                             </div>
-                            
+
                             <div>
-                                <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">Current Tutorial Session</h3>
+                                <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">Current Tutorial
+                                    Session</h3>
                                 <p class="text-gray-700 dark:text-white dark:opacity-70 font-light">Chernoff 212</p>
                                 <p class="text-gray-700 dark:text-white dark:opacity-70 font-light">Tuesdays 1:30 PM</p>
                             </div>
@@ -506,7 +537,7 @@
         // THEME TOGGLE FUNCTIONALITY
         // Manages light/dark mode switching with localStorage persistence
         // ========================================
-        
+
         // Initialize theme on page load
         function initTheme() {
             // Check if user has a saved preference, otherwise default to dark mode
@@ -517,11 +548,11 @@
                 document.documentElement.classList.remove('dark');
             }
         }
-        
+
         // Toggle between light and dark mode
         function toggleTheme() {
             const isDark = document.documentElement.classList.contains('dark');
-            
+
             if (isDark) {
                 // Switch to light mode
                 document.documentElement.classList.remove('dark');
@@ -532,25 +563,25 @@
                 localStorage.setItem('theme', 'dark');
             }
         }
-        
+
         // Initialize theme immediately
         initTheme();
-        
+
         // ========================================
         // COURSE TAB SWITCHING
         // Handle switching between Course Resources and Weekly Content tabs
         // ========================================
-        
+
         // Function to switch between tabs within the course view
         function showCourseTab(tabName) {
             // Get tab content sections
             const resourcesContent = document.getElementById('course-resources-tab');
             const weeklyContent = document.getElementById('course-weekly-tab');
-            
+
             // Make sure course view is visible
             document.getElementById('course-view').classList.add('active');
             document.getElementById('week-view').classList.remove('active');
-            
+
             // Switch based on which tab was clicked
             if (tabName === 'resources') {
                 // Show Resources tab, hide Weekly tab
@@ -561,24 +592,24 @@
                 resourcesContent.style.display = 'none';
                 weeklyContent.style.display = 'block';
             }
-            
+
             // Scroll to top of page
             window.scrollTo(0, 0);
         }
-        
+
         // ========================================
         // TOGGLE REVIEW NOTES EXPANSION
         // Handle expanding/collapsing the review notes section
         // ========================================
         let reviewNotesExpanded = false;
-        
+
         function toggleReviewNotes() {
             const reviewNotesElement = document.getElementById('week-review-notes');
             const toggleButton = document.getElementById('toggle-review-notes');
             const fadeElement = document.getElementById('review-notes-fade');
-            
+
             reviewNotesExpanded = !reviewNotesExpanded;
-            
+
             if (reviewNotesExpanded) {
                 // Expand the notes - show full content
                 reviewNotesElement.style.maxHeight = '5000px';  // Large enough for any content
@@ -591,12 +622,12 @@
                 fadeElement.style.display = 'block';
             }
         }
-        
+
         // ========================================
         // NAVIGATION FUNCTIONS
         // Handle navigation between Home, About Me, and Contact pages
         // ========================================
-        
+
         // Show Home page (landing page with course selection)
         function showHome() {
             document.getElementById('landing-view').classList.add('active');
@@ -605,14 +636,14 @@
             document.getElementById('course-view').classList.remove('active');
             document.getElementById('week-view').classList.remove('active');
             document.getElementById('coming-soon-view').classList.remove('active');
-            
+
             // Show main nav, hide course nav
             document.getElementById('main-nav').style.display = 'block';
             document.getElementById('course-nav').style.display = 'none';
-            
+
             window.scrollTo(0, 0);
         }
-        
+
         // Show About Me page
         function showAbout() {
             document.getElementById('landing-view').classList.remove('active');
@@ -621,14 +652,14 @@
             document.getElementById('course-view').classList.remove('active');
             document.getElementById('week-view').classList.remove('active');
             document.getElementById('coming-soon-view').classList.remove('active');
-            
+
             // Show main nav, hide course nav
             document.getElementById('main-nav').style.display = 'block';
             document.getElementById('course-nav').style.display = 'none';
-            
+
             window.scrollTo(0, 0);
         }
-        
+
         // Show Contact page
         function showContact() {
             document.getElementById('landing-view').classList.remove('active');
@@ -637,14 +668,14 @@
             document.getElementById('course-view').classList.remove('active');
             document.getElementById('week-view').classList.remove('active');
             document.getElementById('coming-soon-view').classList.remove('active');
-            
+
             // Show main nav, hide course nav
             document.getElementById('main-nav').style.display = 'block';
             document.getElementById('course-nav').style.display = 'none';
-            
+
             window.scrollTo(0, 0);
         }
-        
+
         // ========================================
         // COURSE DATA STRUCTURE
         // This object contains all 12 weeks of content for both courses
@@ -744,7 +775,7 @@
                                 </li>
                             </ul>
                         `,
-                        pdfLink: 'pdfs/APSC171/week1_answerkey.pdf',
+                        pdfLink: 'pdfs/APSC171/APSC171_week1_answerkey (1).pdf',
                         videoId: '9vKqVkMQHKk'
                     },
                     {
@@ -832,7 +863,7 @@
                                 </li>
                             </ul>
                         `,
-                        pdfLink: 'pdfs/APSC171/week2_answerkey.pdf',
+                        pdfLink: 'pdfs/APSC171/APSC171_week2_answerkey (1).pdf',
                         videoId: 'QaN_3TytT_U',
                         extraVideoId: 'rLsmajsyaEg'
                     },
@@ -906,7 +937,7 @@
                                 <li>Solve the resulting system of two equations for the single variable $t$. You must check that $k$ is positive, as the projectile must travel forward.</li>
                             </ul>
                         `,
-                        pdfLink: 'pdfs/APSC171/week3_answerkey.pdf',
+                        pdfLink: 'pdfs/APSC171/APSC171_week3_answerkey.pdf',
                         videoId: 'e4xW-zFl9Pc'
                     },
                     {
@@ -1006,7 +1037,7 @@
                                 </li>
                             </ul>
                         `,
-                        pdfLink: 'pdfs/APSC171/week4_answerkey.pdf',
+                        pdfLink: 'pdfs/APSC171/APSC171_week4_answerkey.pdf',
                         videoId: 'YXWKpgmLgHk',
                         extraVideoId: 'yZHcHQcCmlI',
                         extraVideoId2: 'VVtGpDPn1CU'
@@ -1014,7 +1045,7 @@
                     {
                         week: 5,
                         topic: 'Implicit Derivatives, Related Rates and Optimization',
-                        description: 'Advanced derivative applications and Test 1',
+                        description: 'Advanced derivative applications',
                         notes: 'By the end of this week, learners will be able to:\n\n• Compute implicit derivatives.\n• Solve problems involving related rates.\n• Apply the first derivative test and the second derivative test for identifying local maxima and minima.\n• Distinguish global vs. local extrema.\n• Solve optimization word problems.',
                         reviewNotes: `
                             <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">1. Implicit Differentiation</h2>
@@ -1116,7 +1147,7 @@
                                 </li>
                             </ul>
                         `,
-                        pdfLink: 'pdfs/APSC171/week5_answerkey.pdf',
+                        pdfLink: 'pdfs/APSC171/APSC171_week5_answerkey.pdf',
                         videoId: 'qb40J4N1fa4',
                         extraVideoId: 'j6I3EXiKB2A',
                         extraVideoId2: '0vIZdyjoubE',
@@ -1218,7 +1249,7 @@
                                 </li>
                             </ul>
                         `,
-                        pdfLink: 'pdfs/APSC171/week6_answerkey.pdf',
+                        pdfLink: 'pdfs/APSC171/APSC171_week6_answerkey.pdf',
                         videoId: 'ZmYUcieRTck',
                         extraVideoId: 'Rn9Gr52zhrY'
                     },
@@ -1296,7 +1327,7 @@
                                 </li>
                             </ul>
                         `,
-                        pdfLink: 'pdfs/APSC171/week7_answerkey.pdf',
+                        pdfLink: 'pdfs/APSC171/APSC171_week7_answerkey.pdf',
                         videoId: 'rfG8ce4nNh0',
                         extraVideoId: 'b0RJkIBhfEM'
                     },
@@ -1310,7 +1341,7 @@
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The Concept and Formula</h3>
                             <ul class="list-disc list-inside space-y-3 mb-4">
-                                <li>IBP is the integral equivalent of the <strong>Product Rule</strong> for derivatives. It is used when the integrand is a product of two different types of functions (e.g., $x \\cdot e^{ax}$ or $\\arccos(x) \\cdot 1$).</li>
+            
                                 <li><strong>The Formula:</strong>
                                     $$\\int u \\, dv = uv - \\int v \\, du$$
                                 </li>
@@ -1345,12 +1376,7 @@
                                 <li>The new integral becomes $\\int v \\, du = \\int x \\left(-\\frac{1}{\\sqrt{1-x^2}}\\right) dx$. This integral is now easily solved using a simple <strong>u-substitution</strong> ($w = 1-x^2$). This combination of IBP followed by u-sub is common.</li>
                             </ul>
 
-                            <div class="mt-4 p-4 bg-green-50 dark:bg-green-900 dark:bg-opacity-20 rounded-lg border border-green-200 dark:border-green-800">
-                                <p class="text-sm font-medium text-gray-900 dark:text-white mb-2">Recommended: The DI Method</p>
-                                <p class="text-sm text-gray-700 dark:text-white dark:opacity-80">
-                                    I learned the <strong>DI method</strong> as shown in the video below and thought it was super helpful. I'd recommend checking it out to see how it works and how it relates to the standard integration by parts method. It's a nice shortcut that makes repeated integration by parts way faster and cleaner, in my opinion.
-                                </p>
-                            </div>
+
 
                             <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">2. Substitution (u-Substitution)</h2>
                             
@@ -1397,7 +1423,7 @@
                                 <li>The limits of integration ($c$ and $d$) are the $y$-coordinates of the intersection points.</li>
                             </ul>
                         `,
-                        pdfLink: 'pdfs/APSC171/week8_answerkey.pdf',
+                        pdfLink: 'pdfs/APSC171/APSC171_week8_answerkey.pdf',
                         videoId: 'sci1pls4Lc8',
                         extraVideoId: 'zNU8iK8sGD0',
                         extraVideoId2: '2I-_SV8cwsw'
@@ -1499,7 +1525,7 @@
                                 <li><strong>Result:</strong> The integration yields $4 \\ln|x-1| - 2(x-1)^{-1} + C$.</li>
                             </ol>
                         `,
-                        pdfLink: 'pdfs/APSC171/week9_answerkey.pdf',
+                        pdfLink: 'pdfs/APSC171/APSC171_week9_answerkey.pdf',
                         videoId: 'QLHJl2_aM5Q',
                         extraVideoId: '_HqG9Ac5XAM'
                     },
@@ -1585,7 +1611,7 @@
                                 </li>
                             </ul>
                         `,
-                        pdfLink: 'pdfs/APSC171/week10_answerkey.pdf',
+                        pdfLink: 'pdfs/APSC171/APSC171_week10_answerkey (1).pdf',
                         videoId: '8xWE2ns8T6Q'
                     },
                     {
@@ -1658,16 +1684,16 @@
                                 <li><strong>Largest Amplitude:</strong> Calculate $R$ using the initial conditions. If $x'(0)=0$, then the amplitude $R$ is simply $x(0)$ (the starting displacement).</li>
                             </ul>
                         `,
-                        pdfLink: 'pdfs/APSC171/week11_answerkey.pdf',
-                        videoId: 'IHxXZRJe0KQ'
+                        pdfLink: '',
+                        videoId: ''
                     },
                     {
                         week: 12,
                         topic: 'Review',
                         description: 'Course review and synthesis',
                         notes: 'By the end of this week, learners will be able to:\n\n• Summarize and perform tasks from the earlier work from the course.',
-                        pdfLink: 'pdfs/APSC171/week12_answerkey.pdf',
-                        videoId: 'JCjWo3jB7po'
+                        pdfLink: '',
+                        videoId: ''
                     }
                 ]
             },
@@ -1795,15 +1821,15 @@
             document.getElementById('coming-soon-view').classList.remove('active');
             document.getElementById('about-view').classList.remove('active');
             document.getElementById('contact-view').classList.remove('active');
-            
+
             // Show main nav, hide course nav
             document.getElementById('main-nav').style.display = 'block';
             document.getElementById('course-nav').style.display = 'none';
-            
+
             // Reset state
             currentCourse = null;
             currentWeekIndex = null;
-            
+
             // Scroll to top
             window.scrollTo(0, 0);
         }
@@ -1822,11 +1848,11 @@
             document.getElementById('contact-view').classList.remove('active');
             // Show coming soon view
             document.getElementById('coming-soon-view').classList.add('active');
-            
+
             // Show course nav, hide main nav (like APSC 171 course page)
             document.getElementById('main-nav').style.display = 'none';
             document.getElementById('course-nav').style.display = 'block';
-            
+
             // Scroll to top of page
             window.scrollTo(0, 0);
         }
@@ -1840,26 +1866,26 @@
         function showCourseOutline(courseCode) {
             // Store which course we're viewing
             currentCourse = courseCode;
-            
+
             // Get the course data
             const course = courseData[courseCode];
-            
+
             // Update the course title
             document.getElementById('course-title').textContent = course.title;
-            
+
             // Get the container where we'll put the week cards
             const container = document.getElementById('weeks-container');
-            
+
             // Clear any existing content
             container.innerHTML = '';
-            
+
             // Loop through all 12 weeks and create a card for each
             course.weeks.forEach((weekData, index) => {
                 // Create the week card HTML
                 const weekCard = createWeekCard(weekData, index);
                 container.innerHTML += weekCard;
             });
-            
+
             // Switch views: hide other views, show course outline
             document.getElementById('landing-view').classList.remove('active');
             document.getElementById('week-view').classList.remove('active');
@@ -1867,14 +1893,14 @@
             document.getElementById('about-view').classList.remove('active');
             document.getElementById('contact-view').classList.remove('active');
             document.getElementById('course-view').classList.add('active');
-            
+
             // Show course nav, hide main nav
             document.getElementById('main-nav').style.display = 'none';
             document.getElementById('course-nav').style.display = 'block';
-            
+
             // Set default tab to "Weekly Content"
             showCourseTab('weekly');
-            
+
             // Scroll to top of page
             window.scrollTo(0, 0);
         }
@@ -1919,24 +1945,24 @@
         function showWeekDetail(index) {
             // Store which week we're viewing
             currentWeekIndex = index;
-            
+
             // Get the week data from the current course
             const weekData = courseData[currentCourse].weeks[index];
-            
+
             // Populate the week detail page with this week's information
             document.getElementById('week-number').textContent = `Week ${weekData.week}:`;
             document.getElementById('week-topic').textContent = weekData.topic;
             document.getElementById('week-description').textContent = weekData.description;
-            
+
             // Format the notes with proper line breaks and bullet points
             const notesElement = document.getElementById('week-notes');
             const notesLines = weekData.notes.split('\n');
             notesElement.innerHTML = '';
-            
+
             notesLines.forEach(line => {
                 line = line.trim();
                 if (line === '') return; // Skip empty lines
-                
+
                 if (line.startsWith('•')) {
                     // Bullet point line
                     const li = document.createElement('div');
@@ -1957,67 +1983,84 @@
                     notesElement.appendChild(p);
                 }
             });
-            
+
             // Populate review notes with LaTeX support
             const reviewNotesElement = document.getElementById('week-review-notes');
             reviewNotesElement.innerHTML = weekData.reviewNotes || '<p class="text-gray-500 dark:text-white dark:opacity-50 italic">Review notes coming soon...</p>';
-            
+
             // Reset review notes to collapsed state when changing weeks
             reviewNotesExpanded = false;
             reviewNotesElement.style.maxHeight = '200px';
             document.getElementById('toggle-review-notes').textContent = 'Show More';
             document.getElementById('review-notes-fade').style.display = 'block';
-            
+
             // Re-render MathJax for the new content
             if (window.MathJax) {
                 MathJax.typesetPromise([reviewNotesElement]).catch((err) => console.log('MathJax error:', err));
             }
-            
-            // Set the PDF iframe source and link
-            document.getElementById('week-pdf').src = weekData.pdfLink;
-            document.getElementById('week-pdf-link').href = weekData.pdfLink;
-            
-            // Set the first YouTube video iframe source
-            document.getElementById('week-video').src = `https://www.youtube.com/embed/${weekData.videoId}`;
-            
-            // Handle second video (if exists)
-            const video2Container = document.getElementById('week-video-2-container');
-            const video2Iframe = document.getElementById('week-video-2');
-            const video3Container = document.getElementById('week-video-3-container');
-            const video3Iframe = document.getElementById('week-video-3');
-            const video4Container = document.getElementById('week-video-4-container');
-            const video4Iframe = document.getElementById('week-video-4');
-            const videoSectionTitle = document.getElementById('video-section-title');
-            
-            // Count how many videos we have
-            let videoCount = 1;
-            if (weekData.extraVideoId) {
-                video2Iframe.src = `https://www.youtube.com/embed/${weekData.extraVideoId}`;
-                video2Container.style.display = 'block';
-                videoCount++;
+
+            // Handle PDF Section
+            const pdfSection = document.getElementById('week-pdf-section');
+            if (weekData.pdfLink && weekData.pdfLink.trim() !== '') {
+                pdfSection.style.display = 'block';
+                document.getElementById('week-pdf').src = weekData.pdfLink;
+                document.getElementById('week-pdf-link').href = weekData.pdfLink;
             } else {
-                video2Container.style.display = 'none';
+                pdfSection.style.display = 'none';
+                document.getElementById('week-pdf').src = '';
             }
-            
-            if (weekData.extraVideoId2) {
-                video3Iframe.src = `https://www.youtube.com/embed/${weekData.extraVideoId2}`;
-                video3Container.style.display = 'block';
-                videoCount++;
+
+            // Handle Video Section
+            const videoSection = document.getElementById('week-video-section');
+
+            if (weekData.videoId && weekData.videoId.trim() !== '') {
+                videoSection.style.display = 'block';
+
+                // Set the first YouTube video iframe source
+                document.getElementById('week-video').src = `https://www.youtube.com/embed/${weekData.videoId}`;
+
+                // Handle second video (if exists)
+                const video2Container = document.getElementById('week-video-2-container');
+                const video2Iframe = document.getElementById('week-video-2');
+                const video3Container = document.getElementById('week-video-3-container');
+                const video3Iframe = document.getElementById('week-video-3');
+                const video4Container = document.getElementById('week-video-4-container');
+                const video4Iframe = document.getElementById('week-video-4');
+                const videoSectionTitle = document.getElementById('video-section-title');
+
+                // Count how many videos we have
+                let videoCount = 1;
+                if (weekData.extraVideoId) {
+                    video2Iframe.src = `https://www.youtube.com/embed/${weekData.extraVideoId}`;
+                    video2Container.style.display = 'block';
+                    videoCount++;
+                } else {
+                    video2Container.style.display = 'none';
+                }
+
+                if (weekData.extraVideoId2) {
+                    video3Iframe.src = `https://www.youtube.com/embed/${weekData.extraVideoId2}`;
+                    video3Container.style.display = 'block';
+                    videoCount++;
+                } else {
+                    video3Container.style.display = 'none';
+                }
+
+                if (weekData.extraVideoId3) {
+                    video4Iframe.src = `https://www.youtube.com/embed/${weekData.extraVideoId3}`;
+                    video4Container.style.display = 'block';
+                    videoCount++;
+                } else {
+                    video4Container.style.display = 'none';
+                }
+
+                // Update title based on number of videos
+                videoSectionTitle.textContent = videoCount > 1 ? 'Supplementary Learning Videos' : 'Supplementary Learning Video';
             } else {
-                video3Container.style.display = 'none';
+                videoSection.style.display = 'none';
+                document.getElementById('week-video').src = '';
             }
-            
-            if (weekData.extraVideoId3) {
-                video4Iframe.src = `https://www.youtube.com/embed/${weekData.extraVideoId3}`;
-                video4Container.style.display = 'block';
-                videoCount++;
-            } else {
-                video4Container.style.display = 'none';
-            }
-            
-            // Update title based on number of videos
-            videoSectionTitle.textContent = videoCount > 1 ? 'Supplementary Learning Videos' : 'Supplementary Learning Video';
-            
+
             // Switch views: hide other views, show week detail
             document.getElementById('course-view').classList.remove('active');
             document.getElementById('landing-view').classList.remove('active');
@@ -2025,11 +2068,11 @@
             document.getElementById('about-view').classList.remove('active');
             document.getElementById('contact-view').classList.remove('active');
             document.getElementById('week-view').classList.add('active');
-            
+
             // Keep course nav visible (hide main nav)
             document.getElementById('main-nav').style.display = 'none';
             document.getElementById('course-nav').style.display = 'block';
-            
+
             // Scroll to top of page
             window.scrollTo(0, 0);
         }
@@ -2043,10 +2086,10 @@
             // Hide week detail view, show course outline view
             document.getElementById('week-view').classList.remove('active');
             document.getElementById('course-view').classList.add('active');
-            
+
             // Clear the current week index
             currentWeekIndex = null;
-            
+
             // Scroll to top of page
             window.scrollTo(0, 0);
         }
@@ -2055,10 +2098,11 @@
         // INITIALIZATION
         // When the page loads, make sure the landing view is shown
         // ========================================
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             showLanding();
         });
     </script>
 
 </body>
+
 </html>
