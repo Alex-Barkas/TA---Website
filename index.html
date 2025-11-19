@@ -571,6 +571,9 @@
         // COURSE TAB SWITCHING
         // Handle switching between Course Resources and Weekly Content tabs
         // ========================================
+        
+        // Store original course resources content
+        let originalResourcesContent = null;
 
         // Function to switch between tabs within the course view
         function showCourseTab(tabName) {
@@ -578,19 +581,55 @@
             const resourcesContent = document.getElementById('course-resources-tab');
             const weeklyContent = document.getElementById('course-weekly-tab');
 
-            // Make sure course view is visible
+            // Store original content on first access
+            if (originalResourcesContent === null) {
+                originalResourcesContent = resourcesContent.innerHTML;
+            }
+
+            // Make sure course view is visible (hide coming soon view if it's showing)
             document.getElementById('course-view').classList.add('active');
             document.getElementById('week-view').classList.remove('active');
+            document.getElementById('coming-soon-view').classList.remove('active');
+
+            // Get the course title element
+            const courseTitle = document.getElementById('course-title');
 
             // Switch based on which tab was clicked
             if (tabName === 'resources') {
                 // Show Resources tab, hide Weekly tab
                 resourcesContent.style.display = 'block';
                 weeklyContent.style.display = 'none';
+                
+                // Check current course and set content accordingly
+                if (currentCourse === 'APSC172') {
+                    // Hide the course title for APSC 172
+                    courseTitle.style.display = 'none';
+                    // For APSC 172, show "Coming Soon" message - replace ALL content
+                    resourcesContent.innerHTML = `
+                        <div class="max-w-4xl mx-auto">
+                            <div class="border border-gray-300 dark:border-white border-opacity-30 dark:border-opacity-20 rounded-xl p-12 bg-white dark:bg-black text-center">
+                                <h3 class="text-3xl font-light text-gray-900 dark:text-white mb-4">Coming Soon</h3>
+                                <p class="text-xl text-gray-600 dark:text-white dark:opacity-60 font-light">
+                                    APSC 172 course resources will be available soon.
+                                </p>
+                            </div>
+                        </div>
+                    `;
+                } else if (currentCourse === 'APSC171') {
+                    // Show the course title for APSC 171
+                    courseTitle.style.display = 'block';
+                    // Restore original content for APSC 171
+                    if (originalResourcesContent) {
+                        resourcesContent.innerHTML = '';
+                        resourcesContent.innerHTML = originalResourcesContent;
+                    }
+                }
             } else if (tabName === 'weekly') {
                 // Show Weekly tab, hide Resources tab
                 resourcesContent.style.display = 'none';
                 weeklyContent.style.display = 'block';
+                // Always show course title for weekly tab
+                courseTitle.style.display = 'block';
             }
 
             // Scroll to top of page
@@ -1768,6 +1807,9 @@
         // This is shown when user clicks on the 172 course card
         // ========================================
         function showComingSoon() {
+            // Set current course to APSC 172
+            currentCourse = 'APSC172';
+            
             // Hide all other views
             document.getElementById('landing-view').classList.remove('active');
             document.getElementById('course-view').classList.remove('active');
