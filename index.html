@@ -484,7 +484,7 @@
 
                     <!-- Profile Photo -->
                     <div class="flex-shrink-0">
-                        <img src="kangaroopic.jpg" alt="Profile Photo"
+                        <img src="KangarooPic.jpg" alt="Profile Photo"
                             class="w-full md:w-80 h-64 md:h-full object-cover rounded-2xl shadow-xl border-2 border-gray-300 dark:border-white border-opacity-40 dark:border-opacity-20">
                     </div>
                 </div>
@@ -1615,82 +1615,10 @@
                         videoId: '8xWE2ns8T6Q'
                     },
                     {
-                        week: 11,
-                        topic: 'Differential Equations and Complex Numbers 2',
-                        description: "Euler's formula and complex exponential functions",
-                        notes: "By the end of this week, learners will be able to:\n\n• State Euler's Formula.\n• Use the complex exponential function to convert between Cartesian and polar forms.\n• Solve for the behaviours of a spring/mass system using complex numbers.",
-                        reviewNotes: `
-                            <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">1. Second-Order Homogeneous Differential Equations</h2>
-                            
-                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The General Form</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
-                                <li>We solve equations of the form $\\mathbf{ax'' + bx' + cx = 0}$, which models systems like mass-spring-damper systems.</li>
-                                <li>We assume a solution of the form $\\mathbf{x(t) = e^{\\lambda t}}$ and substitute it into the equation.</li>
-                                <li>This leads to the <strong>Characteristic Equation</strong> (a quadratic equation):
-                                    $$\\mathbf{a\\lambda^2 + b\\lambda + c = 0}$$
-                                </li>
-                                <li>The roots ($\\lambda_1, \\lambda_2$) of this quadratic determine the form of the general solution $x(t)$.</li>
-                            </ul>
 
-                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Case 1: Two Distinct Real Roots ($\\lambda_1, \\lambda_2$)</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
-                                <li>Occurs when the discriminant ($b^2 - 4ac$) is positive. This corresponds to an <strong>Overdamped</strong> system.</li>
-                                <li><strong>General Solution:</strong>
-                                    $$\\mathbf{x(t) = C_1 e^{\\lambda_1 t} + C_2 e^{\\lambda_2 t}}$$
-                                </li>
-                                <li>This solution decays to zero exponentially without oscillating.</li>
-                            </ul>
-
-                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Case 2: Complex Conjugate Roots ($\\lambda = \\alpha \\pm i\\omega$)</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
-                                <li>Occurs when the discriminant ($b^2 - 4ac$) is negative. This corresponds to an <strong>Underdamped</strong> system.</li>
-                                <li><strong>Complex Roots:</strong> $\\lambda_1 = \\alpha + i\\omega$ and $\\lambda_2 = \\alpha - i\\omega$.</li>
-                                <li><strong>General Solution (Real Form):</strong>
-                                    $$\\mathbf{x(t) = e^{\\alpha t} (C_1 \\cos(\\omega t) + C_2 \\sin(\\omega t))}$$
-                                </li>
-                                <li>The mass oscillates with a decreasing amplitude determined by the exponential decay factor $e^{\\alpha t}$.</li>
-                            </ul>
-
-                            <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">2. Simple Harmonic Motion (Undamped Case)</h2>
-                            
-                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Undamped Equation ($c=0$)</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
-                                <li>For a simple, undamped oscillator ($mx'' + kx = 0$):
-                                    $$x'' + \\frac{k}{m} x = 0 \\implies x'' + \\omega_0^2 x = 0$$
-                                </li>
-                                <li>Here, $\\omega_0 = \\sqrt{k/m}$ is the <strong>natural angular frequency</strong> of the system.</li>
-                                <li><strong>General Solution Form:</strong>
-                                    $$\\mathbf{x(t) = A \\cos(\\omega_0 t) + B \\sin(\\omega_0 t)}$$
-                                </li>
-                                <li>This is equivalent to $\\mathbf{x(t) = R \\cos(\\omega_0 t - \\delta)}$, where $R$ is the amplitude.</li>
-                            </ul>
-
-                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Oscillation Characteristics</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
-                                <li><strong>Angular Frequency ($\\omega_0$):</strong> Determined by the $\\frac{k}{m}$ ratio: $\\omega_0 = \\sqrt{k/m}$. A larger $\\omega_0$ means faster oscillation.</li>
-                                <li><strong>Period ($T$):</strong> The time for one full oscillation cycle. It is inversely related to $\\omega_0$.
-                                    $$\\mathbf{T = \\frac{2\\pi}{\\omega_0}}$$
-                                </li>
-                                <li><strong>Amplitude ($R$):</strong> The maximum displacement from the equilibrium ($x=0$). Determined by initial conditions $x(0)$ and $x'(0)$.</li>
-                                <li><strong>Maximum Velocity ($v_{max}$):</strong> Occurs when the particle passes through the equilibrium ($x=0$).</li>
-                                <li>The maximum velocity is related to the amplitude and angular frequency by:
-                                    $$\\mathbf{v_{max} = R \\cdot \\omega_0}$$
-                                </li>
-                            </ul>
-
-                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Comparing Systems</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
-                                <li><strong>Shortest Period:</strong> Requires the <strong>largest angular frequency</strong> $\\omega_0$. Find the $\\frac{k}{m}$ ratio for each equation and select the largest $\\sqrt{k/m}$.</li>
-                                <li><strong>Largest Amplitude:</strong> Calculate $R$ using the initial conditions. If $x'(0)=0$, then the amplitude $R$ is simply $x(0)$ (the starting displacement).</li>
-                            </ul>
-                        `,
-                        pdfLink: '',
-                        videoId: ''
-                    },
-                    {
                         week: 12,
                         topic: 'Review',
-                        description: 'Course review and synthesis',
+                        description: 'Course review',
                         notes: 'By the end of this week, learners will be able to:\n\n• Summarize and perform tasks from the earlier work from the course.',
                         pdfLink: '',
                         videoId: ''
