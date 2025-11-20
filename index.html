@@ -571,7 +571,7 @@
         // COURSE TAB SWITCHING
         // Handle switching between Course Resources and Weekly Content tabs
         // ========================================
-        
+
         // Store original course resources content
         let originalResourcesContent = null;
 
@@ -599,7 +599,7 @@
                 // Show Resources tab, hide Weekly tab
                 resourcesContent.style.display = 'block';
                 weeklyContent.style.display = 'none';
-                
+
                 // Check current course and set content accordingly
                 if (currentCourse === 'APSC172') {
                     // Hide the course title for APSC 172
@@ -1298,7 +1298,8 @@
                         description: 'Computing integrals and anti-derivatives',
                         notes: 'By the end of this week, learners will be able to:\n\n• List properties of definite integrals.\n• State the Fundamental Theorem of Calculus.\n• Compute simple anti-derivatives and definite integrals.',
                         reviewNotes: `
-                            <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">1. The Fundamental Theorem of Calculus (Part 2)</h2>
+                            <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">1. The Fundamental Theorem of Calculus</h2>
+                            <p class="text-gray-700 dark:text-white dark:opacity-80 leading-relaxed font-light mb-4">The Fundamental Theorem of Calculus states that differentiation and integration are inverse processes, where the derivative of the integral of a continuous function returns the original function, and the definite integral of a function over an interval can be computed using the difference of its antiderivative values at the interval's endpoints.</p>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Evaluating Definite Integrals</h3>
                             <ul class="list-disc list-inside space-y-3 mb-4">
@@ -1308,7 +1309,7 @@
                                 <li><strong>Procedure:</strong>
                                     <ol class="list-decimal list-inside ml-6 mt-2 space-y-2">
                                         <li>Rewrite the integrand using negative exponents (The Power Rule Tip): For $\\frac{1}{(x+1)^{3}}$, rewrite as $(x+1)^{-3}$.</li>
-                                        <li>Find the antiderivative $F(x)$. (This may require a simple substitution, $u=x+1$).
+                                        <li>Find the antiderivative $F(x)$.
                                             $$F(x) = \\frac{(x+1)^{-2}}{-2} = -\\frac{1}{2(x+1)^2}$$
                                         </li>
                                         <li>Evaluate $F(x)$ at the limits: $F(5) - F(0)$.</li>
@@ -1809,7 +1810,7 @@
         function showComingSoon() {
             // Set current course to APSC 172
             currentCourse = 'APSC172';
-            
+
             // Hide all other views
             document.getElementById('landing-view').classList.remove('active');
             document.getElementById('course-view').classList.remove('active');
