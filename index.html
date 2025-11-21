@@ -401,6 +401,8 @@
                     class="border border-gray-300 dark:border-white border-opacity-30 dark:border-opacity-20 rounded-xl p-8 bg-white dark:bg-black">
                     <h3 id="video-section-title" class="text-2xl font-light text-gray-900 dark:text-white mb-6">
                         Supplementary Learning Video</h3>
+                    <p id="video-section-note" class="text-gray-700 dark:text-white dark:opacity-80 mb-6 italic"
+                        style="display: none;"></p>
 
                     <!-- First Video -->
                     <div class="relative rounded-lg mb-6" style="padding-bottom: 56.25%; height: 0; overflow: visible;">
@@ -1652,7 +1654,104 @@
                             </ul>
                         `,
                         pdfLink: 'pdfs/APSC171/APSC171_week10_answerkey (1).pdf',
-                        videoId: '8xWE2ns8T6Q'
+                        videoId: '8xWE2ns8T6Q',
+                        extraVideoId: 'CTd1uVq5-l8'
+                    },
+                    {
+                        week: 11,
+                        topic: 'Differential Equations and Complex Numbers 2',
+                        description: 'Euler\'s Formula and spring/mass systems',
+                        notes: 'By the end of this week, learners will be able to:\n\n• State Euler\'s Formula.\n• Use the complex exponential function to convert between Cartesian and polar forms.\n• Solve for the behaviours of a spring/mass system using complex numbers.',
+                        reviewNotes: `
+                            <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">1. Solving Second-Order Linear Differential Equations</h2>
+
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The General Form</h3>
+                            <p class="mb-3">We focus on homogeneous linear equations with constant coefficients ($a, b, c$):
+                            $$ a \\frac{d^2x}{dt^2} + b \\frac{dx}{dt} + cx = 0 \\quad \\text{or} \\quad ax'' + bx' + cx = 0 $$</p>
+
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The Characteristic Equation Method</h3>
+                            <p class="mb-3">To find the general solution $x(t)$, we assume a solution of the form $x(t) = e^{\\lambda t}$. Substituting this into the differential equation yields the <strong>Characteristic Equation</strong>:
+                            $$ a\\lambda^2 + b\\lambda + c = 0 $$
+                            We solve this quadratic equation for the roots $\\lambda$ using the quadratic formula:
+                            $$ \\lambda = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a} $$</p>
+
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The Three Cases for Solutions</h3>
+                            <p class="mb-3">The form of the general solution depends entirely on the type of roots found:</p>
+
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li><strong>Case 1: Two Distinct Real Roots ($\\lambda_1 \\neq \\lambda_2$)</strong>
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2">
+                                        <li>Occurs when the discriminant $b^2 - 4ac > 0$.</li>
+                                        <li><strong>General Solution:</strong>
+                                        $$ x(t) = C_1 e^{\\lambda_1 t} + C_2 e^{\\lambda_2 t} $$</li>
+                                        <li><em>Physical Behavior:</em> Overdamped system (no oscillation, just decay).</li>
+                                    </ul>
+                                </li>
+
+                                <li><strong>Case 2: Repeated Real Root ($\\lambda_1 = \\lambda_2 = \\lambda$)</strong>
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2">
+                                        <li>Occurs when the discriminant $b^2 - 4ac = 0$.</li>
+                                        <li>We need a second linearly independent solution, so we multiply by $t$.</li>
+                                        <li><strong>General Solution:</strong>
+                                        $$ x(t) = C_1 e^{\\lambda t} + C_2 t e^{\\lambda t} $$</li>
+                                        <li><em>Physical Behavior:</em> Critically damped system (returns to equilibrium as fast as possible without oscillating).</li>
+                                    </ul>
+                                </li>
+
+                                <li><strong>Case 3: Complex Conjugate Roots ($\\lambda = \\alpha \\pm \\beta i$)</strong>
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2">
+                                        <li>Occurs when the discriminant $b^2 - 4ac < 0$.</li>
+                                        <li>Using Euler's Formula ($e^{i\\theta} = \\cos\\theta + i\\sin\\theta$), we convert complex exponentials into real trigonometric functions.</li>
+                                        <li><strong>General Solution:</strong>
+                                        $$ x(t) = e^{\\alpha t} (C_1 \\cos(\\beta t) + C_2 \\sin(\\beta t)) $$</li>
+                                        <li><em>Physical Behavior:</em> Underdamped system (oscillates with frequency $\\beta$, while the amplitude decays/grows according to $e^{\\alpha t}$).</li>
+                                    </ul>
+                                </li>
+                            </ul>
+
+                            <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">2. Spring-Mass-Damper Systems (Modeling)</h2>
+
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Deriving the Equation of Motion</h3>
+                            <p class="mb-3">Using Newton's Second Law ($F_{net} = ma$), we sum the forces acting on the mass:</p>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li><strong>Spring Force ($F_s$):</strong> proportional to displacement, opposes motion ($F_s = -kx$).</li>
+                                <li><strong>Damping/Friction Force ($F_d$):</strong> proportional to velocity, opposes motion ($F_d = -c v = -c x'$).</li>
+                            </ul>
+                            <p class="mb-3">$$ ma = -cx' - kx \\quad \\implies \\quad mx'' + cx' + kx = 0 $$</p>
+
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Physical Constants</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li>$\\mathbf{m}$ (Mass): Represents inertia (resistance to acceleration). Units: kg.</li>
+                                <li>$\\mathbf{c}$ (Damping Coefficient): Represents friction or drag. Higher $c$ means the oscillations die out faster. Units: N/(m/s) or kg/s.</li>
+                                <li>$\\mathbf{k}$ (Spring Constant): Represents stiffness. Higher $k$ means a stiffer spring and faster oscillations. Units: N/m.</li>
+                            </ul>
+
+                            <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">3. Analyzing Oscillatory Motion</h2>
+
+                            <p class="mb-3">When the system oscillates (Case 3: Underdamped or Undamped), we analyze specific properties.</p>
+
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Undamped Motion ($c=0$)</h3>
+                            <p class="mb-3">The equation becomes $mx'' + kx = 0$, or $x'' + \\frac{k}{m}x = 0$.
+                            $$ x(t) = C_1 \\cos(\\omega_0 t) + C_2 \\sin(\\omega_0 t) $$</p>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li><strong>Natural Frequency ($\\omega_0$):</strong> The speed of oscillation in rad/s.
+                                $$ \\omega_0 = \\sqrt{\\frac{k}{m}} $$</li>
+                                <li><strong>Period ($T$):</strong> The time it takes to complete one full cycle.
+                                $$ T = \\frac{2\\pi}{\\omega_0} = 2\\pi \\sqrt{\\frac{m}{k}} $$</li>
+                                <li><strong>Amplitude ($A$):</strong> The maximum displacement from equilibrium. If $x(t) = C_1 \\cos(\\omega t) + C_2 \\sin(\\omega t)$, combine terms:
+                                $$ A = \\sqrt{C_1^2 + C_2^2} $$</li>
+                            </ul>
+
+                            <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Comparison Tricks</h3>
+                            <ul class="list-disc list-inside space-y-3 mb-4">
+                                <li><strong>Shortest Period:</strong> Look for the system with the largest $\\frac{k}{m}$ ratio (high stiffness, low mass).</li>
+                                <li><strong>Max Velocity:</strong> For simple harmonic motion $x(t) = A \\sin(\\omega t)$, velocity is $v(t) = A\\omega \\cos(\\omega t)$. The maximum velocity is:
+                                $$ v_{max} = A \\cdot \\omega $$</li>
+                            </ul>
+`,
+                        pdfLink: 'pdfs/APSC171/APSC171_week11_answerkey.pdf',
+                        videoId: 'iQoAbO_xlFs',
+                        videoNote: 'Note: In this video, the variable r is used instead of λ (lambda).'
                     },
                     {
 
@@ -2027,6 +2126,15 @@
 
                 // Update title based on number of videos
                 videoSectionTitle.textContent = videoCount > 1 ? 'Supplementary Learning Videos' : 'Supplementary Learning Video';
+
+                // Handle video note
+                const videoNoteElement = document.getElementById('video-section-note');
+                if (weekData.videoNote) {
+                    videoNoteElement.textContent = weekData.videoNote;
+                    videoNoteElement.style.display = 'block';
+                } else {
+                    videoNoteElement.style.display = 'none';
+                }
             } else {
                 videoSection.style.display = 'none';
                 document.getElementById('week-video').src = '';
