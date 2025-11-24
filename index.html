@@ -65,6 +65,25 @@
         * {
             transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
+
+        /* Ensure review notes text is dark in light mode - override prose defaults */
+        #week-review-notes.prose ul,
+        #week-review-notes.prose ol,
+        #week-review-notes.prose li,
+        #week-review-notes.prose p,
+        #week-review-notes.prose strong,
+        #week-review-notes.prose em {
+            color: rgb(17, 24, 39); /* text-gray-900 - dark text for light mode */
+        }
+        
+        .dark #week-review-notes.prose ul,
+        .dark #week-review-notes.prose ol,
+        .dark #week-review-notes.prose li,
+        .dark #week-review-notes.prose p,
+        .dark #week-review-notes.prose strong,
+        .dark #week-review-notes.prose em {
+            color: rgba(255, 255, 255, 0.8); /* dark:text-white dark:opacity-80 */
+        }
     </style>
 
     <!-- Initialize theme before body renders to prevent flash -->
@@ -371,7 +390,7 @@
                     </div>
                     <div class="relative">
                         <div id="week-review-notes"
-                            class="text-gray-700 dark:text-white dark:opacity-80 leading-relaxed font-light prose prose-lg max-w-none transition-all duration-300"
+                            class="text-gray-900 dark:text-white dark:opacity-80 leading-relaxed font-light prose prose-lg max-w-none transition-all duration-300"
                             style="max-height: 200px; overflow: hidden;">
                         </div>
                         <div id="review-notes-fade"
@@ -735,7 +754,7 @@
                             <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">1. Derivatives</h2>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Key Differentiation Rules</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li><strong>Chain Rule:</strong> Used when differentiating a composite function $f(g(x))$.
                                     $$\\frac{d}{dx} [f(g(x))] = f'(g(x)) \\cdot g'(x)$$
                                 </li>
@@ -748,9 +767,9 @@
                             </ul>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Tips and Simplification</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li><strong>Simplify First (The Power Rule Tip):</strong> Before using the Quotient Rule, you can often use algebra to rewrite a function into terms that are powers of $t$ (or $x$). This lets you use the simple Power Rule and avoids complex calculations.
-                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2">
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2 text-gray-900 dark:text-white">
                                         <li><strong>Example:</strong> For $r(t)=\\frac{5t^{4}-2t}{\\sqrt{t}}$, rewrite as:
                                             $$r(t) = \\frac{5t^4}{t^{1/2}} - \\frac{2t}{t^{1/2}} = 5t^{4 - 1/2} - 2t^{1 - 1/2} = 5t^{7/2} - 2t^{1/2}$$
                                         </li>
@@ -785,12 +804,12 @@
                             <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">2. Parallel and Perpendicular Vectors</h2>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Perpendicular Vectors</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li><strong>Tip 1 (The Dot Product Rule):</strong> Two non-zero vectors $\\vec{a}$ and $\\vec{b}$ are <strong>perpendicular (orthogonal)</strong> if and only if their <strong>dot product is zero</strong>.
                                     $$\\vec{a} \\cdot \\vec{b} = 0$$
                                 </li>
                                 <li><strong>Tip 2 (2D Quick Perpendicular):</strong> To quickly find a vector perpendicular to $\\vec{v} = \\langle a, b \\rangle$, just swap the components and negate one of them.
-                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2">
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2 text-gray-900 dark:text-white">
                                         <li>$\\vec{w}_1 = \\langle -b, a \\rangle$ or $\\vec{w}_2 = \\langle b, -a \\rangle$</li>
                                         <li>For the vector $\\langle -3, 4 \\rangle$, a perpendicular vector is $\\langle -4, -3 \\rangle$.</li>
                                     </ul>
@@ -802,12 +821,12 @@
                             </ul>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Parallel Vectors</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li><strong>Tip (The Scalar Multiple Rule):</strong> Two vectors $\\vec{c}$ and $\\vec{d}$ are <strong>parallel</strong> if and only if one is a <strong>scalar multiple</strong> of the other.
                                     $$\\vec{c} = q \\cdot \\vec{d} \\quad \\text{for some scalar } q$$
                                 </li>
                                 <li>This means the ratio of their corresponding components must be equal.
-                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2">
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2 text-gray-900 dark:text-white">
                                         <li><strong>Example:</strong> For $\\vec{c}=\\langle q, 2 \\rangle$ and $\\vec{d}=\\langle 2, 3 \\rangle$, we need:
                                             $$\\frac{q}{2} = \\frac{2}{3}$$
                                         </li>
@@ -828,7 +847,7 @@
                             <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">1. Vector-Valued Functions $\\vec{r}(t)$</h2>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Definition and Basic Form</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li>A vector-valued function, $\\vec{r}(t)$, describes the <strong>position</strong> of a particle or point in space (or a plane) at time $t$.</li>
                                 <li>In 2D, its components define the $(x, y)$ coordinates:
                                     $$\\vec{r}(t) = \\langle x(t), y(t) \\rangle$$
@@ -837,10 +856,10 @@
                             </ul>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Converting to Cartesian Equation (Eliminating the Parameter)</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li><strong>Goal:</strong> To find the familiar $y=f(x)$ equation.</li>
                                 <li><strong>Method:</strong>
-                                    <ol class="list-decimal list-inside ml-6 mt-2 space-y-2">
+                                    <ol class="list-decimal list-inside ml-6 mt-2 space-y-2 text-gray-900 dark:text-white">
                                         <li>Start with the parametric equations: $x = x(t)$ and $y = y(t)$.</li>
                                         <li><strong>Solve one equation for $t$</strong>. Pick the easiest one (usually $x(t)$ or $y(t)$).</li>
                                         <li><strong>Substitute</strong> that expression for $t$ into the other equation.</li>
@@ -848,16 +867,16 @@
                                     </ol>
                                 </li>
                                 <li><strong>Tip (Check Domain and Range):</strong> When you eliminate the parameter, the resulting Cartesian equation ($y=f(x)$) often describes a curve that is <strong>larger</strong> than the actual path traced by $\\vec{r}(t)$. This is super important.
-                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2">
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2 text-gray-900 dark:text-white">
                                         <li><strong>Example:</strong> If $x(t) = \\sqrt{t-1}$, then $x$ must be $\\ge 0$. You must indicate which part of the graph $\\vec{r}(t)$ actually passes over.</li>
                                     </ul>
                                 </li>
                             </ul>
                             
                             <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">2. Particle Collision vs. Intersecting Paths</h2>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li><strong>Collision:</strong> Particles collide if they are at the <strong>same position</strong> at the <strong>same time</strong>.
-                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2">
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2 text-gray-900 dark:text-white">
                                         <li>Set the vector functions equal to each other using the <strong>same parameter</strong> $t$:
                                             $$\\vec{r}_1(t) = \\vec{r}_2(t)$$
                                         </li>
@@ -866,7 +885,7 @@
                                     </ul>
                                 </li>
                                 <li><strong>Intersecting Paths:</strong> The paths (trajectories) intersect if they are at the <strong>same position</strong> but possibly at <strong>different times</strong>.
-                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2">
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2 text-gray-900 dark:text-white">
                                         <li>Set the vector functions equal using <strong>different parameters</strong> (e.g., $t$ for $r_1$ and $s$ for $r_2$):
                                             $$\\vec{r}_1(t) = \\vec{r}_2(s)$$
                                         </li>
@@ -880,7 +899,7 @@
                             <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">3. Parametrizing Circles</h2>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Standard Parametrization</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li>A circle centered at $(h, k)$ with radius $R$ is defined by the Cartesian equation:
                                     $$(x-h)^2 + (y-k)^2 = R^2$$
                                 </li>
@@ -891,12 +910,12 @@
                             </ul>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Tips for Controlling Direction and Start Point</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li><strong>Clockwise Motion:</strong> Want to go clockwise instead? Just swap the components (or swap $\\cos(t)$ and $\\sin(t)$) OR negate the $t$ inside. A simple way is to swap the $\\sin(t)$ and $\\cos(t)$ terms:
                                     $$\\vec{u}_{\\text{CW}}(t) = \\langle h + R \\sin(t), \\quad k + R \\cos(t) \\rangle$$
                                 </li>
                                 <li><strong>Starting Point ($t=0$):</strong>
-                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2">
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2 text-gray-900 dark:text-white">
                                         <li>$\\langle h + R\\cos(t), k + R\\sin(t) \\rangle$ starts at $(h+R, k)$ (the rightmost point).</li>
                                         <li>$\\langle h + R\\sin(t), k + R\\cos(t) \\rangle$ starts at $(h, k+R)$ (the topmost point).</li>
                                         <li>You can use phase shift (like $\\vec{u}(t) = \\langle h + R \\cos(t+\\phi), k + R \\sin(t+\\phi) \\rangle$) to control where you start. For example, to start at $(h, k-R)$ (bottom of the circle), set $\\phi = \\frac{3\\pi}{2}$ or $-\\frac{\\pi}{2}$.</li>
@@ -917,7 +936,7 @@
                             <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">1. Derivatives of Vector-Valued Functions</h2>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Key Definitions</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li><strong>Position Vector:</strong> $\\vec{r}(t) = \\langle x(t), y(t), z(t) \\rangle$. This traces the particle's path.</li>
                                 <li><strong>Velocity Vector:</strong> The derivative of the position vector, $\\vec{r}'(t)$, is the <strong>velocity</strong> vector $\\vec{v}(t)$.
                                     $$\\vec{v}(t) = \\vec{r}'(t) = \\left\\langle \\frac{dx}{dt}, \\frac{dy}{dt}, \\frac{dz}{dt} \\right\\rangle$$
@@ -929,7 +948,7 @@
                             </ul>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Setting Up Circular Motion</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li><strong>Parametric Form of a Circle (Radius $R$, Center $(h, k)$):</strong>
                                     $$\\vec{r}(t) = \\langle h + R \\cos(\\omega t), \\quad k + R \\sin(\\omega t) \\rangle$$
                                 </li>
@@ -938,7 +957,7 @@
                                     $$\\omega = \\frac{s}{R}$$
                                 </li>
                                 <li><strong>Controlling Direction and Start Point:</strong>
-                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2">
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2 text-gray-900 dark:text-white">
                                         <li><strong>Counter-Clockwise:</strong> Uses $\\langle R \\cos(\\omega t), R \\sin(\\omega t) \\rangle$. Starts at $(R, 0)$ for $t=0$.</li>
                                         <li><strong>Clockwise:</strong> Uses $\\langle R \\cos(\\omega t), -R \\sin(\\omega t) \\rangle$ OR $\\langle R \\sin(\\omega t), R \\cos(\\omega t) \\rangle$ (with careful start point check).</li>
                                         <li>For starting at $(2,0)$ with radius $R=2$ going clockwise: Use $\\langle 2 \\cos(\\omega t), -2 \\sin(\\omega t) \\rangle$. Find $\\omega$ from the given speed.</li>
@@ -949,7 +968,7 @@
                             <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">2. Tangent Vectors and Targeting</h2>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The Tangent Line Concept</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li>If an object travels straight ahead from its current position $\\vec{r}(t)$ in the direction it's moving, it follows the line <strong>tangent</strong> to the curve at that point.</li>
                                 <li>This tangent line is defined by:
                                     $$\\vec{L}(u) = \\vec{r}(t_0) + u \\cdot \\vec{r}'(t_0)$$
@@ -958,7 +977,7 @@
                             </ul>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The Targeting Tip</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li><strong>Scenario:</strong> Particle at $\\vec{r}(t)$ launches a projectile towards a target $\\vec{P}$.</li>
                                 <li><strong>Condition:</strong> The vector from the particle's launch position $\\vec{r}(t)$ to the target $\\vec{P}$ must be <strong>parallel</strong> to the particle's velocity vector $\\vec{v}(t) = \\vec{r}'(t)$ at the launch time $t$.</li>
                                 <li><strong>Setup:</strong>
@@ -966,7 +985,7 @@
                                 </li>
                                 <li>This sets up a system of equations (one for each component) where you need to solve for $t$ and $k$.</li>
                                 <li><strong>Steps:</strong>
-                                    <ol class="list-decimal list-inside ml-6 mt-2 space-y-2">
+                                    <ol class="list-decimal list-inside ml-6 mt-2 space-y-2 text-gray-900 dark:text-white">
                                         <li>Find the position of the car: $\\vec{r}(t) = \\langle t+1, t^2+2 \\rangle$.</li>
                                         <li>Find the velocity of the car: $\\vec{r}'(t) = \\langle 1, 2t \\rangle$.</li>
                                         <li>The target is $\\vec{P} = \\langle -1, 2 \\rangle$.</li>
@@ -990,14 +1009,14 @@
                             <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">1. Projectile Motion (Using Derivatives)</h2>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The Motion Hierarchy</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li>Position $\\vec{r}(t)$</li>
                                 <li>Velocity $\\vec{v}(t) = \\vec{r}'(t)$</li>
                                 <li>Acceleration $\\vec{a}(t) = \\vec{v}'(t) = \\vec{r}''(t)$</li>
                             </ul>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Analyzing Motion from Velocity</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li><strong>Finding Acceleration:</strong> If given the velocity $\\vec{v}(t)=\\langle v_x(t), v_y(t) \\rangle$, the acceleration is found by differentiating each component.
                                     $$\\vec{a}(t) = \\vec{v}'(t) = \\left\\langle \\frac{d}{dt} v_x(t), \\quad \\frac{d}{dt} v_y(t) \\right\\rangle$$
                                 </li>
@@ -1007,7 +1026,7 @@
                             <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">2. Derivatives of Inverse Trig and Transcendental Functions</h2>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Key Differentiation Rules</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li><strong>Inverse Tangent Derivative (Chain Rule Required):</strong>
                                     $$\\frac{d}{du} (\\arctan(u)) = \\frac{1}{1+u^2} \\cdot u'$$
                                 </li>
@@ -1021,7 +1040,7 @@
                             </ul>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The Product/Quotient Rule Trap</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li>Be careful to apply the <strong>Product Rule</strong> or <strong>Quotient Rule</strong> first when needed, and then apply the Chain Rule to differentiate the inner functions.</li>
                                 <li><strong>Example:</strong> For $f(s)=\\frac{\\arctan(s)}{4^{s}}$, you MUST use the <strong>Quotient Rule</strong>:
                                     $$f'(s) = \\frac{(\\frac{d}{ds} \\arctan(s)) \\cdot 4^s - \\arctan(s) \\cdot (\\frac{d}{ds} 4^s)}{(4^s)^2}$$
@@ -1031,16 +1050,16 @@
                             <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">3. Evaluating Inverse Trigonometric Functions</h2>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Key Property: Domain and Range Restriction</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li>$\\arcsin(x)$ has a range of $[-\\pi/2, \\pi/2]$. $\\arccos(x)$ has a range of $[0, \\pi]$.</li>
                                 <li><strong>Tip (The Unit Circle):</strong> When asked to evaluate $\\arcsin(\\sin(\\theta))$, if $\\theta$ is outside the restricted range, use the unit circle to find an equivalent angle $\\phi$ that <em>is</em> in the range such that $\\sin(\\phi) = \\sin(\\theta)$.</li>
                             </ul>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The Quadrant Method (Using Triangles)</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li>Used to simplify composite functions like $\\cos(\\arcsin(1/2))$ or $\\sin(\\arctan(r))$.</li>
                                 <li><strong>Steps:</strong>
-                                    <ol class="list-decimal list-inside ml-6 mt-2 space-y-2">
+                                    <ol class="list-decimal list-inside ml-6 mt-2 space-y-2 text-gray-900 dark:text-white">
                                         <li>Let $\\theta$ be the angle defined by the inner inverse function (e.g., $\\theta = \\arcsin(1/2)$).</li>
                                         <li>Draw a <strong>right-angle triangle</strong> representing $\\theta$ in the appropriate quadrant.</li>
                                         <li>Use the definition (SOH CAH TOA) to label two sides of the triangle.</li>
@@ -1054,21 +1073,21 @@
                             <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">4. Linearization (Tangent Line Approximation)</h2>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The Linearization Formula</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li>The <strong>linearization</strong> of a function $f(x)$ at a point $x = a$ is given by:
                                     $$L(x) = f(a) + f'(a)(x-a)$$
                                 </li>
                                 <li><strong>What it does:</strong> The linearization $L(x)$ is the equation of the <strong>tangent line</strong> to the curve $y = f(x)$ at the point $(a, f(a))$. It provides a <strong>linear approximation</strong> of the function near $x = a$.</li>
                                 <li><strong>Why it's useful:</strong> For values of $x$ close to $a$, we have $f(x) \\approx L(x)$. This approximation allows us to estimate function values using simple linear calculations instead of evaluating the more complex original function.</li>
                                 <li><strong>Key components:</strong>
-                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2">
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2 text-gray-900 dark:text-white">
                                         <li>$f(a)$ is the $y$-value of the function at the point of tangency.</li>
                                         <li>$f'(a)$ is the slope of the tangent line at $x = a$.</li>
                                         <li>$(x - a)$ represents the horizontal distance from the point of tangency.</li>
                                     </ul>
                                 </li>
                                 <li><strong>Example:</strong> To approximate $\\sqrt{4.1}$ using linearization of $f(x) = \\sqrt{x}$ at $a = 4$:
-                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2">
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2 text-gray-900 dark:text-white">
                                         <li>$f(4) = \\sqrt{4} = 2$</li>
                                         <li>$f'(x) = \\frac{1}{2\\sqrt{x}}$, so $f'(4) = \\frac{1}{2\\sqrt{4}} = \\frac{1}{4}$</li>
                                         <li>$L(x) = 2 + \\frac{1}{4}(x - 4)$</li>
@@ -1092,13 +1111,13 @@
                             <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">1. Implicit Differentiation</h2>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The Concept</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li>Used when a function $y$ cannot be easily solved explicitly as $y=f(x)$, where $x$ and $y$ are intertwined (e.g., $y^2+xy-y^3=2$).</li>
                                 <li>The goal is to find the derivative $\\frac{dy}{dx}$.</li>
                             </ul>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The Chain Rule Tip</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li>When differentiating any term involving $y$, you must use the <strong>Chain Rule</strong>.</li>
                                 <li>Treat $y$ as an inner function $y(x)$.</li>
                                 <li><strong>Key Rule:</strong> $\\frac{d}{dx} [g(y)] = g'(y) \\cdot \\frac{dy}{dx}$.</li>
@@ -1120,7 +1139,7 @@
                             <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">2. Related Rates</h2>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The Concept</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li>Related rates problems involve finding the rate of change of one variable (e.g., $\\frac{d\\theta}{dt}$) when the rate of change of another related variable (e.g., $\\frac{dx}{dt}$) is known.</li>
                                 <li>All differentiation is done with respect to <strong>time</strong> ($t$).</li>
                             </ul>
@@ -1130,7 +1149,7 @@
                                 <li><strong>Draw a Diagram and Define Variables:</strong> Clearly label all changing and constant quantities.</li>
                                 <li><strong>Identify Knowns/Unknowns:</strong> List all given rates (e.g., $\\frac{dh}{dt}$), known values at the moment of interest, and the desired rate (e.g., $\\frac{dC}{dt}$).</li>
                                 <li><strong>Find the Relationship Equation (Geometric Link):</strong> Establish an equation linking the variables (e.g., Pythagorean theorem, Volume of a Cone, Trigonometric Ratios).
-                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2">
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2 text-gray-900 dark:text-white">
                                         <li>For Drone/Camera problems, the relationship is trigonometric: $\\tan(\\theta) = \\frac{\\text{Opposite}}{\\text{Adjacent}}$.</li>
                                         <li>For Cone problems, the volume equation $V=\\frac{1}{3}\\pi r^{2}h$ is key.</li>
                                     </ul>
@@ -1140,7 +1159,7 @@
                             </ol>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Cone Proportions Tip</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li>If two variables in the volume equation of a cone ($r$ and $h$) are changing, you usually need a second relationship between $r$ and $h$ to simplify the differentiation.</li>
                                 <li><strong>Relationship:</strong> We need to relate $r$ to the circumference $C = 2\\pi r$. If the volume $V$ is constant, then $\\frac{dV}{dt} = 0$.</li>
                                 <li><strong>No Proportionality Assumption:</strong> Unlike many cone problems, if the relationship between $r$ and $h$ is not constant ($r/h$ is not constant), you must use the Product Rule when differentiating $V=\\frac{1}{3}\\pi r^{2}h$ with respect to $t$:
@@ -1151,7 +1170,7 @@
                             <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">3. Optimization</h2>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The Concept</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li>Optimization involves finding the maximum or minimum value of a function on a given interval (e.g., maximizing volume or area).</li>
                             </ul>
                             
@@ -1161,7 +1180,7 @@
                                 <li><strong>Determine the Domain (Interval):</strong> Establish the physical constraints on the variable (e.g., for a box problem, the cut size $x$ must be $x > 0$ and cannot exceed half the smallest dimension, so $0 < x < 4$).</li>
                                 <li><strong>Find the Critical Numbers:</strong> Compute the derivative $Q'(x)$ and set it equal to zero to find candidate values for maximum/minimum.</li>
                                 <li><strong>Test the Candidates:</strong> Evaluate the objective function $Q(x)$ at:
-                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2">
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2 text-gray-900 dark:text-white">
                                         <li>The critical numbers found in step 3.</li>
                                         <li>The endpoints of the domain (from step 2).</li>
                                     </ul>
@@ -1170,7 +1189,7 @@
                             </ol>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Box Volume Tip</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li><strong>Dimensions (Length $\\times$ Width $\\times$ Height):</strong> If the original cardboard is $L_0 \\times W_0$ and you cut a square of side $x$ from each corner:
                                     $$V(x) = (L_0 - 2x)(W_0 - 2x)(x)$$
                                 </li>
@@ -1180,7 +1199,7 @@
                             </ul>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Inscribed Rectangle Tip</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li>If a rectangle is centered on the $y$-axis with a base of $2x$, its upper-right corner is at $(x, y)$.</li>
                                 <li><strong>Area $A$:</strong> $A = (\\text{Base}) \\times (\\text{Height}) = (2x) \\cdot y$.</li>
                                 <li><strong>Substitute $y$:</strong> Use the parabola equation $y=20-4x^2$ to express Area in one variable:
@@ -1203,7 +1222,7 @@
                             <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">1. Riemann Sums</h2>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The Concept</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li>A Riemann sum is an approximation of the definite integral $\\int_{a}^{b} f(x) dx$, which represents the net area under the curve $f(x)$ from $a$ to $b$.</li>
                                 <li>The area is approximated by summing the areas of $n$ rectangles.
                                     $$\\int_{a}^{b} f(x) dx \\approx \\sum_{i=1}^{n} f(x_i^*) \\Delta x$$
@@ -1211,16 +1230,16 @@
                             </ul>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Key Definitions</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li><strong>Width of Interval ($\\Delta x$):</strong> Calculated as $\\Delta x = \\frac{b-a}{n}$ for equal width intervals.</li>
                                 <li><strong>Right Sum ($R_n$):</strong> Uses the right endpoint of each interval to determine the height of the rectangle. $R_n = \\sum_{i=1}^{n} f(x_i) \\Delta x$.</li>
                                 <li><strong>Left Sum ($L_n$):</strong> Uses the left endpoint of each interval to determine the height of the rectangle. $L_n = \\sum_{i=1}^{n} f(x_{i-1}) \\Delta x$.</li>
                             </ul>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Tip for Upper and Lower Estimates</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li>For a function $f(x)$ that is <strong>monotonic</strong> (always increasing or always decreasing) over the interval:
-                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2">
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2 text-gray-900 dark:text-white">
                                         <li>If $f(x)$ is <strong>increasing</strong> ($\\uparrow$), the <strong>Right Sum ($R_n$)</strong> gives the <strong>Upper Estimate</strong> (overestimate).</li>
                                         <li>If $f(x)$ is <strong>increasing</strong> ($\\uparrow$), the <strong>Left Sum ($L_n$)</strong> gives the <strong>Lower Estimate</strong> (underestimate).</li>
                                     </ul>
@@ -1232,7 +1251,7 @@
                             <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">2. Midpoint Rule</h2>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The Concept</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li>The Midpoint Rule uses the midpoint of each subinterval to determine the height of the rectangles.</li>
                                 <li>For each interval $[x_{i-1}, x_i]$, the midpoint is $\\bar{x}_i = \\frac{x_{i-1} + x_i}{2}$.</li>
                                 <li>The Midpoint Rule formula is:
@@ -1243,7 +1262,7 @@
                             </ul>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Relationship to Concavity</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li>If the curve is <strong>Concave Up</strong> ($\\cup$, $f''(x) > 0$), the Midpoint Rule gives an <strong>Underestimate</strong>.</li>
                                 <li>If the curve is <strong>Concave Down</strong> ($\\cap$, $f''(x) < 0$), the Midpoint Rule gives an <strong>Overestimate</strong>.</li>
                             </ul>
@@ -1251,7 +1270,7 @@
                             <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">3. Trapezoidal Rule</h2>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The Concept</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li>The Trapezoidal Rule uses trapezoids instead of rectangles, averaging the left and right endpoints for a much better approximation.
                                     $$T_n = \\frac{\\Delta x}{2} [f(x_0) + 2f(x_1) + 2f(x_2) + \\dots + 2f(x_{n-1}) + f(x_n)]$$
                                 </li>
@@ -1259,7 +1278,7 @@
                             </ul>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Underestimate vs. Overestimate</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li>The Trapezoidal Rule's error is related to the <strong>concavity</strong> of the function $f(x)$.</li>
                                 <li>If the curve is <strong>Concave Down</strong> ($\\cap$, $f''(x) < 0$), the trapezoids lie <strong>below</strong> the curve, resulting in an <strong>Underestimate</strong>.</li>
                                 <li>If the curve is <strong>Concave Up</strong> ($\\cup$, $f''(x) > 0$), the trapezoids lie <strong>above</strong> the curve, resulting in an <strong>Overestimate</strong>.</li>
@@ -1268,21 +1287,21 @@
                             
                             <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">4. Integrals as Geometric Area</h2>
                             
-                            <p class="text-gray-700 dark:text-white dark:opacity-80 leading-relaxed text-lg font-light mb-6">This is finding areas using just recognition of shapes we already are familiar with.</p>
+                            <p class="text-gray-900 dark:text-white dark:opacity-80 leading-relaxed text-lg font-light mb-6">This is finding areas using just recognition of shapes we already are familiar with.</p>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The Concept</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li>Some integrals can be evaluated exactly without using the Fundamental Theorem of Calculus by recognizing the shape defined by $f(x)$ over the integration interval.
                                     $$\\int_{a}^{b} f(x) dx = \\text{Area}_{\\text{Above } x\\text{-axis}} - \\text{Area}_{\\text{Below } x\\text{-axis}}$$
                                 </li>
                             </ul>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Recognizing Shapes</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li><strong>Semicircle Tip:</strong> The term $\\sqrt{R^2 - x^2}$ always relates to a semicircle of radius $R$.</li>
                                 <li>If $y = \\sqrt{9-x^2}$, squaring both sides gives $y^2 = 9-x^2$, or $x^2 + y^2 = 9$. This is the equation for the upper half of a circle centered at the origin with $R=3$.</li>
                                 <li><strong>Procedure for $\\int_{-3}^{0}(1+\\sqrt{9-x^{2}}) dx$:</strong>
-                                    <ol class="list-decimal list-inside ml-6 mt-2 space-y-2">
+                                    <ol class="list-decimal list-inside ml-6 mt-2 space-y-2 text-gray-900 dark:text-white">
                                         <li>Split the integral: $\\int_{-3}^{0} 1 dx + \\int_{-3}^{0} \\sqrt{9-x^{2}} dx$.</li>
                                         <li>The first part is a rectangle (Area $1 \\times 3$).</li>
                                         <li>The second part is the area of a quarter circle (Quadrant II) with radius $R=3$. Area $= \\frac{1}{4} \\pi R^2$.</li>
@@ -1301,15 +1320,15 @@
                         notes: 'By the end of this week, learners will be able to:\n\n• List properties of definite integrals.\n• State the Fundamental Theorem of Calculus.\n• Compute simple anti-derivatives and definite integrals.',
                         reviewNotes: `
                             <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">1. The Fundamental Theorem of Calculus</h2>
-                            <p class="text-gray-700 dark:text-white dark:opacity-80 leading-relaxed font-light mb-4">The Fundamental Theorem of Calculus states that differentiation and integration are inverse processes, where the derivative of the integral of a continuous function returns the original function, and the definite integral of a function over an interval can be computed using the difference of its antiderivative values at the interval's endpoints.</p>
+                            <p class="text-gray-900 dark:text-white dark:opacity-80 leading-relaxed font-light mb-4">The Fundamental Theorem of Calculus states that differentiation and integration are inverse processes, where the derivative of the integral of a continuous function returns the original function, and the definite integral of a function over an interval can be computed using the difference of its antiderivative values at the interval's endpoints.</p>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Evaluating Definite Integrals</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li><strong>FTC Part 2:</strong> If $f$ is continuous on $[a, b]$, and $F$ is any antiderivative of $f$ (i.e., $F'=f$), then:
                                     $$\\int_{a}^{b} f(x) dx = F(b) - F(a)$$
                                 </li>
                                 <li><strong>Procedure:</strong>
-                                    <ol class="list-decimal list-inside ml-6 mt-2 space-y-2">
+                                    <ol class="list-decimal list-inside ml-6 mt-2 space-y-2 text-gray-900 dark:text-white">
                                         <li>Rewrite the integrand using negative exponents (The Power Rule Tip): For $\\frac{1}{(x+1)^{3}}$, rewrite as $(x+1)^{-3}$.</li>
                                         <li>Find the antiderivative $F(x)$.
                                             $$F(x) = \\frac{(x+1)^{-2}}{-2} = -\\frac{1}{2(x+1)^2}$$
@@ -1320,7 +1339,7 @@
                             </ul>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Antiderivatives and General Integration</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li><strong>The Power Rule for Integration:</strong> For $n \\ne -1$:
                                     $$\\int x^n dx = \\frac{x^{n+1}}{n+1} + C$$
                                 </li>
@@ -1335,7 +1354,7 @@
                             <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">2. Applications of the Definite Integral</h2>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Total Change and Accumulation</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li>The integral of a rate function $r(t)$ gives the <strong>total change</strong> (accumulation) of the quantity over the interval.
                                     $$\\text{Total Change} = \\int_{t_0}^{t_f} r(t) dt$$
                                 </li>
@@ -1345,12 +1364,12 @@
                             </ul>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Area Between Curves</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li>The total area $A$ enclosed between two curves $f(x)$ and $g(x)$ over $[a, b]$ is found by integrating the absolute difference:
                                     $$A = \\int_{a}^{b} |f(x) - g(x)| dx$$
                                 </li>
                                 <li><strong>Procedure:</strong>
-                                    <ol class="list-decimal list-inside ml-6 mt-2 space-y-2">
+                                    <ol class="list-decimal list-inside ml-6 mt-2 space-y-2 text-gray-900 dark:text-white">
                                         <li>Find the intersection points to define the sub-intervals where one function is always "on top" of the other. (Set $y_1=y_2$).</li>
                                         <li>Set up the integral(s) as $\\int (\\text{Top Function} - \\text{Bottom Function}) dx$.</li>
                                     </ol>
@@ -1360,7 +1379,7 @@
                             <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">3. Properties of Definite Integrals</h2>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Linearity of the Integral</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li>Definite integrals can be split and scalars can be factored out. This is called the <strong>linearity property</strong>.
                                     $$\\int_{a}^{b} [c \\cdot f(x) + d \\cdot g(x)] dx = c \\int_{a}^{b} f(x) dx + d \\int_{a}^{b} g(x) dx$$
                                 </li>
@@ -1382,7 +1401,7 @@
                             <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">1. Integration by Parts (IBP)</h2>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The Concept and Formula</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
             
                                 <li><strong>The Formula:</strong>
                                     $$\\int u \\, dv = uv - \\int v \\, du$$
@@ -1390,10 +1409,10 @@
                             </ul>
 
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The LIATE Trick (Choosing $u$ and $dv$)</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li>The critical step is choosing which part of the integrand will be $u$ and which will be $dv$. The goal is to make the resulting integral $\\int v \\, du$ simpler than the original integral.</li>
                                 <li>The mnemonic <strong>LIATE</strong> helps prioritize the choice for $u$:
-                                    <ol class="list-decimal list-inside ml-6 mt-2 space-y-2">
+                                    <ol class="list-decimal list-inside ml-6 mt-2 space-y-2 text-gray-900 dark:text-white">
                                         <li><strong>L</strong>ogarithmic functions (e.g., $\\ln(x)$)</li>
                                         <li><strong>I</strong>nverse trigonometric functions (e.g., $\\arccos(x)$)</li>
                                         <li><strong>A</strong>lgebraic functions (e.g., $x^n$, polynomials)</li>
@@ -1405,12 +1424,12 @@
                             </ul>
 
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Example Application: $\\int \\arccos(x) \\, dx$</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li>The integrand is technically $\\arccos(x) \\cdot 1$.</li>
                                 <li>According to LIATE, $u$ must be the Inverse Trig function ($\\arccos(x)$), as it is highest priority.</li>
                                 <li><strong>Choice:</strong> $u = \\arccos(x)$, and $dv = dx$.</li>
                                 <li><strong>Derivatives/Integrals:</strong>
-                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2">
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2 text-gray-900 dark:text-white">
                                         <li>$du = -\\frac{1}{\\sqrt{1-x^2}} dx$</li>
                                         <li>$v = x$</li>
                                     </ul>
@@ -1423,14 +1442,14 @@
                             <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">2. Substitution (u-Substitution)</h2>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The Concept</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li>U-Substitution is the integral equivalent of the <strong>Chain Rule</strong> for derivatives. It simplifies a complex integrand by changing the integration variable.</li>
                             </ul>
 
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Procedure and Trick</h3>
                             <ol class="list-decimal list-inside space-y-3 mb-4">
                                 <li><strong>Choose $u$:</strong> Select an inner function $u$ whose derivative, $du$, is also present (or nearly present, up to a constant multiplier) in the integrand.
-                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2">
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2 text-gray-900 dark:text-white">
                                         <li><strong>Trick for $\\int xe^{-3x^2} dx$:</strong> Choose $u$ as the exponent: $u = -3x^2$.</li>
                                     </ul>
                                 </li>
@@ -1445,7 +1464,7 @@
                             <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">3. Area Between Curves (Review)</h2>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Integration with Vertical Slices ($\\Delta x$)</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li>Used when the area boundaries are defined as functions of $x$ (i.e., $y=f(x)$).</li>
                                 <li><strong>Formula:</strong> $A = \\int_{a}^{b} (\\text{Top Function}) - (\\text{Bottom Function}) \\, dx$.</li>
                                 <li>This requires identifying the intersection points ($a$ and $b$) by setting $f(x)=g(x)$.</li>
@@ -1453,11 +1472,11 @@
                             </ul>
 
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Integration with Horizontal Slices ($\\Delta y$)</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li>Used when the area boundaries are defined as functions of $y$ (i.e., $x=f(y)$).</li>
                                 <li><strong>Formula:</strong> $A = \\int_{c}^{d} (\\text{Right Function}) - (\\text{Left Function}) \\, dy$.</li>
                                 <li><strong>Procedure:</strong> You must rewrite both boundary functions in terms of $y$.
-                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2">
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2 text-gray-900 dark:text-white">
                                         <li>For $g(x)=\\sqrt{x}$, rewrite as $x=y^2$.</li>
                                         <li>For $f(x)=\\frac{x}{3}$, rewrite as $x=3y$.</li>
                                     </ul>
@@ -1479,14 +1498,14 @@
                             <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">1. Volume of Revolution</h2>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The Washer Method (Rotation about Horizontal Axis)</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li>Used when the area being rotated does not touch the axis of revolution, creating a hole.</li>
                                 <li>The axis of revolution is $\\mathbf{y=c}$ (a horizontal line). Integration is with respect to $\\mathbf{x}$.</li>
                                 <li>Volume element is $dV = \\pi (R^2 - r^2) dx$.</li>
                                 <li><strong>Outer Radius ($R$):</strong> Distance from the axis of revolution ($y=c$) to the function <strong>furthest</strong> away.</li>
                                 <li><strong>Inner Radius ($r$):</strong> Distance from the axis of revolution ($y=c$) to the function <strong>closest</strong> to it.</li>
                                 <li><strong>Setup for Axis $y=6$:</strong>
-                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2">
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2 text-gray-900 dark:text-white">
                                         <li>The axis is $y=6$.</li>
                                         <li>The top boundary of the region is $y=5$ and the bottom is $y=3x-x^2$.</li>
                                         <li>Outer Radius $\\mathbf{R}$: From $y=6$ down to the furthest function $y=3x-x^2$.
@@ -1501,11 +1520,11 @@
                             </ul>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The Disk Method (Rotation about Vertical Axis)</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li>Used when the area touches the axis of revolution (no hole).</li>
                                 <li>The axis of revolution is $\\mathbf{x=c}$ (a vertical line). Integration is with respect to $\\mathbf{y}$.</li>
                                 <li><strong>Procedure for Rotation about $x$-axis:</strong> The $x$-axis is the line $y=0$. Since the region touches this axis, it's the Disk Method.
-                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2">
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2 text-gray-900 dark:text-white">
                                         <li>Radius $\\mathbf{R}$: Distance from $y=0$ to the function $y=x^2$.
                                             $$R = x^2$$
                                         </li>
@@ -1517,7 +1536,7 @@
                             <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">2. Work Done by Pumping</h2>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The Concept</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li>Work $W$ is done against gravity to lift a mass $m$ to a height $h$. $W = \\int dW$.</li>
                                 <li>The differential work $dW$ required to lift an infinitesimally thin slice of fluid (of volume $dV$) a distance $D$ is:
                                     $$dW = (\\text{Force}) \\cdot (\\text{Distance}) = (\\text{Mass} \\cdot g) \\cdot D$$
@@ -1544,7 +1563,7 @@
                             <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">3. Integration by Partial Fractions</h2>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The Concept</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li>Used to integrate rational functions $\\frac{P(x)}{Q(x)}$ where $Q(x)$ can be factored.</li>
                             </ul>
                             
@@ -1555,7 +1574,7 @@
                                     $$\\frac{4x-2}{(x-1)^2} = \\frac{A}{x-1} + \\frac{B}{(x-1)^2}$$
                                 </li>
                                 <li><strong>Solve for $A$ and $B$:</strong>
-                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2">
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2 text-gray-900 dark:text-white">
                                         <li>Multiply by the denominator $(x-1)^2$: $4x-2 = A(x-1) + B$.</li>
                                         <li>Use the "cover-up" tip: Set $x=1$: $4(1)-2 = A(0) + B \\implies B=2$.</li>
                                         <li>Choose any other $x$ (e.g., $x=0$) to find $A$: $4(0)-2 = A(0-1) + 2 \\implies -2 = -A + 2 \\implies A=4$.</li>
@@ -1580,13 +1599,13 @@
                             <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">1. Complex Numbers: Forms and Operations</h2>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Cartesian (Rectangular) Form: $z = a + bi$</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li>$a$ is the <strong>Real part</strong>, and $b$ is the <strong>Imaginary part</strong>.</li>
                                 <li><strong>Addition/Subtraction:</strong> Combine the real parts and the imaginary parts separately.</li>
                                 <li><strong>Multiplication:</strong> Use the FOIL method (First, Outer, Inner, Last), remembering that $i^2 = -1$.</li>
                                 <li><strong>Complex Conjugate ($\\bar{z}$):</strong> Change the sign of the imaginary part. For $z=a+bi$, $\\bar{z} = a-bi$.</li>
                                 <li><strong>Trick:</strong>
-                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2">
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2 text-gray-900 dark:text-white">
                                         <li>Sum: $z + \\bar{z} = (a+bi) + (a-bi) = 2a$ (always purely <strong>real</strong>).</li>
                                         <li>Product: $z \\cdot \\bar{z} = (a+bi)(a-bi) = a^2 - (bi)^2 = a^2 + b^2$ (always purely <strong>real</strong> and equal to $||z||^2$).</li>
                                     </ul>
@@ -1594,7 +1613,7 @@
                             </ul>
 
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Polar Form: $z = |z| \\angle \\arg(z)$ or $z = r e^{i\\theta}$</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li><strong>Modulus ($|z|$ or $r$):</strong> The distance from the origin (magnitude of the vector).
                                     $$r = |z| = \\sqrt{a^2 + b^2}$$
                                 </li>
@@ -1607,7 +1626,7 @@
                             </ul>
 
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Extension: Powers of $i$</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li>The powers of $i$ cycle every 4 steps:
                                     $$i^1 = i, \\quad i^2 = -1, \\quad i^3 = -i, \\quad i^4 = 1$$
                                 </li>
@@ -1618,11 +1637,11 @@
                             <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">2. Differential Equations: Spring/Mass/Damper</h2>
                             
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Modeling the Physical System</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li><strong>Goal:</strong> Use Newton's Second Law ($\\sum F = ma$) to derive a differential equation that governs the position $x(t)$ of the mass.</li>
                                 <li><strong>Acceleration:</strong> $a = x''(t)$.</li>
                                 <li><strong>Forces (Assume $x$ is positive to the right):</strong>
-                                    <ol class="list-decimal list-inside ml-6 mt-2 space-y-2">
+                                    <ol class="list-decimal list-inside ml-6 mt-2 space-y-2 text-gray-900 dark:text-white">
                                         <li><strong>Spring Force ($F_s$):</strong> Restoring force (Hooke's Law), opposes displacement $x$.
                                             $$F_s = -k x(t)$$
                                         </li>
@@ -1639,15 +1658,15 @@
                             </ul>
 
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Physical Interpretation of Coefficients</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li>The characteristics of the solution $x(t)$ depend on the constants $m$, $c$, and $k$.</li>
                                 <li><strong>Small Damping ($c$ is small):</strong> Corresponds to a physical system with very little friction (e.g., in air).
-                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2">
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2 text-gray-900 dark:text-white">
                                         <li>The solution $x(t)$ will be <strong>underdamped</strong>, meaning the mass will oscillate (move back and forth) with decreasing amplitude.</li>
                                     </ul>
                                 </li>
                                 <li><strong>Large Damping ($c$ is large):</strong> Corresponds to a system with very high friction (e.g., submerged in thick oil).
-                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2">
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2 text-gray-900 dark:text-white">
                                         <li>The solution $x(t)$ will be <strong>overdamped</strong>, meaning the mass returns slowly to equilibrium without oscillating.</li>
                                     </ul>
                                 </li>
@@ -1666,21 +1685,21 @@
                             <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">1. Solving Differential Equations</h2>
 
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The General Form</h3>
-                            <p class="mb-3">All of our spring/mass systems will look like this equation (where $a$, $b$, and $c$ are constants):
+                            <p class="mb-3 text-gray-900 dark:text-white">All of our spring/mass systems will look like this equation (where $a$, $b$, and $c$ are constants):
                             $$ a \\frac{d^2x}{dt^2} + b \\frac{dx}{dt} + cx = 0 \\quad \\text{or} \\quad ax'' + bx' + cx = 0 $$</p>
 
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The Characteristic Equation Method</h3>
-                            <p class="mb-3">To find the general solution $x(t)$, we assume a solution of the form $x(t) = e^{\\lambda t}$. Substituting this into the differential equation yields the <strong>Characteristic Equation</strong>:
+                            <p class="mb-3 text-gray-900 dark:text-white">To find the general solution $x(t)$, we assume a solution of the form $x(t) = e^{\\lambda t}$. Substituting this into the differential equation yields the <strong>Characteristic Equation</strong>:
                             $$ a\\lambda^2 + b\\lambda + c = 0 $$
                             We solve this quadratic equation for the roots $\\lambda$ using the quadratic formula:
                             $$ \\lambda = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a} $$</p>
 
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The Three Cases for Solutions</h3>
-                            <p class="mb-3">The form of the general solution depends entirely on the type of roots found:</p>
+                            <p class="mb-3 text-gray-900 dark:text-white">The form of the general solution depends entirely on the type of roots found:</p>
 
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li><strong>Case 1: Two Distinct Real Roots ($\\lambda_1 \\neq \\lambda_2$)</strong>
-                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2">
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2 text-gray-900 dark:text-white">
                                         <li>Occurs when the discriminant $b^2 - 4ac > 0$.</li>
                                         <li><strong>General Solution:</strong>
                                         $$ x(t) = C_1 e^{\\lambda_1 t} + C_2 e^{\\lambda_2 t} $$</li>
@@ -1689,7 +1708,7 @@
                                 </li>
 
                                 <li><strong>Case 2: Repeated Real Root ($\\lambda_1 = \\lambda_2 = \\lambda$)</strong>
-                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2">
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2 text-gray-900 dark:text-white">
                                         <li>Occurs when the discriminant $b^2 - 4ac = 0$.</li>
                                         <li>We need a second linearly independent solution, so we multiply by $t$.</li>
                                         <li><strong>General Solution:</strong>
@@ -1699,7 +1718,7 @@
                                 </li>
 
                                 <li><strong>Case 3: Complex Conjugate Roots ($\\lambda = \\alpha \\pm \\beta i$)</strong>
-                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2">
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2 text-gray-900 dark:text-white">
                                         <li>Occurs when the discriminant $b^2 - 4ac < 0$.</li>
                                         <li>Using Euler's Formula ($e^{i\\theta} = \\cos\\theta + i\\sin\\theta$), we convert complex exponentials into real trigonometric functions.</li>
                                         <li><strong>General Solution:</strong>
@@ -1712,15 +1731,15 @@
                             <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">2. Spring-Mass-Damper Systems (Modeling)</h2>
 
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Deriving the Equation of Motion</h3>
-                            <p class="mb-3">Using Newton's Second Law ($F_{net} = ma$), we sum the forces acting on the mass:</p>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <p class="mb-3 text-gray-900 dark:text-white">Using Newton's Second Law ($F_{net} = ma$), we sum the forces acting on the mass:</p>
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li><strong>Spring Force ($F_s$):</strong> proportional to displacement, opposes motion ($F_s = -kx$).</li>
                                 <li><strong>Damping/Friction Force ($F_d$):</strong> proportional to velocity, opposes motion ($F_d = -c v = -c x'$).</li>
                             </ul>
-                            <p class="mb-3">$$ ma = -cx' - kx \\quad \\implies \\quad mx'' + cx' + kx = 0 $$</p>
+                            <p class="mb-3 text-gray-900 dark:text-white">$$ ma = -cx' - kx \\quad \\implies \\quad mx'' + cx' + kx = 0 $$</p>
 
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Physical Constants</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li>$\\mathbf{m}$ (Mass): Represents inertia (resistance to acceleration). Units: kg.</li>
                                 <li>$\\mathbf{c}$ (Damping Coefficient): Represents friction or drag. Higher $c$ means the oscillations die out faster. Units: N/(m/s) or kg/s.</li>
                                 <li>$\\mathbf{k}$ (Spring Constant): Represents stiffness. Higher $k$ means a stiffer spring and faster oscillations. Units: N/m.</li>
@@ -1728,12 +1747,12 @@
 
                             <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">3. Analyzing Oscillatory Motion</h2>
 
-                            <p class="mb-3">When the system oscillates (Case 3: Underdamped or Undamped), we analyze specific properties.</p>
+                            <p class="mb-3 text-gray-900 dark:text-white">When the system oscillates (Case 3: Underdamped or Undamped), we analyze specific properties.</p>
 
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Undamped Motion ($c=0$)</h3>
-                            <p class="mb-3">The equation becomes $mx'' + kx = 0$, or $x'' + \\frac{k}{m}x = 0$.
+                            <p class="mb-3 text-gray-900 dark:text-white">The equation becomes $mx'' + kx = 0$, or $x'' + \\frac{k}{m}x = 0$.
                             $$ x(t) = C_1 \\cos(\\omega_0 t) + C_2 \\sin(\\omega_0 t) $$</p>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li><strong>Natural Frequency ($\\omega_0$):</strong> The speed of oscillation in rad/s.
                                 $$ \\omega_0 = \\sqrt{\\frac{k}{m}} $$</li>
                                 <li><strong>Period ($T$):</strong> The time it takes to complete one full cycle.
@@ -1743,7 +1762,7 @@
                             </ul>
 
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">Comparison Tricks</h3>
-                            <ul class="list-disc list-inside space-y-3 mb-4">
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
                                 <li><strong>Shortest Period:</strong> Look for the system with the largest $\\frac{k}{m}$ ratio (high stiffness, low mass).</li>
                                 <li><strong>Max Velocity:</strong> For simple harmonic motion $x(t) = A \\sin(\\omega t)$, velocity is $v(t) = A\\omega \\cos(\\omega t)$. The maximum velocity is:
                                 $$ v_{max} = A \\cdot \\omega $$</li>
