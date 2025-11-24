@@ -67,23 +67,40 @@
         }
 
         /* Ensure review notes text is dark in light mode - override prose defaults */
-        #week-review-notes.prose ul,
-        #week-review-notes.prose ol,
-        #week-review-notes.prose li,
-        #week-review-notes.prose p,
-        #week-review-notes.prose strong,
-        #week-review-notes.prose em {
-            color: rgb(17, 24, 39); /* text-gray-900 - dark text for light mode */
+        /* Force ALL elements inside review notes to be dark in light mode */
+        #week-review-notes,
+        #week-review-notes *,
+        #week-review-notes ul,
+        #week-review-notes ol,
+        #week-review-notes li,
+        #week-review-notes p,
+        #week-review-notes strong,
+        #week-review-notes em,
+        #week-review-notes span,
+        #week-review-notes div,
+        #week-review-notes h1,
+        #week-review-notes h2,
+        #week-review-notes h3 {
+            color: rgb(17, 24, 39) !important; /* text-gray-900 - dark text for light mode */
         }
         
-        .dark #week-review-notes.prose ul,
-        .dark #week-review-notes.prose ol,
-        .dark #week-review-notes.prose li,
-        .dark #week-review-notes.prose p,
-        .dark #week-review-notes.prose strong,
-        .dark #week-review-notes.prose em {
-            color: rgba(255, 255, 255, 0.8); /* dark:text-white dark:opacity-80 */
+        /* Override for dark mode */
+        .dark #week-review-notes,
+        .dark #week-review-notes *,
+        .dark #week-review-notes ul,
+        .dark #week-review-notes ol,
+        .dark #week-review-notes li,
+        .dark #week-review-notes p,
+        .dark #week-review-notes strong,
+        .dark #week-review-notes em,
+        .dark #week-review-notes span,
+        .dark #week-review-notes div,
+        .dark #week-review-notes h1,
+        .dark #week-review-notes h2,
+        .dark #week-review-notes h3 {
+            color: rgba(255, 255, 255, 0.8) !important; /* dark:text-white dark:opacity-80 */
         }
+
     </style>
 
     <!-- Initialize theme before body renders to prevent flash -->
@@ -368,15 +385,6 @@
 
             <!-- Week Content Sections -->
             <div class="max-w-4xl mx-auto space-y-6">
-
-                <!-- Section A: Learning Outcomes -->
-                <div
-                    class="border border-gray-300 dark:border-white border-opacity-30 dark:border-opacity-20 rounded-xl p-8 bg-white dark:bg-black">
-                    <h3 class="text-2xl font-light text-gray-900 dark:text-white mb-6">Learning Outcomes</h3>
-                    <div id="week-notes"
-                        class="text-gray-700 dark:text-white dark:opacity-80 leading-relaxed font-light space-y-2">
-                    </div>
-                </div>
 
                 <!-- Section B: Review Notes (LaTeX Support) -->
                 <div
@@ -1697,36 +1705,36 @@
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The Three Cases for Solutions</h3>
                             <p class="mb-3 text-gray-900 dark:text-white">The form of the general solution depends entirely on the type of roots found:</p>
 
-                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
-                                <li><strong>Case 1: Two Distinct Real Roots ($\\lambda_1 \\neq \\lambda_2$)</strong>
-                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2 text-gray-900 dark:text-white">
-                                        <li>Occurs when the discriminant $b^2 - 4ac > 0$.</li>
-                                        <li><strong>General Solution:</strong>
-                                        $$ x(t) = C_1 e^{\\lambda_1 t} + C_2 e^{\\lambda_2 t} $$</li>
-                                        <li><em>Physical Behavior:</em> Overdamped system (no oscillation, just decay).</li>
-                                    </ul>
-                                </li>
+                            <div class="space-y-4 mb-4 text-gray-900 dark:text-white">
+                                <div><strong>Case 1: Two Distinct Real Roots ($\\lambda_1 \\neq \\lambda_2$)</strong>
+                                    <div class="ml-6 mt-2 space-y-2">
+                                        <p>Occurs when the discriminant $b^2 - 4ac > 0$.</p>
+                                        <p><strong>General Solution:</strong>
+                                        $$ x(t) = C_1 e^{\\lambda_1 t} + C_2 e^{\\lambda_2 t} $$</p>
+                                        <p><em>Physical Behavior:</em> Overdamped system (no oscillation, just decay).</p>
+                                    </div>
+                                </div>
 
-                                <li><strong>Case 2: Repeated Real Root ($\\lambda_1 = \\lambda_2 = \\lambda$)</strong>
-                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2 text-gray-900 dark:text-white">
-                                        <li>Occurs when the discriminant $b^2 - 4ac = 0$.</li>
-                                        <li>We need a second linearly independent solution, so we multiply by $t$.</li>
-                                        <li><strong>General Solution:</strong>
-                                        $$ x(t) = C_1 e^{\\lambda t} + C_2 t e^{\\lambda t} $$</li>
-                                        <li><em>Physical Behavior:</em> Critically damped system (returns to equilibrium as fast as possible without oscillating).</li>
-                                    </ul>
-                                </li>
+                                <div><strong>Case 2: Repeated Real Root ($\\lambda_1 = \\lambda_2 = \\lambda$)</strong>
+                                    <div class="ml-6 mt-2 space-y-2">
+                                        <p>Occurs when the discriminant $b^2 - 4ac = 0$.</p>
+                                        <p>We need a second linearly independent solution, so we multiply by $t$.</p>
+                                        <p><strong>General Solution:</strong>
+                                        $$ x(t) = C_1 e^{\\lambda t} + C_2 t e^{\\lambda t} $$</p>
+                                        <p><em>Physical Behavior:</em> Critically damped system (returns to equilibrium as fast as possible without oscillating).</p>
+                                    </div>
+                                </div>
 
-                                <li><strong>Case 3: Complex Conjugate Roots ($\\lambda = \\alpha \\pm \\beta i$)</strong>
-                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2 text-gray-900 dark:text-white">
-                                        <li>Occurs when the discriminant $b^2 - 4ac < 0$.</li>
-                                        <li>Using Euler's Formula ($e^{i\\theta} = \\cos\\theta + i\\sin\\theta$), we convert complex exponentials into real trigonometric functions.</li>
-                                        <li><strong>General Solution:</strong>
-                                        $$ x(t) = e^{\\alpha t} (C_1 \\cos(\\beta t) + C_2 \\sin(\\beta t)) $$</li>
-                                        <li><em>Physical Behavior:</em> Underdamped system (oscillates with frequency $\\beta$, while the amplitude decays/grows according to $e^{\\alpha t}$).</li>
-                                    </ul>
-                                </li>
-                            </ul>
+                                <div><strong>Case 3: Complex Conjugate Roots ($\\lambda = \\alpha \\pm \\beta i$)</strong>
+                                    <div class="ml-6 mt-2 space-y-2">
+                                        <p>Occurs when the discriminant $b^2 - 4ac < 0$.</p>
+                                        <p>Using Euler's Formula ($e^{i\\theta} = \\cos\\theta + i\\sin\\theta$), we convert complex exponentials into real trigonometric functions.</p>
+                                        <p><strong>General Solution:</strong>
+                                        $$ x(t) = e^{\\alpha t} (C_1 \\cos(\\beta t) + C_2 \\sin(\\beta t)) $$</p>
+                                        <p><em>Physical Behavior:</em> Underdamped system (oscillates with frequency $\\beta$, while the amplitude decays/grows according to $e^{\\alpha t}$).</p>
+                                    </div>
+                                </div>
+                            </div>
 
                             <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">2. Spring-Mass-Damper Systems (Modeling)</h2>
 
@@ -2044,36 +2052,6 @@
             document.getElementById('week-number').textContent = `Week ${weekData.week}:`;
             document.getElementById('week-topic').textContent = weekData.topic;
             document.getElementById('week-description').textContent = weekData.description;
-
-            // Format the notes with proper line breaks and bullet points
-            const notesElement = document.getElementById('week-notes');
-            const notesLines = weekData.notes.split('\n');
-            notesElement.innerHTML = '';
-
-            notesLines.forEach(line => {
-                line = line.trim();
-                if (line === '') return; // Skip empty lines
-
-                if (line.startsWith('•')) {
-                    // Bullet point line
-                    const li = document.createElement('div');
-                    li.className = 'flex items-start mb-2';
-                    li.innerHTML = `
-                        <span class="text-gray-900 dark:text-white mr-3 mt-1">•</span>
-                        <span>${line.substring(1).trim()}</span>
-                    `;
-                    notesElement.appendChild(li);
-                } else {
-                    // Regular text line
-                    const p = document.createElement('p');
-                    p.className = 'mb-3';
-                    if (line.startsWith('By the end of this week')) {
-                        p.className += ' font-medium text-gray-900 dark:text-white';
-                    }
-                    p.textContent = line;
-                    notesElement.appendChild(p);
-                }
-            });
 
             // Populate review notes with LaTeX support
             const reviewNotesElement = document.getElementById('week-review-notes');
