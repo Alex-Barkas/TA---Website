@@ -81,9 +81,10 @@
         #week-review-notes h1,
         #week-review-notes h2,
         #week-review-notes h3 {
-            color: rgb(17, 24, 39) !important; /* text-gray-900 - dark text for light mode */
+            color: rgb(17, 24, 39) !important;
+            /* text-gray-900 - dark text for light mode */
         }
-        
+
         /* Override for dark mode */
         .dark #week-review-notes,
         .dark #week-review-notes *,
@@ -98,9 +99,30 @@
         .dark #week-review-notes h1,
         .dark #week-review-notes h2,
         .dark #week-review-notes h3 {
-            color: rgba(255, 255, 255, 0.8) !important; /* dark:text-white dark:opacity-80 */
+            color: rgba(255, 255, 255, 0.8) !important;
+            /* dark:text-white dark:opacity-80 */
         }
 
+        /* Ensure week-notes (jot notes) text is dark in light mode */
+        /* Target light mode specifically - when .dark class is NOT present */
+        #week-notes,
+        #week-notes *,
+        #week-notes span,
+        #week-notes p,
+        #week-notes div {
+            color: rgb(17, 24, 39) !important;
+            /* text-gray-900 - dark text for light mode */
+        }
+
+        /* Override for dark mode */
+        .dark #week-notes,
+        .dark #week-notes *,
+        .dark #week-notes span,
+        .dark #week-notes p,
+        .dark #week-notes div {
+            color: rgba(255, 255, 255, 0.8) !important;
+            /* dark:text-white dark:opacity-80 */
+        }
     </style>
 
     <!-- Initialize theme before body renders to prevent flash -->
@@ -386,6 +408,15 @@
             <!-- Week Content Sections -->
             <div class="max-w-4xl mx-auto space-y-6">
 
+                <!-- Section A: Learning Outcomes -->
+                <div
+                    class="border border-gray-300 dark:border-white border-opacity-30 dark:border-opacity-20 rounded-xl p-8 bg-white dark:bg-black">
+                    <h3 class="text-2xl font-light text-gray-900 dark:text-white mb-6">Learning Outcomes</h3>
+                    <div id="week-notes"
+                        class="text-gray-900 dark:text-white dark:opacity-80 leading-relaxed font-light space-y-2">
+                    </div>
+                </div>
+
                 <!-- Section B: Review Notes (LaTeX Support) -->
                 <div
                     class="border border-gray-300 dark:border-white border-opacity-30 dark:border-opacity-20 rounded-xl p-8 bg-white dark:bg-black">
@@ -493,7 +524,8 @@
                     <div
                         class="flex-1 border border-gray-300 dark:border-white border-opacity-30 dark:border-opacity-20 rounded-xl p-8 md:p-10 bg-white dark:bg-black space-y-5">
                         <p class="text-lg text-gray-700 dark:text-white dark:opacity-80 leading-relaxed font-light">
-                            I'm Alex Barkas, a second-year student specializing in Applied Mathematics and Mechanical
+                            I'm Alex Barkas, a second-year student specializing in Applied Mathematics and
+                            Mechanical
                             Engineering.
                         </p>
                         <p class="text-lg text-gray-700 dark:text-white dark:opacity-80 leading-relaxed font-light">
@@ -501,11 +533,13 @@
                             subjects. I've always loved exploring new topics and understanding how things work.
                         </p>
                         <p class="text-lg text-gray-700 dark:text-white dark:opacity-80 leading-relaxed font-light">
-                            My goal in these tutorials is to use my experience to help you guys not only understand the
+                            My goal in these tutorials is to use my experience to help you guys not only understand
+                            the
                             material but to really grasp how these fundamental principles work and apply them.
                         </p>
                         <p class="text-lg text-gray-700 dark:text-white dark:opacity-80 leading-relaxed font-light">
-                            When I took these courses in first year, I found the supplementary YouTube videos on this
+                            When I took these courses in first year, I found the supplementary YouTube videos on
+                            this
                             page were incredibly helpful for reinforcing the concepts and seeing them explained
                             visually. I encourage you to use them too!
                         </p>
@@ -541,7 +575,8 @@
                                     class="text-gray-700 dark:text-white dark:opacity-70 font-light hover:text-gray-900 dark:hover:text-white underline">
                                     alex.barkas@queensu.ca
                                 </a>
-                                <p class="text-gray-700 dark:text-white dark:opacity-70 font-light mt-2">Feel free to
+                                <p class="text-gray-700 dark:text-white dark:opacity-70 font-light mt-2">Feel free
+                                    to
                                     email me with any questions.</p>
                             </div>
 
@@ -549,7 +584,8 @@
                                 <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">Current Tutorial
                                     Session</h3>
                                 <p class="text-gray-700 dark:text-white dark:opacity-70 font-light">Chernoff 212</p>
-                                <p class="text-gray-700 dark:text-white dark:opacity-70 font-light">Mondays 1:30 PM</p>
+                                <p class="text-gray-700 dark:text-white dark:opacity-70 font-light">Mondays 1:30 PM
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -1602,7 +1638,7 @@
                         week: 10,
                         topic: 'Differential Equations and Complex Numbers 1',
                         description: 'Spring/mass systems and complex number fundamentals',
-                        notes: 'By the end of this week, learners will be able to:\n\n• Represent a spring/mass system with differential equations.\n• Present harmonic motion in mathematical form.\n• Define and use polar and Cartesian forms of Complex Numbers.',
+                        notes: 'By the end of this week, learners will be able to:\n\n• Represent a spring/mass system with differential equations\n• Present harmonic motion in mathematical form.\n• Define and use polar and Cartesian forms of Complex Numbers.',
                         reviewNotes: `
                             <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">1. Complex Numbers: Forms and Operations</h2>
                             
@@ -1705,36 +1741,36 @@
                             <h3 class="text-xl font-medium text-gray-900 dark:text-white mb-3 mt-4">The Three Cases for Solutions</h3>
                             <p class="mb-3 text-gray-900 dark:text-white">The form of the general solution depends entirely on the type of roots found:</p>
 
-                            <div class="space-y-4 mb-4 text-gray-900 dark:text-white">
-                                <div><strong>Case 1: Two Distinct Real Roots ($\\lambda_1 \\neq \\lambda_2$)</strong>
-                                    <div class="ml-6 mt-2 space-y-2">
-                                        <p>Occurs when the discriminant $b^2 - 4ac > 0$.</p>
-                                        <p><strong>General Solution:</strong>
-                                        $$ x(t) = C_1 e^{\\lambda_1 t} + C_2 e^{\\lambda_2 t} $$</p>
-                                        <p><em>Physical Behavior:</em> Overdamped system (no oscillation, just decay).</p>
-                                    </div>
-                                </div>
+                            <ul class="list-disc list-inside space-y-3 mb-4 text-gray-900 dark:text-white">
+                                <li><strong>Case 1: Two Distinct Real Roots ($\\lambda_1 \\neq \\lambda_2$)</strong>
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2 text-gray-900 dark:text-white">
+                                        <li>Occurs when the discriminant $b^2 - 4ac > 0$.</li>
+                                        <li><strong>General Solution:</strong>
+                                        $$ x(t) = C_1 e^{\\lambda_1 t} + C_2 e^{\\lambda_2 t} $$</li>
+                                        <li><em>Physical Behavior:</em> Overdamped system (no oscillation, just decay).</li>
+                                    </ul>
+                                </li>
 
-                                <div><strong>Case 2: Repeated Real Root ($\\lambda_1 = \\lambda_2 = \\lambda$)</strong>
-                                    <div class="ml-6 mt-2 space-y-2">
-                                        <p>Occurs when the discriminant $b^2 - 4ac = 0$.</p>
-                                        <p>We need a second linearly independent solution, so we multiply by $t$.</p>
-                                        <p><strong>General Solution:</strong>
-                                        $$ x(t) = C_1 e^{\\lambda t} + C_2 t e^{\\lambda t} $$</p>
-                                        <p><em>Physical Behavior:</em> Critically damped system (returns to equilibrium as fast as possible without oscillating).</p>
-                                    </div>
-                                </div>
+                                <li><strong>Case 2: Repeated Real Root ($\\lambda_1 = \\lambda_2 = \\lambda$)</strong>
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2 text-gray-900 dark:text-white">
+                                        <li>Occurs when the discriminant $b^2 - 4ac = 0$.</li>
+                                        <li>We need a second linearly independent solution, so we multiply by $t$.</li>
+                                        <li><strong>General Solution:</strong>
+                                        $$ x(t) = C_1 e^{\\lambda t} + C_2 t e^{\\lambda t} $$</li>
+                                        <li><em>Physical Behavior:</em> Critically damped system (returns to equilibrium as fast as possible without oscillating).</li>
+                                    </ul>
+                                </li>
 
-                                <div><strong>Case 3: Complex Conjugate Roots ($\\lambda = \\alpha \\pm \\beta i$)</strong>
-                                    <div class="ml-6 mt-2 space-y-2">
-                                        <p>Occurs when the discriminant $b^2 - 4ac < 0$.</p>
-                                        <p>Using Euler's Formula ($e^{i\\theta} = \\cos\\theta + i\\sin\\theta$), we convert complex exponentials into real trigonometric functions.</p>
-                                        <p><strong>General Solution:</strong>
-                                        $$ x(t) = e^{\\alpha t} (C_1 \\cos(\\beta t) + C_2 \\sin(\\beta t)) $$</p>
-                                        <p><em>Physical Behavior:</em> Underdamped system (oscillates with frequency $\\beta$, while the amplitude decays/grows according to $e^{\\alpha t}$).</p>
-                                    </div>
-                                </div>
-                            </div>
+                                <li><strong>Case 3: Complex Conjugate Roots ($\\lambda = \\alpha \\pm \\beta i$)</strong>
+                                    <ul class="list-circle list-inside ml-6 mt-2 space-y-2 text-gray-900 dark:text-white">
+                                        <li>Occurs when the discriminant $b^2 - 4ac < 0$.</li>
+                                        <li>Using Euler's Formula ($e^{i\\theta} = \\cos\\theta + i\\sin\\theta$), we convert complex exponentials into real trigonometric functions.</li>
+                                        <li><strong>General Solution:</strong>
+                                        $$ x(t) = e^{\\alpha t} (C_1 \\cos(\\beta t) + C_2 \\sin(\\beta t)) $$</li>
+                                        <li><em>Physical Behavior:</em> Underdamped system (oscillates with frequency $\\beta$, while the amplitude decays/grows according to $e^{\\alpha t}$).</li>
+                                    </ul>
+                                </li>
+                            </ul>
 
                             <h2 class="text-2xl font-medium text-gray-900 dark:text-white mb-4 mt-6">2. Spring-Mass-Damper Systems (Modeling)</h2>
 
@@ -1787,7 +1823,7 @@
                         week: 12,
                         topic: 'Review',
                         description: 'Course review',
-                        notes: 'By the end of this week, learners will be able to:\n\n• Summarize and perform tasks from the earlier work from the course.',
+                        notes: 'By the end of this week, learners will be able to:\n\n• Summarize and perform tasks from the earlier work from the course',
                         pdfLink: '',
                         videoId: ''
                     }
@@ -2052,6 +2088,36 @@
             document.getElementById('week-number').textContent = `Week ${weekData.week}:`;
             document.getElementById('week-topic').textContent = weekData.topic;
             document.getElementById('week-description').textContent = weekData.description;
+
+            // Format the notes with proper line breaks and bullet points
+            const notesElement = document.getElementById('week-notes');
+            const notesLines = weekData.notes.split('\n');
+            notesElement.innerHTML = '';
+
+            notesLines.forEach(line => {
+                line = line.trim();
+                if (line === '') return; // Skip empty lines
+
+                if (line.startsWith('•')) {
+                    // Bullet point line
+                    const li = document.createElement('div');
+                    li.className = 'flex items-start mb-2';
+                    li.innerHTML = `
+                        <span class="text-gray-900 dark:text-white mr-3 mt-1">•</span>
+                        <span class="text-gray-900 dark:text-white">${line.substring(1).trim()}</span>
+                    `;
+                    notesElement.appendChild(li);
+                } else {
+                    // Regular text line
+                    const p = document.createElement('p');
+                    p.className = 'mb-3 text-gray-900 dark:text-white';
+                    if (line.startsWith('By the end of this week')) {
+                        p.className += ' font-medium';
+                    }
+                    p.textContent = line;
+                    notesElement.appendChild(p);
+                }
+            });
 
             // Populate review notes with LaTeX support
             const reviewNotesElement = document.getElementById('week-review-notes');
